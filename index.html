@@ -5,7 +5,7 @@
     <h1>Hello from Frontend</h1>
     <p id="output">Loading...</p>
     <script>
-      fetch('/.netlify/functions/hello')
+      fetch('https://b-end-test.netlify.app/functions/hello')
         .then(res => res.json())
         .then(data => {
           document.getElementById('output').innerText = data.message;
