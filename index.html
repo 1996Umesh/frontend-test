@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head><title>Hello</title></head>
-  <body>
-    <h1>Hello from Frontend</h1>
-    <p id="output">Loading...</p>
-    <script>
-      fetch('https://b-end-test.netlify.app/.netlify/functions/hello')
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('output').innerText = data.message;
-        })
-        .catch(() => {
-          document.getElementById('output').innerText = 'Function call failed';
-        });
-    </script>
-  </body>
+
+<head>
+  <title>Hello</title>
+</head>
+
+<body>
+  <h1>Hello from Frontend</h1>
+  <p id="output">Loading...</p>
+  <script>
+    fetch('https://b-end-test.netlify.app/.netlify/functions/hello')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('output').innerText = data.message;
+      })
+      .catch(() => {
+        document.getElementById('output').innerText = 'Function call failed';
+      });
+  </script>
+</body>
+
 </html>
