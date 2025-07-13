@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Kiwi English Exams</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5 JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5 fixed-top">
+            <a href="index.html" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Kiwi English Exams
+                </h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/student-dashboard" class="nav-item nav-link active">Student Dashboard</a>
+                </div>
+                <a href="/logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Student Dashboard Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3 mb-4">
+                    <div class="bg-light p-4 rounded shadow-sm">
+                        <h4 class="mb-4">Student Menu</h4>
+                        <div class="list-group">
+                            <a href="#" id="studentDashboardBtn" class="list-group-item list-group-item-action active">
+                                <i class="fa fa-home mr-2"></i> Dashboard
+                            </a>
+                            <a href="#" id="registeredExamsBtn" class="list-group-item list-group-item-action">
+                                <i class="fa fa-book-open mr-2"></i> Registered Exams
+                            </a>
+                            <!-- <a href="#" id="resultsBtn" class="list-group-item list-group-item-action">
+                                <i class="fa fa-poll mr-2"></i> Results
+                            </a> -->
+                            <!-- <a href="#" id="studentMessagesBtn" class="list-group-item list-group-item-action">
+                                <i class="fa fa-comments mr-2"></i> Messages
+                            </a>
+                            <a href="#" id="studentSettingsBtn" class="list-group-item list-group-item-action">
+                                <i class="fa fa-cog mr-2"></i> Settings
+                            </a> -->
+                            <a href="#" id="profileBtn" class="list-group-item list-group-item-action">
+                                <i class="fa fa-user mr-2"></i> Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-md-9">
+                    <!-- Sections -->
+                    <section id="studentDashboard" class="mt-4">
+                        <h2 class="text-primary mb-4"><i class="fa fa-home mr-2"></i> Dashboard</h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="bg-primary text-white text-center p-4 rounded shadow-sm">
+                                    <h5>Registered Exams</h5>
+                                    <p class="m-0">3</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="bg-success text-white text-center p-4 rounded shadow-sm">
+                                    <h5>Completed Exams</h5>
+                                    <p class="m-0">2</p>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-4 mb-3">
+                                <div class="bg-warning text-white text-center p-4 rounded shadow-sm">
+                                    <h5>New Messages</h5>
+                                    <p class="m-0">1</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </section>
+
+
+                    <section id="registeredExams" class="mt-4" style="display: none;">
+                        <h2 class="text-primary mb-4"><i class="fa fa-book-open mr-2"></i> Registered Exams</h2>
+                        <p>Manage and view the details of all registered exams below.</p>
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h3 class="text-primary mb-3">Register New Exam</h3>
+                            <form action="/add-student-exam" method="post">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Subject</label>
+                                        <select class="form-control border-0 border-bottom" id="subjectDropdown"
+                                            name="subject_id" required>
+                                            <option value="" disabled selected>Select Subject</option>
+                                            <% subjects.forEach(subject=> { %>
+                                                <option value="<%= subject._id %>">
+                                                    <%= subject.subject_name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Exam</label>
+                                            <select class="form-control border-0 border-bottom" id="examDropdown"
+                                                name="exam_id" required>
+                                                <option value="" selected disabled>Select Exam</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label fw-bold">Exam Name : <span
+                                                id="examName">--</span></label>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label fw-bold">Exam Date : <span
+                                                id="examDate">--</span></label>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label fw-bold">Start Time : <span
+                                                id="examStart">--</span></label>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label fw-bold">End Time : <span
+                                                id="examEnd">--</span></label>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label fw-bold">Exam Fee : <span
+                                                id="examFee">--</span></label>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#paymentModal">
+                                    Pay Exam Fee & Register for the Exam
+                                </button>
+
+                                <!-- Bootstrap Modal -->
+                                <div class="modal fade" id="paymentModal" tabindex="-1"
+                                    aria-labelledby="paymentModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="paymentModalLabel">Confirm Payment</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to pay the <strong
+                                                        id="examFee">--</strong> and register for the selected
+                                                    exam?</p>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancel</button>
+
+                                                <!-- Submit the original form using JS -->
+                                                <button type="submit" class="btn btn-primary"
+                                                    >Yes, Pay & Register</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                            </form>
+                        </div>
+
+                        <div class="table-responsive bg-white p-3 rounded shadow-sm">
+                            <h3 class="text-primary mb-3">Registered Exam List</h3>
+                            <table class="table table-striped table-bordered align-middle">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Exam Name</th>
+                                        <th>Exam Date</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                        <th>Exam Fee</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% studentexams.forEach(studentexam=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= studentexam.exam_id ? studentexam.exam_id.exam_name : 'N/A' %>
+                                            </td>
+                                            <td>
+                                                <%= studentexam.exam_id ?
+                                                    studentexam.exam_id.exam_date.toISOString().slice(0, 10) : 'N/A' %>
+                                            </td>
+                                            <td>
+                                                <%= studentexam.exam_id ? studentexam.exam_id.exam_start_time : 'N/A' %>
+                                            </td>
+                                            <td>
+                                                <%= studentexam.exam_id ? studentexam.exam_id.exam_end_time : 'N/A' %>
+                                            </td>
+                                            <td>
+                                                <%= studentexam.exam_id ? `$${studentexam.exam_id.exam_fee}` : 'N/A' %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section id="results" class="mt-4" style="display: none;">
+                        <h2 class="text-primary mb-4"><i class="fa fa-poll mr-2"></i> Results</h2>
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Exam</th>
+                                    <th>Date</th>
+                                    <th>Score</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kiwi Kids English Fun</td>
+                                    <td>10th July 2025</td>
+                                    <td>85%</td>
+                                    <td>Passed</td>
+                                </tr>
+                                <tr>
+                                    <td>Kiwi Grammar Test</td>
+                                    <td>5th June 2025</td>
+                                    <td>78%</td>
+                                    <td>Passed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section id="studentMessages" class="mt-4" style="display: none;">
+                        <h2 class="text-primary mb-4"><i class="fa fa-comments mr-2"></i> Messages</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item">Your exam schedule has been updated.</li>
+                            <li class="list-group-item">Don't forget to bring your ID on exam day.</li>
+                        </ul>
+                    </section>
+
+                    <section id="profile" class="mt-4" style="display: none;">
+                        <h2 class="text-primary mb-4"><i class="fa fa-user mr-2"></i> Profile</h2>
+                        <p>Manage and update your personal profile details below. You can change your name, email
+                            address, password, and other account information.</p>
+
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h4 class="mb-3 text-primary">Edit Profile</h4>
+                            <form action="/edit-student-profile" method="post">
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" name="student_name"
+                                        placeholder="Enter Full name" value="<%= logged_student.student_name %>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" name="student_email"
+                                        placeholder="Enter Email Address" value="<%= logged_student.student_email %>">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Phone Number</label>
+                                    <div class="input-group">
+                                        <select class="form-select border-0 border-bottom" style="max-width: 150px;"
+                                            name="student_country_code" required>
+                                            <option disabled <%=!logged_student.student_country_code ? 'selected' : ''
+                                                %>>Country Code</option>
+
+                                            <% countries.forEach(country=> { %>
+                                                <option value="<%= country.phoneCode %>"
+                                                    <%=country.phoneCode==logged_student.student_country_code
+                                                    ? 'selected' : '' %>>
+                                                    <%= country.phoneCode %> | <%= country.name %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+
+                                        <input type="tel" class="form-control border-0 border-bottom"
+                                            name="student_phone_no" placeholder="Phone Number"
+                                            value="<%= logged_student.student_phone_no %>" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">New Password</label>
+                                    <input type="password" class="form-control" name="student_password"
+                                        placeholder="Enter new password">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" name="student_password_confirmation"
+                                        placeholder="Re-enter new password">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                            </form>
+
+                        </div>
+                    </section>
+
+                    <section id="studentSettings" class="mt-4" style="display: none;">
+                        <h2 class="text-primary mb-4"><i class="fa fa-cog mr-2"></i> Settings</h2>
+                        <form>
+                            <div class="form-group">
+                                <label>Email Notifications</label>
+                                <select class="form-control">
+                                    <option selected>Enabled</option>
+                                    <option>Disabled</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Change Password</label>
+                                <input type="password" class="form-control" placeholder="New Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Settings</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Student Dashboard End -->
+
+    <!-- JS to toggle sections -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = ["studentDashboard", "registeredExams", "profile"];
+            function showSection(id) {
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    const button = document.getElementById(sectionId + "Btn");
+                    if (sectionId === id) {
+                        section.style.display = "block";
+                        button.classList.add("active");
+                    } else {
+                        section.style.display = "none";
+                        button.classList.remove("active");
+                    }
+                });
+            }
+
+            showSection("studentDashboard");
+
+            sections.forEach(id => {
+                const button = document.getElementById(id + "Btn");
+                if (button) {
+                    button.addEventListener("click", function () {
+                        showSection(id);
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Fetch exams when a subject is selected
+        document.getElementById('subjectDropdown').addEventListener('change', function () {
+            const subjectId = this.value;
+            fetch(`/get-exams-by-subject/${subjectId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const examDropdown = document.getElementById('examDropdown');
+                    examDropdown.innerHTML = '<option value="" disabled selected>Select Exam</option>';
+                    data.forEach(exam => {
+                        const option = document.createElement('option');
+                        option.value = exam._id;
+                        option.textContent = exam.exam_name;
+                        option.dataset.date = exam.exam_date;
+                        option.dataset.start = exam.exam_start_time;
+                        option.dataset.end = exam.exam_end_time;
+                        option.dataset.fee = exam.exam_fee;
+                        examDropdown.appendChild(option);
+                    });
+                })
+                .catch(err => {
+                    console.error('Fetch error:', err);
+                });
+        });
+
+        // Fill exam details when an exam is selected
+        document.getElementById('examDropdown').addEventListener('change', function () {
+            const selected = this.options[this.selectedIndex];
+            if (!selected) return;
+
+            document.getElementById('examName').textContent = selected.textContent;
+            document.getElementById('examDate').textContent = new Date(selected.dataset.date).toISOString().split('T')[0];
+            document.getElementById('examStart').textContent = selected.dataset.start;
+            document.getElementById('examEnd').textContent = selected.dataset.end;
+            document.getElementById('examFee').textContent = `$${selected.dataset.fee}`;
+        });
+    </script>
+
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <a href="index.html" class="navbar-brand">
+                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Kiwi English
+                            Exams</h1>
+                    </a>
+                    <p class="m-0 text-justify">Your trusted partner for mastering English exams in New Zealand and
+                        beyond. We provide the guidance and support you need to achieve your goals.</p>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h3 class="text-white mb-4">Newsletter</h3>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-light" style="padding: 30px;"
+                                placeholder="Your Email Address">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary px-4">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Get In Touch</h3>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>123 Galle Road, Colombo 03, Sri Lanka</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+94 77 123 4567</p>
+                    <p><i class="fa fa-envelope mr-2"></i>info@kiwienglishexams.lk</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-twitter"></i></a>
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-facebook-f"></i></a>
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-linkedin-in"></i></a>
+                        <a class="text-white" href="#"><i class="fab fa-2x fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Our Exams</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>IELTS</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i> TOEFL</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>KEPT</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>KBEE</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>IELTS</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Quick Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Privacy Policy</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Terms &
+                            Condition</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Regular FAQs</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help & Support</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white-50 border-top py-4"
+        style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0">Copyright &copy; <a class="text-white" href="#">kiwiexams.netlify.app</a>. All Rights
+                        Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
+            class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

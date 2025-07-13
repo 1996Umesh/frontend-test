@@ -1,23 +1,678 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Hello</title>
+    <meta charset="utf-8">
+    <title>Kiwi English Exams</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Hello from Frontend</h1>
-  <p id="output">Loading...</p>
-  <script>
-    fetch('https://b-end-test.netlify.app/.netlify/functions/hello')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('output').innerText = data.message;
-      })
-      .catch(() => {
-        document.getElementById('output').innerText = 'Function call failed';
-      });
-  </script>
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5 fixed-top">
+            <a href="index.html" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Kiwi English Exams
+                </h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="#about" class="nav-item nav-link">About</a>
+                    <a href="#exam" class="nav-item nav-link">Exams</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="detail.html" class="dropdown-item">Exams Detail</a>
+                            <a href="#feature" class="dropdown-item">Our Features</a>
+                            <!-- <a href="#team" class="dropdown-item">Instructors</a> -->
+                            <a href="#testimonial" class="dropdown-item">Testimonial</a>
+                        </div>
+                    </div>
+                    <a href="#contact" class="nav-item nav-link">Contact</a>
+                </div>
+                <a href="student-registration.html" class="btn btn-primary py-2 px-4">Apply for</a>
+                <a href="login.html" class="btn btn-success py-2 px-4 ml-1">Login</a>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid position-relative overlay-bottom mb-5">
+        <div class="container text-center my-5 py-5">
+            <h1 class="text-white mt-4 mb-4">Achieve Global Success</h1>
+            <h1 class="text-white display-4 display-md-1 mb-4 mb-md-5">New Zealand English Exams</h1>
+            <div class="mx-auto mb-4" style="width: 100%; max-width: 600px;">
+                <div class="d-flex flex-column flex-md-row">
+
+                    <div class="dropdown mb-2 mb-md-0 flex-shrink-0">
+                        <button class="btn btn-outline-light bg-white text-body px-4 dropdown-toggle w-100"
+                            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Exams
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Kiwi Kids English Fun</a>
+                            <a class="dropdown-item" href="#">Kiwi Young Explorers</a>
+                            <a class="dropdown-item" href="#">Kiwi Kids English Fun</a>
+                        </div>
+                    </div>
+
+                    <input type="text" class="form-control border-light flex-fill mb-2 mb-md-0 mx-md-2"
+                        style="padding: 15px;" placeholder="Keyword" />
+
+
+                    <button class="btn btn-secondary w-100 w-md-auto px-4">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- About Start -->
+    <section id="about">
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                        <div class="position-relative h-100">
+                            <img class="position-absolute w-100 h-100" src="img/about1.jpg" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="section-title position-relative mb-4">
+                            <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">About Us
+                            </h6>
+                            <h1 class="display-4">First Choice For English Exams Anywhere</h1>
+                        </div>
+                        <p class="text-justify">
+                            At Kiwi English Exams, we’re your reliable partner for achieving top scores in English exams
+                            like IELTS, TOEFL, and PTE. Our expert team and proven resources help you succeed with ease.
+                        </p>
+                        <p class="text-justify">
+                            Based in New Zealand, we cater to learners worldwide. Our tailored support and deep
+                            expertise ensure you’re always on track.
+                        </p>
+
+                        <div class="row pt-3 mx-0">
+                            <div class="col-12 col-md-6 px-0 mb-3 mb-md-0">
+                                <div class="bg-success text-center p-4">
+                                    <h1 class="text-white" data-toggle="counter-up">123</h1>
+                                    <h6 class="text-uppercase text-white">Available<span class="d-block">Exams</span>
+                                    </h6>
+                                </div>
+                            </div>
+                            <!-- <div class="col-12 col-md-4 px-0 mb-3 mb-md-0">
+                                <div class="bg-secondary text-center p-4">
+                                    <h1 class="text-white" data-toggle="counter-up">123</h1>
+                                    <h6 class="text-uppercase text-white">Skilled<span
+                                            class="d-block">Instructors</span></h6>
+                                </div>
+                            </div> -->
+                            <div class="col-12 col-md-6 px-0">
+                                <div class="bg-secondary text-center p-4">
+                                    <h1 class="text-white" data-toggle="counter-up">1234</h1>
+                                    <h6 class="text-uppercase text-white">Happy<span class="d-block">Candidates</span>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Learn More button -->
+                        <div class="mt-4 text-right">
+                            <a href="about.html" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About End -->
+
+
+    <!-- Feature Start -->
+    <section id="feature">
+        <div class="container-fluid bg-image">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 my-1 pt-0 pb-lg-0">
+                        <div class="section-title position-relative mb-1">
+                            <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Why Choose
+                                Us?</h6>
+                            <h1 class="display-4">Why Start Your Exams with Us?</h1>
+                        </div>
+                        <p class="mb-1 pb-2 text-justify">
+                            At Kiwi English Exams, we make your exam journey easier with expert guidance and tailored
+                            resources. Start with us and achieve your English goals confidently!
+                        </p>
+                        <div class="d-flex mb-1">
+                            <div class="btn-icon bg-primary mr-4">
+                                <i class="fa fa-2x fa-graduation-cap text-white"></i>
+                            </div>
+                            <div class="mt-n1">
+                                <h4>Skilled Instructors</h4>
+                                <p class="text-justify">Learn from qualified experts who offer personalized tips and
+                                    strategies for exam success.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="btn-icon bg-secondary mr-4">
+                                <i class="fa fa-2x fa-certificate text-white"></i>
+                            </div>
+                            <div class="mt-n1">
+                                <h4>International Certificate</h4>
+                                <p class="text-justify">Gain recognized certifications to unlock opportunities abroad.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="btn-icon bg-warning mr-4">
+                                <i class="fa fa-2x fa-book-reader text-white"></i>
+                            </div>
+                            <div class="mt-n1">
+                                <h4>Online Exams</h4>
+                                <p class="text-justify">Take flexible online exams that match real test conditions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5" style="min-height: 500px;">
+                        <div class="position-relative h-100">
+                            <img class="position-absolute w-100 h-100" src="img/feature1.jpg"
+                                style="object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 text-right">
+                    <a href="feature.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Start -->
+
+
+    <!-- Exams Start -->
+    <section id="exam">
+        <div class="container-fluid px-0 py-5">
+            <div class="row mx-0 justify-content-center pt-5">
+                <div class="col-lg-6">
+                    <div class="section-title text-center position-relative mb-4">
+                        <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Our Exams</h6>
+                        <h1 class="display-4">Checkout New Releases Of Our Exams</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container px-3 py-3">
+                <!-- First Course -->
+                <div class="row align-items-center mb-4">
+                    <div class="col-12 col-md-6 mb-3 mb-md-0 order-1">
+                        <img src="img/courses-1x.jpg" alt="Students studying" class="img-fluid rounded">
+                    </div>
+                    <div class="col-12 col-md-6 order-2">
+                        <h4 class="mb-2">Kiwi Kids English Fun</h4>
+                        <p class="text-justify mb-3">
+                            Our Kiwi Kids English Fun course is designed for young learners aged 6–12. Through fun
+                            activities, games, and interactive lessons, kids build a strong foundation in English.
+                        </p>
+                        <a class="btn btn-primary btn-sm" href="detail.html">Find out more about our exams</a>
+                    </div>
+                </div>
+
+                <!-- Second Course -->
+                <div class="row align-items-center mb-4">
+                    <div class="col-12 col-md-6 order-2 order-md-1">
+                        <h4 class="mb-2">Kiwi Young Explorers</h4>
+                        <p class="text-justify mb-3">
+                            Kiwi Young Explorers is perfect for curious minds! In this course, kids discover English
+                            through storytelling, songs, and creative projects.
+                        </p>
+                        <a class="btn btn-primary btn-sm" href="detail.html">Find out more about our exams</a>
+                    </div>
+                    <div class="col-12 col-md-6 order-1 order-md-2 mb-3 mb-md-0">
+                        <img src="img/courses-2x.jpg" alt="Students studying" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signup Section -->
+            <div class="row justify-content-center mx-0 mb-5">
+                <div class="col-12 col-lg-10 py-0">
+                    <div class="bg-white p-4 p-md-5 my-4">
+                        <h1 class="text-center mb-4">Filter Exam Schedules</h1>
+                        <form>
+                            <div class="form-row">
+                                <div class="col-md-6 col-lg-3 mb-3">
+                                    <label class="form-label fw-bold">Country</label>
+                                    <select class="custom-select bg-light border-0" style="height: 45px;" id="country">
+                                        <option selected disabled>Selected Country</option>
+                                        <% countries.forEach(country=> { %>
+                                            <option value="<%= country.id %>">
+                                                <%= country.name %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 col-lg-3 mb-3">
+                                    <label class="form-label fw-bold">Subject</label>
+                                    <select class="custom-select bg-light border-0" style="height: 45px;" id="subject">
+                                        <option selected disabled>Selected Subject</option>
+                                        <% subjects.forEach(subject=> { %>
+                                            <option value="<%= subject._id %>">
+                                                <%= subject.subject_name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 col-lg-3 mb-3">
+                                    <label class="form-label fw-bold">Exam Date</label>
+                                    <input type="date" class="form-control bg-light border-0" style="padding: 15px;"
+                                        id="examDate">
+                                </div>
+
+                                <div class="col-md-6 col-lg-3 mb-3">
+                                    <label class="form-label fw-bold">Exam Start Time</label>
+                                    <input type="time" class="form-control bg-light border-0" style="padding: 15px;"
+                                        id="startTime">
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary px-5" type="submit"
+                                        style="height: 45px;">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Filtered Results Section -->
+                        <div class="mt-5">
+                            <h4 class="text-center mb-4">Filtered Exam Results</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center" id="examResultsTable">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Exam Name</th>
+                                            <th>Country</th>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Register for the Exam</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr>
+                                            <td>IELTS General</td>
+                                            <td>Sri Lanka</td>
+                                            <td>Colombo</td>
+                                            <td>2025-07-10</td>
+                                            <td>09:00 AM</td>
+                                            <td><a class="btn btn-success btn-sm" href="detail.html">Goto Register</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>IELTS General</td>
+                                            <td>Sri Lanka</td>
+                                            <td>Colombo</td>
+                                            <td>2025-07-10</td>
+                                            <td>09:00 AM</td>
+                                            <td><a class="btn btn-success btn-sm" href="detail.html">Goto Register</a>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Exams End -->
+
+
+    <!-- Team Start -->
+
+    <!-- Team End -->
+
+
+    <!-- Testimonial Start -->
+    <section id="testimonial">
+        <div class="container-fluid bg-image py-5" style="margin: 90px 0;">
+            <div class="container py-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 mb-5 mb-lg-0">
+                        <div class="section-title position-relative mb-4">
+                            <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Testimonial
+                            </h6>
+                            <h1 class="display-4">What Say Our Students</h1>
+                        </div>
+                        <p class="m-0 text-justify">Don’t just take our word for it — hear from the students who’ve
+                            experienced the
+                            difference. Their stories and successes show how Kiwi English Exams can help you achieve
+                            your
+                            goals, too!</p>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="owl-carousel testimonial-carousel">
+                            <div class="bg-white p-5">
+                                <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
+                                <p class="text-justify">"The personalized coaching helped me pass my exam with flying
+                                    colors. I feel more
+                                    confident in my daily communication at work and in life!"</p>
+                                <div class="d-flex flex-shrink-0 align-items-center mt-4">
+                                    <img class="img-fluid mr-4" src="img/testimonial-2.jpg" alt="">
+                                    <div>
+                                        <h5>Arjun Patel</h5>
+                                        <span>Marketing Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-5">
+                                <i class="fa fa-3x fa-quote-left text-primary mb-4"></i>
+                                <p class="text-justify">"Thanks to Kiwi English Exams, I improved my writing and
+                                    speaking skills for my job.
+                                    The
+                                    courses were practical and the instructors were always supportive!"</p>
+                                <div class="d-flex flex-shrink-0 align-items-center mt-4">
+                                    <img class="img-fluid mr-4" src="img/testimonial-1.jpg" alt="">
+                                    <div>
+                                        <h5>Maria Smith</h5>
+                                        <span>Software Engineer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Learn More button -->
+                <div class="mt-4 text-right">
+                    <a href="testimonial.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial end -->
+
+
+    <!-- Contact Start -->
+    <section id="contact">
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="row align-items-center">
+                    <!-- Contact Info -->
+                    <div class="col-12 col-lg-5 mb-4 mb-lg-0">
+                        <div class="bg-light d-flex flex-column justify-content-center px-4 py-4" style="height: auto;">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="btn-icon bg-primary mr-3">
+                                    <i class="fa fa-2x fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4>Our Location</h4>
+                                    <p class="m-0">123 Lambton Quay, Wellington Central, Wellington 6011, New Zealand
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="btn-icon bg-secondary mr-3">
+                                    <i class="fa fa-2x fa-phone-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4>Call Us</h4>
+                                    <p class="m-0">+64 21 987 6543</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="btn-icon bg-warning mr-3">
+                                    <i class="fa fa-2x fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4>Email Us</h4>
+                                    <p class="m-0">info@kiwienglishexams.nz</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="col-12 col-lg-7">
+                        <div class="section-title position-relative mb-4">
+                            <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Need Help?
+                            </h6>
+                            <h1 class="display-4">Send Us A Message</h1>
+                        </div>
+                        <div class="contact-form">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-12 col-md-6">
+                                        <input type="text"
+                                            class="form-control border-top-0 border-right-0 border-left-0 p-0"
+                                            placeholder="Your Name" required>
+                                    </div>
+                                    <div class="form-group col-12 col-md-6">
+                                        <input type="email"
+                                            class="form-control border-top-0 border-right-0 border-left-0 p-0"
+                                            placeholder="Your Email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text"
+                                        class="form-control border-top-0 border-right-0 border-left-0 p-0"
+                                        placeholder="Subject" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control border-top-0 border-right-0 border-left-0 p-0"
+                                        rows="4" placeholder="Message" required></textarea>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary py-2 px-4" type="submit">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learn More button -->
+                <div class="mt-4 text-right">
+                    <a href="contact.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <a href="index.html" class="navbar-brand">
+                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Kiwi English
+                            Exams</h1>
+                    </a>
+                    <p class="m-0 text-justify">Your trusted partner for mastering English exams in New Zealand and
+                        beyond. We provide the guidance and support you need to achieve your goals.</p>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h3 class="text-white mb-4">Newsletter</h3>
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-light" style="padding: 30px;"
+                                placeholder="Your Email Address">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary px-4">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Get In Touch</h3>
+                    <p><i class="fa fa-map-marker-alt mr-2"></i>123 Galle Road, Colombo 03, Sri Lanka</p>
+                    <p><i class="fa fa-phone-alt mr-2"></i>+94 77 123 4567</p>
+                    <p><i class="fa fa-envelope mr-2"></i>info@kiwienglishexams.lk</p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-twitter"></i></a>
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-facebook-f"></i></a>
+                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-linkedin-in"></i></a>
+                        <a class="text-white" href="#"><i class="fab fa-2x fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Our Exams</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>IELTS</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i> TOEFL</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>KEPT</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>KBEE</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>IELTS</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h3 class="text-white mb-4">Quick Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Privacy Policy</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Terms &
+                            Condition</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Regular FAQs</a>
+                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help & Support</a>
+                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white-50 border-top py-4"
+        style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                    <p class="m-0">Copyright &copy; <a class="text-white" href="#">kiwiexams.netlify.app</a>. All Rights
+                        Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="index.html" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
+            class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <script>
+        document.addEventListener('click', function (event) {
+            var navbarCollapse = document.getElementById('navbarCollapse');
+            var isClickInsideNavbar = navbarCollapse.contains(event.target);
+
+            // Check if the navbar is open
+            var isNavbarOpen = navbarCollapse.classList.contains('show');
+
+            if (!isClickInsideNavbar && isNavbarOpen) {
+                // If the click is outside and the navbar is open, collapse it
+                $('.navbar-collapse').collapse('hide');
+            }
+        });
+    </script>
+
+    <script>
+        document.querySelector('button[type="submit"]').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const countryId = document.getElementById('country').value;
+            const subjectId = document.getElementById('subject').value;
+            const examDate = document.getElementById('examDate').value;
+            const startTime = document.getElementById('startTime').value;
+
+            countryId = countryId == "" ? 0 : countryId;
+            subjectId = subjectId == "" ? 0 : subjectId;
+            examDate = examDate == "" ? 0 : examDate;
+            startTime = startTime == "" ? 0 : startTime;
+
+            if (countryId || subjectId || examDate || startTime) {
+                fetch(`/get-exams-filter/${countryId}/${subjectId}/${examDate}/${startTime}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const tbody = document.querySelector('#examResultsTable tbody');
+                        tbody.innerHTML = ''; // clear old results
+
+                        if (data.length === 0) {
+                            tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No exams found</td></tr>';
+                        } else {
+                            data.forEach(exam => {
+                                const row = `
+                                    <tr>
+                                        <td>${exam.exam_name}</td>
+                                        <td>${new Date(exam.exam_date).toLocaleDateString()}</td>
+                                        <td>${exam.exam_start_time}</td>
+                                        <td>${exam.exam_end_time}</td>
+                                        <td>$${exam.exam_fee.toFixed(2)}</td>
+                                        <td>${exam.subject_id.subject_name}</td>
+                                    </tr>
+                                    `;
+                                tbody.insertAdjacentHTML('beforeend', row);
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error:', err);
+                        alert('Failed to fetch exams. Check console for details.');
+                    });
+            } else {
+                alert('Please fill all fields to filter.');
+            }
+        });
+    </script>
+
+
 </body>
 
 </html>
