@@ -215,26 +215,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% studentexams.forEach(studentexam=> { %>
+                                    
                                         <tr>
                                             <td>
-                                                <%= studentexam.exam_id ? studentexam.exam_id.exam_name : 'N/A' %>
+                                                
                                             </td>
                                             <td>
-                                                <%= studentexam.exam_id ?
-                                                    studentexam.exam_id.exam_date.toISOString().slice(0, 10) : 'N/A' %>
+                                                
                                             </td>
                                             <td>
-                                                <%= studentexam.exam_id ? studentexam.exam_id.exam_start_time : 'N/A' %>
+                                                
                                             </td>
                                             <td>
-                                                <%= studentexam.exam_id ? studentexam.exam_id.exam_end_time : 'N/A' %>
+                                                
                                             </td>
                                             <td>
-                                                <%= studentexam.exam_id ? `$${studentexam.exam_id.exam_fee}` : 'N/A' %>
+                                                
                                             </td>
                                         </tr>
-                                        <% }) %>
+                                        
                                 </tbody>
                             </table>
                         </div>
