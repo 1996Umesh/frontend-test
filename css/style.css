@@ -6438,7 +6438,7 @@ button.bg-dark:focus {
 }
 
 .bg-white {
-  background-color: #fff !important;
+  background-color: #d6e7ff !important;
 }
 
 .bg-transparent {
@@ -9800,12 +9800,12 @@ h6,
 }
 
 .jumbotron {
-  background: linear-gradient(rgb(40 120 235 / 0%), rgba(40, 120, 235, 0.7)), url(../img/header5.jpg), no-repeat center center;
+  background: url(../img/header6.jpg), no-repeat center center;
   background-size: cover;
 }
 
-.jumbotron.page-header {
-  background: linear-gradient(rgba(40, 120, 235, 0.1), rgba(40, 120, 235, 0.3)), url(../img/page-header1.jpg), no-repeat center center;
+.jumbotron.student-register-page {
+  background: url(../img/student-registration.jpg), no-repeat center center;
   background-size: cover;
 }
 
