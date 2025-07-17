@@ -184,7 +184,7 @@
           localStorage.setItem('userId', data.userId);
           loginForm.reset();
 
-          messageDiv.innerHTML = `<div class="alert alert-success">Login successful!</div>`+ data.token;
+          messageDiv.innerHTML = `<div class="alert alert-success">Login successful!</div>`;
 
           setTimeout(() => {
             switch (data.role) {
@@ -203,7 +203,7 @@
               default:
                 messageDiv.innerHTML = `<div class="alert alert-danger">Unknown role</div>`;
             }
-          }, 1000);
+          }, 100);
         } else {
           messageDiv.innerHTML = `<div class="alert alert-danger">${data.error || 'Login failed'}</div>`;
         }
