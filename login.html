@@ -184,7 +184,7 @@
           localStorage.setItem('userId', data.userId);
           loginForm.reset();
 
-          messageDiv.innerHTML = `<div class="alert alert-success">Login successful!</div>`;
+          messageDiv.innerHTML = `<div class="alert alert-success">Login successful!</div>`+ data.token;
 
           setTimeout(() => {
             switch (data.role) {
