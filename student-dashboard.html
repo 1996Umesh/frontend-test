@@ -31,6 +31,31 @@
 </head>
 
 <body>
+    <script>
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/login.html';
+        }
+
+        fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(res => {
+                if (!res.ok) throw new Error('Unauthorized');
+                return res.json();
+            })
+            .then(data => {
+                if (data.role !== 'student') {
+                    window.location.href = '/unauthorized.html';
+                }
+            })
+            .catch(() => {
+                localStorage.clear();
+                window.location.href = '/login.html';
+            });
+    </script>
+
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5 fixed-top">
@@ -179,8 +204,8 @@
                                             </div>
 
                                             <div class="modal-body">
-                                                <p>Are you sure you want to pay the <strong
-                                                        id="examFee">--</strong> and register for the selected
+                                                <p>Are you sure you want to pay the <strong id="examFee">--</strong> and
+                                                    register for the selected
                                                     exam?</p>
                                             </div>
 
@@ -189,15 +214,15 @@
                                                     data-bs-dismiss="modal">Cancel</button>
 
                                                 <!-- Submit the original form using JS -->
-                                                <button type="submit" class="btn btn-primary"
-                                                    >Yes, Pay & Register</button>
+                                                <button type="submit" class="btn btn-primary">Yes, Pay &
+                                                    Register</button>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
 
-                                
+
 
                             </form>
                         </div>
@@ -215,25 +240,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-                                        <tr>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                                
-                                            </td>
-                                            <td>
-                                                
-                                            </td>
-                                        </tr>
-                                        
+
+                                    <tr>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
