@@ -1,3 +1,28 @@
+<script>
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/login.html';
+    }
+
+    fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` }
+    })
+        .then(res => {
+            if (!res.ok) throw new Error('Unauthorized');
+            return res.json();
+        })
+        .then(data => {
+            if (data.role !== 'superadmin') {
+                window.location.href = '/unauthorized.html';
+            }
+        })
+        .catch(() => {
+            localStorage.clear();
+            window.location.href = '/login.html';
+        });
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,31 +56,6 @@
 </head>
 
 <body>
-    <script>
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = '/login.html';
-        }
-
-        fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
-            method: 'GET',
-            headers: { Authorization: `Bearer ${token}` }
-        })
-            .then(res => {
-                if (!res.ok) throw new Error('Unauthorized');
-                return res.json();
-            })
-            .then(data => {
-                if (data.role !== 'superadmin') {
-                    window.location.href = '/unauthorized.html';
-                }
-            })
-            .catch(() => {
-                localStorage.clear();
-                window.location.href = '/login.html';
-            });
-    </script>
-
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5 fixed-top">
