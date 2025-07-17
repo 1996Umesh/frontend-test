@@ -180,13 +180,34 @@
         const data = await response.json();
 
         if (response.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userId', data.userId);
+          loginForm.reset();
+
           messageDiv.innerHTML = `<div class="alert alert-success">Login successful!</div>`;
+
           setTimeout(() => {
-            window.location.href = '/superadmin-dashboard.html';
+            switch (data.role) {
+              case 'superadmin':
+                window.location.href = '/superadmin-dashboard.html';
+                break;
+              case 'countrydirector':
+                window.location.href = '/countrydirector-dashboard.html';
+                break;
+              case 'examiner':
+                window.location.href = '/examiner-dashboard.html';
+                break;
+              case 'student':
+                window.location.href = '/student-dashboard.html';
+                break;
+              default:
+                messageDiv.innerHTML = `<div class="alert alert-danger">Unknown role</div>`;
+            }
           }, 100);
         } else {
-          messageDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+          messageDiv.innerHTML = `<div class="alert alert-danger">${data.error || 'Login failed'}</div>`;
         }
+
       } catch (err) {
         console.error(err);
         messageDiv.innerHTML = `<div class="alert alert-danger">Unexpected error occurred.</div>`;
