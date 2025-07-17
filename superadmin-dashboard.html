@@ -1,9 +1,9 @@
 <script>
     const token = localStorage.getItem('token');
-    alert(token);
-    if (!token) {
-        window.location.href = '/login.html';
-    }
+    // alert(token);
+    // if (!token) {
+    //     window.location.href = '/login.html';
+    // }
 
     fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
         method: 'GET',
