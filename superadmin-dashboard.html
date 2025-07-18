@@ -553,6 +553,20 @@
     <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
 
+            <script>
+                const phoneInput = document.querySelector("#phone");
+                window.intlTelInput(phoneInput, {
+                  initialCountry: "auto",
+                  geoIpLookup: function (success, failure) {
+                    fetch("https://ipapi.co/json")
+                      .then((res) => res.json())
+                      .then((data) => success(data.country_code))
+                      .catch(() => success("us"));
+                  },
+                  utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+                });
+              </script>
+              
     <!-- JavaScript Libraries -->
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
@@ -565,19 +579,7 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 
-    <script>
-        const phoneInput = document.querySelector("#phone");
-        window.intlTelInput(phoneInput, {
-          initialCountry: "auto",
-          geoIpLookup: function (success, failure) {
-            fetch("https://ipapi.co/json")
-              .then((res) => res.json())
-              .then((data) => success(data.country_code))
-              .catch(() => success("us"));
-          },
-          utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-        });
-      </script>
+    
       
 </body>
 
