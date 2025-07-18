@@ -31,11 +31,10 @@
                 // ✅ Success: User can stay on this page
             })
             .catch((err) => {
-                console.error('Error:', err.message);
-                alert('Session expired or invalid. Please log in again.');
-                localStorage.removeItem('token');
+                // console.error('Error:', err.message);
+                // alert('Session expired or invalid. Please log in again.');
+                // localStorage.removeItem('token');
                 // window.location.href = '/login.html';
-                window.history.back();
             });
     }
 </script>
