@@ -1,42 +1,31 @@
 <script>
-    // ✅ Step 1: Get the token from localStorage
-    const token = localStorage.getItem('token');
-    console.log(token);
+    fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+        .then(async (res) => {
+            const data = await res.json();
+            console.log('Response:', data);
 
-    if (!token) {
-        // ❌ No token means user not logged in
-        window.location.href = '/login.html';
-    } else {
-        // ✅ Step 2: Validate token and role via serverless function
-        fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            if (!res.ok || !data.role) {
+                throw new Error('Unauthorized');
+            }
+
+            // ✅ Continue if role is correct
+            if (data.role !== 'superadmin') {
+                alert('Access denied: not a superadmin.');
+                return;
+            }
         })
-            .then(async (res) => {
-                const data = await res.json();
+        .catch((err) => {
+            console.error('Error:', err.message);
+            alert('Session expired or invalid. Please log in again.');
+            localStorage.removeItem('token');
+            window.location.href = '/login.html';
+        });
 
-                if (!res.ok || !data.role) {
-                    throw new Error('Unauthorized');
-                }
-
-                // ✅ Only allow if role is superadmin
-                if (data.role !== 'superadmin') {
-                    // ❌ Not allowed, redirect back or show unauthorized
-                    alert('Access denied. You are not authorized.');
-                    window.history.back(); // or redirect to unauthorized page
-                }
-
-                // ✅ Success: User can stay on this page
-            })
-            .catch((err) => {
-                console.error('Error:', err.message);
-                alert('Session expired or invalid. Please log in again.');
-                localStorage.removeItem('token');
-                window.location.href = '/login.html';
-            });
-    }
 </script>
 
 
