@@ -9,10 +9,10 @@
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` }
     })
-        .then(res => {
-            if (!res.ok) throw new Error('Unauthorized');
-            return res.json();
-        })
+        // .then(res => {
+        //     if (!res.ok) throw new Error('Unauthorized');
+        //     return res.json();
+        // })
         .then(data => {
             if (data.role !== 'superadmin') {
                 window.location.reload();
