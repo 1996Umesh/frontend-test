@@ -615,9 +615,10 @@
                 countrydirector_email: document.getElementById('countrydirector_email').value,
                 countrydirector_password: document.getElementById('countrydirector_password').value
             };
+            alert(formData[country]);
 
             try {
-                const res = await fetch('/.netlify/functions/add-countrydirector', {
+                const res = await fetch('https://b-end-test.netlify.app/.netlify/functions/add-countrydirector', {
                     method: 'POST',
                     body: JSON.stringify(formData),
                     headers: { 'Content-Type': 'application/json' }
