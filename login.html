@@ -180,7 +180,7 @@
         const data = await response.json();
 
         if (response.ok) {
-          localStorage.setItem('token', data.token); // Save token
+          localStorage.setItem('token', data.token); // store it
           localStorage.setItem('userId', data.userId);
           localStorage.setItem('role', data.role);
           loginForm.reset();
