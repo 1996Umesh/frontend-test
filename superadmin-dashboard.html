@@ -16,8 +16,9 @@
                 return res.json();
             })
             .then(data => {
+                alert(data.role);
                 if (data.role !== 'superadmin') {
-                    alert(data.role);
+                    
                     // Redirect back if user has no permission
                     if (document.referrer) {
                         window.location.href = document.referrer;
