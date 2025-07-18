@@ -2,38 +2,41 @@
     const token = localStorage.getItem('token');
 
     if (!token) {
-        // Redirect to login if no token exists
+        // No token means not logged in, redirect to login
         window.location.href = '/login.html';
     } else {
         fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
             method: 'GET',
             headers: {
-                Authorization: `Bearer ${token}`
-            }
+                Authorization: `Bearer ${token}`,
+            },
         })
-            .then(res => {
-                if (!res.ok) throw new Error('Unauthorized');
-                return res.json();
-            })
-            .then(data => {
-                alert(data.role);
+            .then(async (res) => {
+                const data = await res.json();
+
+                if (!res.ok || !data.role) {
+                    throw new Error('Unauthorized');
+                }
+
+                // Allow only specific roles
                 if (data.role !== 'superadmin') {
-                    
-                    // Redirect back if user has no permission
+                    // 🚨 Redirect back to previous page or fallback
                     if (document.referrer) {
                         window.location.href = document.referrer;
                     } else {
                         window.location.href = '/unauthorized.html'; // fallback
                     }
                 }
+
+                // ✅ If authorized: do nothing (user stays)
             })
-            .catch(() => {
-                // Optional: Clear token and redirect on error
-                // localStorage.clear();
-                // window.location.href = '/login.html';
+            .catch((err) => {
+                console.error('Access check failed:', err.message);
+                // Optional: redirect or show alert
+                alert('Access denied. You will be redirected.');
+                window.location.href = '/login.html';
             });
     }
-
 </script>
 
 <!DOCTYPE html>
