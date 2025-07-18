@@ -1,28 +1,37 @@
 <script>
     const token = localStorage.getItem('token');
-    // alert(token);
-    if (!token) {
-        window.location.href = '/login.html';
-    }
 
-    fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` }
-    })
-        // .then(res => {
-        //     if (!res.ok) throw new Error('Unauthorized');
-        //     return res.json();
-        // })
-        .then(data => {
-            if (data.role !== 'superadmin') {
-                window.location.reload();
-                // window.history.back();
+    if (!token) {
+        // Redirect to login if no token exists
+        window.location.href = '/login.html';
+    } else {
+        fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`
             }
         })
-        .catch(() => {
-            // localStorage.clear();
-            // window.location.href = '/login.html';
-        });
+            .then(res => {
+                if (!res.ok) throw new Error('Unauthorized');
+                return res.json();
+            })
+            .then(data => {
+                if (data.role !== 'superadmin') {
+                    // Redirect back if user has no permission
+                    if (document.referrer) {
+                        window.location.href = document.referrer;
+                    } else {
+                        window.location.href = '/unauthorized.html'; // fallback
+                    }
+                }
+            })
+            .catch(() => {
+                // Optional: Clear token and redirect on error
+                // localStorage.clear();
+                // window.location.href = '/login.html';
+            });
+    }
+
 </script>
 
 <!DOCTYPE html>
