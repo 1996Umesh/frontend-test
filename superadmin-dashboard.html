@@ -15,8 +15,8 @@
         })
         .then(data => {
             if (data.role !== 'superadmin') {
-                // window.location.reload();
-                window.history.back();
+                window.location.reload();
+                // window.history.back();
             }
         })
         .catch(() => {
