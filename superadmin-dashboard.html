@@ -17,10 +17,10 @@
                 if (!res.ok || !data.role) {
                     throw new Error('Unauthorized');
                 }
-
+                alert(data.role);
                 // Allow only specific roles
                 if (data.role !== 'superadmin') {
-                    alert(data.role);
+                    
                     // 🚨 Redirect back to previous page or fallback
                     if (document.referrer) {
                         window.location.href = document.referrer;
