@@ -1,11 +1,12 @@
 <script>
+    // ✅ Step 1: Get the token from localStorage
     const token = localStorage.getItem('token');
-    alert(token);
-    // Step 1: If no token, redirect to login
+
     if (!token) {
+        // ❌ No token means user not logged in
         window.location.href = '/login.html';
     } else {
-        // Step 2: Verify token and role
+        // ✅ Step 2: Validate token and role via serverless function
         fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
             method: 'GET',
             headers: {
@@ -15,22 +16,28 @@
             .then(async (res) => {
                 const data = await res.json();
 
-                // Step 3: If invalid or wrong role, prevent access
-                if (!res.ok || data.role !== 'superadmin') {
-                    alert('Access denied. You are not authorized.');
-                    window.stop(); // Stop page from loading further
-                    document.body.innerHTML = ''; // Clear page
+                if (!res.ok || !data.role) {
+                    throw new Error('Unauthorized');
                 }
 
-                // ✅ If role is superadmin, page continues loading
+                // ✅ Only allow if role is superadmin
+                if (data.role !== 'superadmin') {
+                    // ❌ Not allowed, redirect back or show unauthorized
+                    alert('Access denied. You are not authorized.');
+                    window.history.back(); // or redirect to unauthorized page
+                }
+
+                // ✅ Success: User can stay on this page
             })
-            .catch(() => {
-                // Token invalid or other error
-                // alert('Session expired or invalid. Please log in again.');
-                // window.location.href = '/login.html';
+            .catch((err) => {
+                console.error('Error:', err.message);
+                alert('Session expired or invalid. Please log in again.');
+                localStorage.removeItem('token');
+                window.location.href = '/login.html';
             });
     }
 </script>
+
 
 
 <!DOCTYPE html>
