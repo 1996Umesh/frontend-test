@@ -1,26 +1,52 @@
 <script>
+    // ✅ Step 1: Get the token from localStorage
     const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = '/login.html';
-    }
+    console.log(token);
 
-    fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` }
-    })
-        .then(res => {
-            if (!res.ok) throw new Error('Unauthorized');
-            return res.json();
+    if (!token) {
+        // ❌ No token means user not logged in
+        window.location.href = '/login.html';
+    } else {
+        // ✅ Step 2: Validate token and role via serverless function
+        fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         })
-        .then(data => {
-            if (data.role !== 'examiner') {
-                window.location.href = '/unauthorized.html';
-            }
-        })
-        .catch(() => {
-            localStorage.clear();
-            window.location.href = '/login.html';
-        });
+            .then(async (res) => {
+                const data = await res.json();
+
+                if (!res.ok || !data.role) {
+                    throw new Error('Unauthorized');
+                }
+
+                // ✅ Only allow if role is examiner
+                if (data.role !== 'examiner') {
+                    // ❌ Not allowed, redirect back or show unauthorized
+                    alert('Access denied. You are not authorized.');
+                    window.history.back(); // or redirect to unauthorized page
+                }
+
+                // ✅ Success: User can stay on this page
+            })
+            .catch((err) => {
+                // console.error('Error:', err.message);
+                // alert('Session expired or invalid. Please log in again.');
+                // localStorage.removeItem('token');
+                // window.location.href = '/login.html';
+            });
+    }
+</script>
+
+<script>
+    function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('role'); // ❌ Remove JWT
+        alert('Logged out successfully');
+        window.location.href = '/login.html'; // 🔁 Redirect to login
+    }
 </script>
 
 <!DOCTYPE html>
@@ -71,7 +97,7 @@
                     <a href="/" class="nav-item nav-link">Home</a>
                     <a href="/examiner-dashboard" class="nav-item nav-link active">Examiner Dashboard</a>
                 </div>
-                <a href="logout" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
+                <a href="#" onclick="logout()" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
             </div>
         </nav>
     </div>
