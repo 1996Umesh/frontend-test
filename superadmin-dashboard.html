@@ -274,31 +274,28 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="country" class="form-label">Country</label>
-                                                    <select class="form-control" id="country" name="country" required>
-                                                        <option selected disabled>Select Country</option>
-                                                        <% countries.forEach(country=> { %>
-                                                            <option value="<%= country.name %>">
-                                                                <%= country.name %>
-                                                            </option>
-                                                            <% }); %>
-                                                    </select>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="country" class="form-label">Select Country</label>
                                                     <input type="text" id="country" class="form-control" name="country" />
                                                 </div>
 
-                                                <div class="mb-3">
+                                                <!-- <div class="mb-3">
+                                                    <label for="country" class="form-label">Select Country</label>
+                                                    <input type="text" id="country" class="form-control" name="country" />
+                                                </div> -->
+
+                                                <!-- <div class="mb-3">
                                                     <label for="phone" class="form-label">Phone Number</label>
                                                     <input id="phone" type="tel" class="form-control" />
-                                                </div>
+                                                </div> -->
                                                   
                                                 <div class="col-md-6 mb-3">
                                                     <label for="countrydirector_name" class="form-label">Country
                                                         Director Name</label>
                                                     <input type="text" class="form-control" id="countrydirector_name"
                                                         name="countrydirector_name" placeholder="Enter name" required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="phone" class="form-label">Country</label>
+                                                    <input id="phone" type="tel" class="form-control" />
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="countrydirector_email" class="form-label">Email
