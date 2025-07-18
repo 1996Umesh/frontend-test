@@ -1,10 +1,11 @@
 <script>
     const token = localStorage.getItem('token');
 
+    // Step 1: If no token, redirect to login
     if (!token) {
-        // No token means not logged in, redirect to login
         window.location.href = '/login.html';
     } else {
+        // Step 2: Verify token and role
         fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
             method: 'GET',
             headers: {
@@ -13,32 +14,24 @@
         })
             .then(async (res) => {
                 const data = await res.json();
-                alert(data.role);
-                if (!res.ok || !data.role) {
-                    throw new Error('Unauthorized');
-                }
-                alert(data.role);
-                // Allow only specific roles
-                if (data.role !== 'superadmin') {
-                    
-                    // 🚨 Redirect back to previous page or fallback
-                    if (document.referrer) {
-                        window.location.href = document.referrer;
-                    } else {
-                        window.location.href = '/unauthorized.html'; // fallback
-                    }
+
+                // Step 3: If invalid or wrong role, prevent access
+                if (!res.ok || data.role !== 'superadmin') {
+                    alert('Access denied. You are not authorized.');
+                    window.stop(); // Stop page from loading further
+                    document.body.innerHTML = ''; // Clear page
                 }
 
-                // ✅ If authorized: do nothing (user stays)
+                // ✅ If role is superadmin, page continues loading
             })
-            .catch((err) => {
-                // console.error('Access check failed:', err.message);
-                // Optional: redirect or show alert
-                // alert('Access denied. You will be redirected.');
-                // window.location.href = '/login.html';
+            .catch(() => {
+                // Token invalid or other error
+                alert('Session expired or invalid. Please log in again.');
+                window.location.href = '/login.html';
             });
     }
 </script>
+
 
 <!DOCTYPE html>
 <html lang="en">
