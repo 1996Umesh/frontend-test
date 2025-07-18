@@ -34,7 +34,8 @@
                 console.error('Error:', err.message);
                 alert('Session expired or invalid. Please log in again.');
                 localStorage.removeItem('token');
-                window.location.href = '/login.html';
+                // window.location.href = '/login.html';
+                window.history.back();
             });
     }
 </script>
