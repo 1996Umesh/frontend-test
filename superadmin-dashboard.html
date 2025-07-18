@@ -269,55 +269,61 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="/add-countrydirector" method="post">
+                                    <form id="countryDirectorForm">
                                         <div class="modal-body">
                                             <div class="row align-items-center mb-3">
                                                 <div class="col-md-3">
-                                                  <label for="country" class="col-form-label">Country</label>
+                                                    <label for="country" class="col-form-label">Country</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                  <input type="text" id="country" class="form-control" name="country" required>
+                                                    <input type="text" id="country" class="form-control" name="country"
+                                                        required>
                                                 </div>
-                                              </div>
-                                              
-                                              <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                  <label for="countrydirector_name" class="col-form-label">Country Director Name</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                  <input type="text" class="form-control" id="countrydirector_name" name="countrydirector_name" placeholder="Enter name" required>
-                                                </div>
-                                              </div>
-                                              
-                                              <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                  <label for="phone" class="col-form-label">Phone No</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                  <input id="phone" type="tel" class="form-control" name="phone" placeholder="+94 77 123 4567" required>
-                                                </div>
-                                              </div>
-                                              
-                                              <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                  <label for="countrydirector_email" class="col-form-label">Email Address</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                  <input type="email" class="form-control" id="countrydirector_email" name="countrydirector_email" placeholder="Enter email" required>
-                                                </div>
-                                              </div>
-                                              
-                                              <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                  <label for="countrydirector_password" class="col-form-label">Password</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                  <input type="password" class="form-control" id="countrydirector_password" name="countrydirector_password" placeholder="Enter password" required>
-                                                </div>
-                                              </div>
-                                              
-                                            
+                                            </div>
 
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="countrydirector_name" class="col-form-label">Country
+                                                        Director Name</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" id="countrydirector_name"
+                                                        name="countrydirector_name" placeholder="Enter name" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="phone" class="col-form-label">Phone No</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input id="phone" type="tel" class="form-control" name="phone"
+                                                        placeholder="+94 77 123 4567" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="countrydirector_email" class="col-form-label">Email
+                                                        Address</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="email" class="form-control" id="countrydirector_email"
+                                                        name="countrydirector_email" placeholder="Enter email" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="countrydirector_password"
+                                                        class="col-form-label">Password</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="password" class="form-control"
+                                                        id="countrydirector_password" name="countrydirector_password"
+                                                        placeholder="Enter password" required>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="modal-footer">
@@ -598,6 +604,38 @@
         });
     </script>
 
+    <script>
+        document.getElementById('countryDirectorForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                country: document.getElementById('country').value,
+                countrydirector_name: document.getElementById('countrydirector_name').value,
+                phone: document.getElementById('phone').value,
+                countrydirector_email: document.getElementById('countrydirector_email').value,
+                countrydirector_password: document.getElementById('countrydirector_password').value
+            };
+
+            try {
+                const res = await fetch('/.netlify/functions/add-countrydirector', {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const result = await res.json();
+                if (res.ok) {
+                    alert('Country Director added successfully!');
+                    document.getElementById('countryDirectorForm').reset();
+                } else {
+                    alert(result.message || 'Something went wrong!');
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Failed to submit.');
+            }
+        });
+    </script>
 
     <!-- JavaScript Libraries -->
 
