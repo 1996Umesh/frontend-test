@@ -58,26 +58,26 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Bootstrap (optional if already added) -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-<!-- intl-tel-input CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+    <!-- intl-tel-input CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
 
-<!-- intl-tel-input JS and dependencies -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+    <!-- intl-tel-input JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
 
 
-<!-- Bootstrap CSS (if not already included) -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Bootstrap CSS (if not already included) -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
-<!-- Country Select CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/css/countrySelect.min.css">
+    <!-- Country Select CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/css/countrySelect.min.css">
 
-<!-- jQuery (required for country-select) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery (required for country-select) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Country Select JS -->
-<script src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
+    <!-- Country Select JS -->
+    <script src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
 
 
     <!-- Bootstrap 5 CSS -->
@@ -272,26 +272,37 @@
                                     <form action="/add-countrydirector" method="post">
                                         <div class="modal-body">
                                             <div class="row">
+                                                <!-- Country -->
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="country" class="form-control">Country</label>
-                                                    <input type="text" id="country" class="form-control" name="country" required>
+                                                    <label for="country" class="form-label">Country</label>
+                                                    <input type="text" id="country" class="form-control" name="country"
+                                                        required>
                                                 </div>
+
+                                                <!-- Country Director Name -->
                                                 <div class="col-md-6 mb-3">
                                                     <label for="countrydirector_name" class="form-label">Country
                                                         Director Name</label>
                                                     <input type="text" class="form-control" id="countrydirector_name"
                                                         name="countrydirector_name" placeholder="Enter name" required>
                                                 </div>
+
+                                                <!-- Phone Number -->
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="phone" class="form-control">Phone No</label>
-                                                    <input id="phone" type="tel" class="form-control" required>
+                                                    <label for="phone" class="form-label">Phone No</label>
+                                                    <input id="phone" type="tel" class="form-control" name="phone"
+                                                        placeholder="+94 77 123 4567" required>
                                                 </div>
+
+                                                <!-- Email -->
                                                 <div class="col-md-6 mb-3">
                                                     <label for="countrydirector_email" class="form-label">Email
                                                         Address</label>
                                                     <input type="email" class="form-control" id="countrydirector_email"
                                                         name="countrydirector_email" placeholder="Enter email" required>
                                                 </div>
+
+                                                <!-- Password -->
                                                 <div class="col-md-6 mb-3">
                                                     <label for="countrydirector_password"
                                                         class="form-label">Password</label>
@@ -300,6 +311,7 @@
                                                         placeholder="Enter password" required>
                                                 </div>
                                             </div>
+
                                         </div>
 
                                         <div class="modal-footer">
@@ -557,29 +569,29 @@
     <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
 
-            <script>
-                const phoneInput = document.querySelector("#phone");
-                window.intlTelInput(phoneInput, {
-                  initialCountry: "auto",
-                  geoIpLookup: function (success, failure) {
-                    fetch("https://ipapi.co/json")
-                      .then((res) => res.json())
-                      .then((data) => success(data.country_code))
-                      .catch(() => success("us"));
-                  },
-                  utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-                });
-              </script>
+    <script>
+        const phoneInput = document.querySelector("#phone");
+        window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: function (success, failure) {
+                fetch("https://ipapi.co/json")
+                    .then((res) => res.json())
+                    .then((data) => success(data.country_code))
+                    .catch(() => success("us"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        });
+    </script>
 
-            <script>
-                $(document).ready(function () {
-                $("#country").countrySelect({
-                    defaultCountry: "us", // or "auto" for geo IP lookup
-                    preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
-                });
-                });
-            </script>
-  
+    <script>
+        $(document).ready(function () {
+            $("#country").countrySelect({
+                defaultCountry: "us", // or "auto" for geo IP lookup
+                preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
+            });
+        });
+    </script>
+
 
     <!-- JavaScript Libraries -->
 
@@ -593,8 +605,8 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 
-    
-      
+
+
 </body>
 
 </html>
