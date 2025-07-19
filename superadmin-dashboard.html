@@ -535,8 +535,6 @@
     </script>
 
     <script>
-        loadCountryDirectors();
-        
         async function loadCountryDirectors() {
             const tbody = document.querySelector("#directorsTable tbody");
             tbody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>';
@@ -587,7 +585,7 @@
             alert("Delete clicked for ID: " + id);
         }
 
-        // loadCountryDirectors();
+        loadCountryDirectors();
     </script>
 
     <!-- JavaScript Libraries -->
