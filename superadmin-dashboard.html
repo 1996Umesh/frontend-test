@@ -610,6 +610,9 @@
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            country = document.getElementById("country").value;
+            alert(country);
+
             const data = {
                 country: document.getElementById("country").value,
                 countrydirector_name: document.getElementById("countrydirector_name").value,
