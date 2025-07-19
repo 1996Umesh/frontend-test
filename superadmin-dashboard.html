@@ -610,16 +610,11 @@
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            country = document.getElementById("country").value;
+            countrydirector_name = document.getElementById("countrydirector_name").value;
             phone = document.getElementById("phone").value;
-            alert(phone);
-
-            const data = {
-                country: document.getElementById("country").value,
-                countrydirector_name: document.getElementById("countrydirector_name").value,
-                phone: document.getElementById("phone").value,
-                countrydirector_email: document.getElementById("countrydirector_email").value,
-                countrydirector_password: document.getElementById("countrydirector_password").value,
-            };
+            countrydirector_email = document.getElementById("countrydirector_email").value;
+            countrydirector_password = document.getElementById("countrydirector_password").value;
 
             try {
                 const response = await fetch('https://b-end-test.netlify.app/.netlify/functions/add-countrydirector', {
@@ -627,7 +622,7 @@
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(data),
+                    body: JSON.stringify({ country, countrydirector_name, phone, countrydirector_email, countrydirector_password }),
                 });
 
                 const result = await response.json();
