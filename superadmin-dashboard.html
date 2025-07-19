@@ -542,6 +542,7 @@
             try {
                 const res = await fetch("https://b-end-test.netlify.app/.netlify/functions/get-countrydirectors");
                 const data = await res.json();
+                console.log(data);
 
                 if (!Array.isArray(data)) {
                     tbody.innerHTML = '<tr><td colspan="5" class="text-danger">Failed to load data</td></tr>';
