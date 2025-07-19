@@ -605,37 +605,48 @@
     </script>
 
     <script>
-        document.getElementById('countryDirectorForm').addEventListener('submit', async (e) => {
+        document.getElementById('countryDirectorForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const formData = {
-                country: document.getElementById('country').value,
-                countrydirector_name: document.getElementById('countrydirector_name').value,
-                phone: document.getElementById('phone').value,
-                countrydirector_email: document.getElementById('countrydirector_email').value,
-                countrydirector_password: document.getElementById('countrydirector_password').value
+            const country = document.getElementById('country').value;
+            const name = document.getElementById('countrydirector_name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('countrydirector_email').value;
+            const password = document.getElementById('countrydirector_password').value;
+
+            const data = {
+                country,
+                countrydirector_name: name,
+                phone,
+                countrydirector_email: email,
+                countrydirector_password: password,
             };
 
             try {
                 const res = await fetch('https://b-end-test.netlify.app/.netlify/functions/add-countrydirector', {
                     method: 'POST',
-                    body: JSON.stringify(formData),
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
                 });
 
+
                 const result = await res.json();
+
                 if (res.ok) {
-                    alert('Country Director added successfully!');
+                    alert('✅ Country Director created successfully!');
                     document.getElementById('countryDirectorForm').reset();
                 } else {
-                    alert(result.message || 'Something went wrong!');
+                    alert(`❌ Failed to submit: ${result.message}`);
                 }
-            } catch (error) {
-                console.error(error);
-                alert('Failed to submit.');
+            } catch (err) {
+                console.error('❌ Error:', err);
+                alert('❌ Failed to submit. Please try again.');
             }
         });
     </script>
+
 
     <!-- JavaScript Libraries -->
 
