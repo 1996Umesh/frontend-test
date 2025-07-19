@@ -536,57 +536,41 @@
 
     <script>
         async function loadCountryDirectors() {
-            const tbody = document.querySelector("#directorsTable tbody");
-            tbody.innerHTML = '<tr><td colspan="5">Loading...</td></tr>';
-
             try {
-                const res = await fetch("https://b-end-test.netlify.app/.netlify/functions/get-countrydirectors");
-                const data = await res.json();
-                console.log(data);
+                const response = await fetch("https://b-end-test.netlify.app/.netlify/functions/get-countrydirectors");
+                const data = await response.json();
 
-                if (!Array.isArray(data)) {
-                    tbody.innerHTML = '<tr><td colspan="5" class="text-danger">Failed to load data</td></tr>';
-                    return;
+                if (!response.ok) {
+                    throw new Error(data.error || 'Unknown error');
                 }
 
-                if (data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5">No Country Directors Found</td></tr>';
-                    return;
-                }
+                const tbody = document.querySelector("#countryDirectorsTable tbody");
+                tbody.innerHTML = '';
 
-                tbody.innerHTML = "";
-                data.forEach(director => {
+                data.forEach(cd => {
                     const row = `
-                        <tr>
-                        <td>${director.country}</td>
-                        <td>${director.countrydirector_name}</td>
-                        <td>${director.countrydirector_email}</td>
-                        <td>${director.phone}</td>
+                    <tr>
+                        <td>${cd.country}</td>
+                        <td>${cd.countrydirector_name}</td>
+                        <td>${cd.countrydirector_email}</td>
+                        <td>${cd.phone}</td>
                         <td>
-                            <button class="btn btn-success btn-sm me-1" onclick="editDirector('${director._id}')">Edit</button>
-                            <button class="btn btn-danger btn-sm me-1" onclick="deleteDirector('${director._id}')">Delete</button>
+                            <button class="btn btn-success btn-sm me-1">Edit</button>
+                            <button class="btn btn-danger btn-sm me-1">Delete</button>
                         </td>
-                        </tr>
-                    `;
-                    tbody.insertAdjacentHTML("beforeend", row);
+                    </tr>
+                `;
+                    tbody.innerHTML += row;
                 });
             } catch (err) {
-                console.error("Fetch error:", err);
-                tbody.innerHTML = '<tr><td colspan="5" class="text-danger">Error loading data</td></tr>';
+                console.error("Error loading data:", err);
+                document.getElementById("message").innerHTML = `<div class="alert alert-danger">❌ Error loading data</div>`;
             }
         }
 
-        // Placeholder functions
-        function editDirector(id) {
-            alert("Edit clicked for ID: " + id);
-        }
-
-        function deleteDirector(id) {
-            alert("Delete clicked for ID: " + id);
-        }
-
-        loadCountryDirectors();
+        window.onload = loadCountryDirectors;
     </script>
+
 
     <!-- JavaScript Libraries -->
 
