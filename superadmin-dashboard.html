@@ -338,7 +338,7 @@
                         </div>
 
                         <!-- Edit Country Director Modal -->
-                        
+
 
                         <!-- Country Director Table -->
                         <div class="table-responsive bg-white p-3 rounded shadow-sm">
@@ -586,7 +586,7 @@
                                                     <label for="country" class="col-form-label">Country</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="country" class="form-control" name="country"
+                                                    <input type="text" id="country" class="form-control" name="country" value="${director.country || ''}" 
                                                         required>
                                                 </div>
                                             </div>
@@ -598,7 +598,7 @@
                                                 </div>
                                                 <div class="col-md-9">
                                                     <input type="text" class="form-control" id="countrydirector_name"
-                                                        name="countrydirector_name" placeholder="Enter name" required>
+                                                        name="countrydirector_name" placeholder="Enter name" value="${director.countrydirector_name || ''}"  required>
                                                 </div>
                                             </div>
 
@@ -607,7 +607,7 @@
                                                     <label for="phone" class="col-form-label">Phone No</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <input id="phone" type="tel" class="form-control" name="phone"
+                                                    <input id="phone" type="tel" class="form-control" name="phone" value="${director.phone || ''}" 
                                                         placeholder="+94 77 123 4567" required>
                                                 </div>
                                             </div>
@@ -618,7 +618,7 @@
                                                         Address</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <input type="email" class="form-control" id="countrydirector_email"
+                                                    <input type="email" class="form-control" id="countrydirector_email" value="${director.countrydirector_email || ''}" 
                                                         name="countrydirector_email" placeholder="Enter email" required>
                                                 </div>
                                             </div>
@@ -631,7 +631,7 @@
                                                 <div class="col-md-9">
                                                     <input type="password" class="form-control"
                                                         id="countrydirector_password" name="countrydirector_password"
-                                                        placeholder="Enter password" required>
+                                                        placeholder="Enter password">
                                                 </div>
                                             </div>
                                         </div>
