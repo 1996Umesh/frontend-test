@@ -354,6 +354,7 @@
                                     <!-- Rows will be injected here -->
                                 </tbody>
                             </table>
+                            <div id="message"></div> <!-- Make sure this exists for status messages -->
                             <div id="message"></div>
                         </div>
                     </section>
@@ -536,45 +537,49 @@
     </script>
 
     <script>
-        async function loadCountryDirectors() {
-            try {
-                const response = await fetch("https://b-end-test.netlify.app/.netlify/functions/get-countrydirectors");
+        document.addEventListener('DOMContentLoaded', function () {
+            const loadData = async () => {
+                const statusEl = document.getElementById('message');
+                const tableBody = document.querySelector('#countryDirectorsTable tbody');
 
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+                try {
+                    statusEl.innerHTML = '<div class="alert alert-info">Loading data...</div>';
+
+                    const response = await fetch('https://b-end-test.netlify.app/.netlify/functions/get-countrydirectors');
+
+                    if (!response.ok) {
+                        throw new Error(`Server returned ${response.status}`);
+                    }
+
+                    const directors = await response.json();
+
+                    if (!Array.isArray(directors)) {
+                        throw new Error('Invalid data format received');
+                    }
+
+                    tableBody.innerHTML = directors.map(director => `
+            <tr>
+                <td>${director.country || 'N/A'}</td>
+                <td>${director.countrydirector_name || 'N/A'}</td>
+                <td>${director.countrydirector_email || 'N/A'}</td>
+                <td>${director.phone || 'N/A'}</td>
+                <td>
+                    <button class="btn btn-success btn-sm me-1">Edit</button>
+                    <button class="btn btn-danger btn-sm me-1">Delete</button>
+                </td>
+            </tr>
+            `).join('');
+
+                    statusEl.innerHTML = '<div class="alert alert-success">Data loaded successfully</div>';
+                } catch (error) {
+                    console.error('Error:', error);
+                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-danger">Error loading data</td></tr>`;
+                    statusEl.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
                 }
+            };
 
-                const data = await response.json();
-
-                const tbody = document.querySelector("#countryDirectorsTable tbody");
-                tbody.innerHTML = '';
-
-                data.forEach(cd => {
-                    const row = `
-                        <tr>
-                            <td>${cd.country}</td>
-                            <td>${cd.countrydirector_name}</td>
-                            <td>${cd.countrydirector_email}</td>
-                            <td>${cd.phone}</td>
-                            <td>
-                                <button class="btn btn-success btn-sm me-1">Edit</button>
-                                <button class="btn btn-danger btn-sm me-1">Delete</button>
-                            </td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                });
-            } catch (err) {
-                console.error("Error loading data:", err);
-                document.getElementById("message").innerHTML = `
-            <div class="alert alert-danger">
-                ❌ Error loading data: ${err.message}
-            </div>`;
-            }
-        }
-
-        window.onload = loadCountryDirectors;
+            loadData();
+        });
     </script>
 
 
