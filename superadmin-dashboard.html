@@ -693,6 +693,42 @@
         });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Delegate click event to dynamically created .confirm-delete buttons
+            document.body.addEventListener('click', async (e) => {
+                if (e.target.classList.contains('confirm-delete')) {
+                    const directorId = e.target.getAttribute('data-id');
+
+                    try {
+                        const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/delete-countrydirector`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ id: directorId })
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            // Remove row from the table
+                            const row = e.target.closest('tr');
+                            if (row) row.remove();
+
+                            alert('✅ Country Director deleted successfully.');
+                        } else {
+                            alert('❌ Failed to delete. ' + (result.error || 'Try again.'));
+                        }
+                    } catch (err) {
+                        console.error('Error deleting director:', err);
+                        alert('❌ Server error occurred.');
+                    }
+                }
+            });
+        });
+
+    </script>
 
     <!-- JavaScript Libraries -->
 
