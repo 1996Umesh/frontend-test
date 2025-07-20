@@ -475,46 +475,20 @@
             class="fa fa-angle-double-up"></i></a>
 
     <script>
-        // const phoneInput = document.querySelector("#phone");
-        // window.intlTelInput(phoneInput, {
-        //     initialCountry: "auto",
-        //     geoIpLookup: function (success, failure) {
-        //         fetch("https://ipapi.co/json")
-        //             .then((res) => res.json())
-        //             .then((data) => success(data.country_code))
-        //             .catch(() => success("us"));
-        //     },
-        //     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-        // });
-    </script>
-
-    <script>
-        function initializePhoneInputs() {
-            const phoneInputs = document.querySelectorAll(".phone");
-            phoneInputs.forEach(phoneInput => {
-                window.intlTelInput(phoneInput, {
-                    initialCountry: "auto",
-                    geoIpLookup: function (success, failure) {
-                        fetch("https://ipapi.co/json")
-                            .then((res) => res.json())
-                            .then((data) => success(data.country_code))
-                            .catch(() => success("us"));
-                    },
-                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-                });
-            });
-        }
-
-        // Run on page load
-        initializePhoneInputs();
-
-        // Run again after modals are dynamically inserted
-        document.addEventListener("click", function (e) {
-            if (e.target.matches("[data-bs-toggle='modal']")) {
-                setTimeout(() => initializePhoneInputs(), 200);
-            }
+        const phoneInput = document.querySelector("#phone");
+        window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: function (success, failure) {
+                fetch("https://ipapi.co/json")
+                    .then((res) => res.json())
+                    .then((data) => success(data.country_code))
+                    .catch(() => success("us"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
     </script>
+
+    
 
 
     <script>
@@ -709,6 +683,18 @@
                             </tr>
                         `;
                     }).join('');
+
+                    const phoneInput = document.querySelector("#phone");
+                    window.intlTelInput(phoneInput, {
+                        initialCountry: "auto",
+                        geoIpLookup: function (success, failure) {
+                            fetch("https://ipapi.co/json")
+                                .then((res) => res.json())
+                                .then((data) => success(data.country_code))
+                                .catch(() => success("us"));
+                        },
+                        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+                    });
 
                     // statusEl.innerHTML = '<div class="alert alert-success">Data loaded successfully</div>';
                 } catch (error) {
