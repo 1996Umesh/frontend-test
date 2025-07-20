@@ -475,18 +475,47 @@
             class="fa fa-angle-double-up"></i></a>
 
     <script>
-        const phoneInput = document.querySelector("#phone");
-        window.intlTelInput(phoneInput, {
-            initialCountry: "auto",
-            geoIpLookup: function (success, failure) {
-                fetch("https://ipapi.co/json")
-                    .then((res) => res.json())
-                    .then((data) => success(data.country_code))
-                    .catch(() => success("us"));
-            },
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        // const phoneInput = document.querySelector("#phone");
+        // window.intlTelInput(phoneInput, {
+        //     initialCountry: "auto",
+        //     geoIpLookup: function (success, failure) {
+        //         fetch("https://ipapi.co/json")
+        //             .then((res) => res.json())
+        //             .then((data) => success(data.country_code))
+        //             .catch(() => success("us"));
+        //     },
+        //     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        // });
+    </script>
+
+    <script>
+        function initializePhoneInputs() {
+            const phoneInputs = document.querySelectorAll(".phone");
+            phoneInputs.forEach(phoneInput => {
+                window.intlTelInput(phoneInput, {
+                    initialCountry: "auto",
+                    geoIpLookup: function (success, failure) {
+                        fetch("https://ipapi.co/json")
+                            .then((res) => res.json())
+                            .then((data) => success(data.country_code))
+                            .catch(() => success("us"));
+                    },
+                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+                });
+            });
+        }
+
+        // Run on page load
+        initializePhoneInputs();
+
+        // Run again after modals are dynamically inserted
+        document.addEventListener("click", function (e) {
+            if (e.target.matches("[data-bs-toggle='modal']")) {
+                setTimeout(() => initializePhoneInputs(), 200);
+            }
         });
     </script>
+
 
     <script>
         $(document).ready(function () {
@@ -717,7 +746,14 @@
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({ id: directorId, ...data })
+                            body: JSON.stringify({
+                                id: directorId,
+                                country: data.country,
+                                countrydirector_name: data.countrydirector_name,
+                                countrydirector_email: data.countrydirector_email,
+                                phone: data.phone,
+                                countrydirector_password: data.countrydirector_password
+                            })
                         });
 
                         const result = await response.json();
