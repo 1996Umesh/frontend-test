@@ -537,12 +537,12 @@
 
     <script>
         async function loadCountryDirectors() {
-            alert("sssssssss");
+            // alert("sssssssss");
             try {
-                alert("pppppp");
+                
                 const response = await fetch("https://b-end-test.netlify.app/.netlify/functions/get-countrydirectors");
                 const data = await response.json();
-
+                alert(data);
                 if (!response.ok) {
                     throw new Error(data.error || 'Unknown error');
                 }
