@@ -331,7 +331,7 @@
                                                 data-bs-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-success">Add Country Director</button>
                                         </div>
-                                        <div id="message" class="mt-1 text-center"></div>
+                                        <div id="add-message" class="mt-1 text-center"></div>
                                     </form>
                                 </div>
                             </div>
@@ -354,8 +354,7 @@
                                     <!-- Rows will be injected here -->
                                 </tbody>
                             </table>
-                            <div id="message"></div> <!-- Make sure this exists for status messages -->
-                            <div id="message"></div>
+                            <div id="get-message"></div> <!-- Make sure this exists for status messages -->
                         </div>
                     </section>
 
@@ -498,7 +497,7 @@
 
     <script>
         const form = document.getElementById("countryDirectorForm");
-        const messageDiv = document.getElementById('message');
+        const messageDiv = document.getElementById('add-message');
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -539,7 +538,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const loadData = async () => {
-                const statusEl = document.getElementById('message');
+                const statusEl = document.getElementById('get-message');
                 const tableBody = document.querySelector('#countryDirectorsTable tbody');
 
                 try {
