@@ -337,6 +337,86 @@
                             </div>
                         </div>
 
+                        <!-- Edit Country Director Modal -->
+                        <div class="modal fade" id="editCountryDirectorModal" tabindex="-1"
+                            aria-labelledby="editCountryDirectorLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header text-white">
+                                        <h5 class="modal-title" id="addCountryDirectorLabel">Edit Country Director
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <form id="countryDirectorForm">
+                                        <div class="modal-body">
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="country" class="col-form-label">Country</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="country" class="form-control" name="country"
+                                                        required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="countrydirector_name" class="col-form-label">Country
+                                                        Director Name</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" id="countrydirector_name"
+                                                        name="countrydirector_name" placeholder="Enter name" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="phone" class="col-form-label">Phone No</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input id="phone" type="tel" class="form-control" name="phone"
+                                                        placeholder="+94 77 123 4567" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="countrydirector_email" class="col-form-label">Email
+                                                        Address</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="email" class="form-control" id="countrydirector_email"
+                                                        name="countrydirector_email" placeholder="Enter email" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-3">
+                                                    <label for="countrydirector_password"
+                                                        class="col-form-label">Password</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="password" class="form-control"
+                                                        id="countrydirector_password" name="countrydirector_password"
+                                                        placeholder="Enter password" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-success">Edit Country Director</button>
+                                        </div>
+                                        <div id="add-message" class="mt-1 text-center"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Country Director Table -->
                         <div class="table-responsive bg-white p-3 rounded shadow-sm">
                             <h3 class="text-primary mb-3">Country Director List</h3>
@@ -562,7 +642,9 @@
                 <td>${director.countrydirector_email || 'N/A'}</td>
                 <td>${director.phone || 'N/A'}</td>
                 <td>
-                    <button class="btn btn-success btn-sm me-1">Edit</button>
+                    <button class="btn btn-success btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editCountryDirectorModal">
+                        Edit
+                    </button>
                     <button class="btn btn-danger btn-sm me-1">Delete</button>
                 </td>
             </tr>
