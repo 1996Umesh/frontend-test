@@ -552,17 +552,17 @@
 
                 data.forEach(cd => {
                     const row = `
-                <tr>
-                    <td>${cd.country}</td>
-                    <td>${cd.countrydirector_name}</td>
-                    <td>${cd.countrydirector_email}</td>
-                    <td>${cd.phone}</td>
-                    <td>
-                        <button class="btn btn-success btn-sm me-1">Edit</button>
-                        <button class="btn btn-danger btn-sm me-1">Delete</button>
-                    </td>
-                </tr>
-            `;
+                        <tr>
+                            <td>${cd.country}</td>
+                            <td>${cd.countrydirector_name}</td>
+                            <td>${cd.countrydirector_email}</td>
+                            <td>${cd.phone}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm me-1">Edit</button>
+                                <button class="btn btn-danger btn-sm me-1">Delete</button>
+                            </td>
+                        </tr>
+                    `;
                     tbody.innerHTML += row;
                 });
             } catch (err) {
