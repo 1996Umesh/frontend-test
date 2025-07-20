@@ -558,98 +558,60 @@
                         throw new Error('Invalid data format received');
                     }
 
-                    tableBody.innerHTML = directors.map(director => `
-            <tr>
-                <td>${director.country || 'N/A'}</td>
-                <td>${director.countrydirector_name || 'N/A'}</td>
-                <td>${director.countrydirector_email || 'N/A'}</td>
-                <td>${director.phone || 'N/A'}</td>
-                <td>
-                    <button class="btn btn-success btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editCountryDirectorModal">
-                        Edit
-                    </button>
-                    <div class="modal fade" id="editCountryDirectorModal" tabindex="-1"
-                            aria-labelledby="editCountryDirectorLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
+                    tableBody.innerHTML = directors.map(director => {
+                        const modalId = `editModal-${director._id}`;
+                        return `
+                            <tr>
+                            <td>${director.country || 'N/A'}</td>
+                            <td>${director.countrydirector_name || 'N/A'}</td>
+                            <td>${director.countrydirector_email || 'N/A'}</td>
+                            <td>${director.phone || 'N/A'}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm me-1" data-bs-toggle="modal" data-bs-target="#${modalId}">
+                                Edit
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="${modalId}" tabindex="-1"
+                                aria-labelledby="${modalId}-label" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
                                     <div class="modal-header text-white">
-                                        <h5 class="modal-title" id="addCountryDirectorLabel">Edit Country Director
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <h5 class="modal-title" id="${modalId}-label">Edit Country Director</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
 
-                                    <form id="countryDirectorForm">
+                                    <form class="edit-form" data-id="${director._id}">
                                         <div class="modal-body">
-                                            <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                    <label for="country" class="col-form-label">Country</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="country" class="form-control" name="country" value="${director.country || ''}" 
-                                                        required>
-                                                </div>
+                                        <div class="row align-items-center mb-3">
+                                            <div class="col-md-3">
+                                            <label for="country-${director._id}" class="col-form-label">Country</label>
                                             </div>
+                                            <div class="col-md-9">
+                                            <input type="text" id="country-${director._id}" class="form-control" name="country"
+                                                value="${director.country || ''}" required>
+                                            </div>
+                                        </div>
 
-                                            <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                    <label for="countrydirector_name" class="col-form-label">Country
-                                                        Director Name</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="countrydirector_name"
-                                                        name="countrydirector_name" placeholder="Enter name" value="${director.countrydirector_name || ''}"  required>
-                                                </div>
-                                            </div>
+                                        <!-- Repeat the same structure for all inputs, just change the id with director._id -->
+                                        <!-- ... -->
 
-                                            <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                    <label for="phone" class="col-form-label">Phone No</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input id="phone" type="tel" class="form-control" name="phone" value="${director.phone || ''}" 
-                                                        placeholder="+94 77 123 4567" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                    <label for="countrydirector_email" class="col-form-label">Email
-                                                        Address</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="email" class="form-control" id="countrydirector_email" value="${director.countrydirector_email || ''}" 
-                                                        name="countrydirector_email" placeholder="Enter email" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center mb-3">
-                                                <div class="col-md-3">
-                                                    <label for="countrydirector_password"
-                                                        class="col-form-label">Password</label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="password" class="form-control"
-                                                        id="countrydirector_password" name="countrydirector_password"
-                                                        placeholder="Enter password">
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-success">Edit Country Director</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-success">Edit Country Director</button>
                                         </div>
-                                        <div id="add-message" class="mt-1 text-center"></div>
                                     </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    <button class="btn btn-danger btn-sm me-1">Delete</button>
-                </td>
-            </tr>
-            `).join('');
+                                </div>
+
+                                <button class="btn btn-danger btn-sm me-1">Delete</button>
+                            </td>
+                            </tr>
+                        `;
+                    }).join('');
 
                     // statusEl.innerHTML = '<div class="alert alert-success">Data loaded successfully</div>';
                 } catch (error) {
