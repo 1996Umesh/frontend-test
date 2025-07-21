@@ -263,8 +263,8 @@
 
             const fullPhoneNumber = iti.getNumber(); // E.g., +94771234567
 
-            fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-countrydirector`, {
-                method: 'PUT',
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/add-countrydirector`, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -281,7 +281,7 @@
                     if (data.message || data._id) {
                         window.location.href = 'country-directors-list.html';
                     } else {
-                        alert('Update failed: ' + (data.error || 'Unknown error'));
+                        alert('Insert failed: ' + (data.error || 'Unknown error'));
                     }
                 })
                 .catch(err => {
