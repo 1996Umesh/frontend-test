@@ -152,8 +152,6 @@
     </div>
     <!-- Admin Dashboard End -->
 
-    <!-- Admin Dashboard End -->
-
     <!-- Footer Start -->
     <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
         <div class="container mt-5 pt-5">
@@ -236,8 +234,20 @@
 
 
     <script>
+        // const phoneInput = document.querySelector("#phone");
+        // window.intlTelInput(phoneInput, {
+        //     initialCountry: "auto",
+        //     geoIpLookup: function (success, failure) {
+        //         fetch("https://ipapi.co/json")
+        //             .then((res) => res.json())
+        //             .then((data) => success(data.country_code))
+        //             .catch(() => success("us"));
+        //     },
+        //     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        // });
+
         const phoneInput = document.querySelector("#phone");
-        window.intlTelInput(phoneInput, {
+        const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
             geoIpLookup: function (success, failure) {
                 fetch("https://ipapi.co/json")
@@ -247,6 +257,8 @@
             },
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
+
+
     </script>
 
     <script>
@@ -278,9 +290,10 @@
     </script>
 
     <script>
-        // Handle form submit
         document.getElementById('countryDirectorForm').addEventListener('submit', function (e) {
-            e.preventDefault(); // prevent default form submit
+            e.preventDefault();
+
+            const fullPhoneNumber = iti.getNumber(); // E.g., +94771234567
 
             fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-countrydirector`, {
                 method: 'PUT',
@@ -292,7 +305,7 @@
                     country: document.getElementById('country').value,
                     countrydirector_name: document.getElementById('countrydirector_name').value,
                     countrydirector_email: document.getElementById('countrydirector_email').value,
-                    phone: document.getElementById('phone').value,
+                    phone: fullPhoneNumber, // 👈 send full number here
                     countrydirector_password: document.getElementById('countrydirector_password').value
                 }),
             })
@@ -309,6 +322,7 @@
                     alert('Network error while updating.');
                 });
         });
+
     </script>
 
     <!-- JavaScript Libraries -->
