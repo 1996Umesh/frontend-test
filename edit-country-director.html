@@ -262,11 +262,11 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
-        alert(id);
 
-        fetch(`https://your-site/.netlify/functions/get-countrydirector-by-id?id=${id}`)
+        fetch(`https://b-end-test.netlify.app/.netlify/functions/get-countrydirector-by-id?id=${id}`)
             .then(res => res.json())
             .then(data => {
+                document.querySelector('#countrydirector_id').value = id;
                 document.querySelector('#country').value = data.country;
                 document.querySelector('#countrydirector_name').value = data.countrydirector_name;
                 document.querySelector('#countrydirector_email').value = data.countrydirector_email;
