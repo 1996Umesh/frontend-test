@@ -89,7 +89,8 @@
                 </div>
                 <div class="card-body">
                     <form id="countryDirectorForm">
-                        <input type="text" id="countrydirector_id" class="form-control" name="countrydirector_id" required>
+                        <input type="text" id="countrydirector_id" class="form-control" name="countrydirector_id"
+                            required>
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <label for="country" class="form-label">Country</label>
@@ -256,6 +257,22 @@
                 preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
             });
         });
+    </script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        fetch(`https://your-site/.netlify/functions/get-countrydirector-by-id?id=${id}`)
+            .then(res => res.json())
+            .then(data => {
+                document.querySelector('#country').value = data.country;
+                document.querySelector('#name').value = data.countrydirector_name;
+                document.querySelector('#email').value = data.countrydirector_email;
+                document.querySelector('#phone').value = data.phone;
+            })
+            .catch(error => console.error('Error loading director:', error));
+
     </script>
 
     <!-- JavaScript Libraries -->
