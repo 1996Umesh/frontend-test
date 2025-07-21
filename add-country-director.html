@@ -66,10 +66,10 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-                    
-                    <a href="superadmin-dashboard.html" class="nav-item nav-link active">SuperAdmin Dashboard</a>
-                    <a href="country-directors-list.html" class="nav-item nav-link">Country Directors</a>
-                    <a href="superadmin-profile.html" class="nav-item nav-link">Profile</a>
+
+                    <a href="superadmin-dashboard.html" class="nav-item nav-link">SuperAdmin Dashboard</a>
+                    <a href="country-directors-list.html" class="nav-item nav-link active">Country Directors</a>
+                    <a href="" class="nav-item nav-link">Profile</a>
                 </div>
                 <a href="#" onclick="logout()" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
             </div>
@@ -78,57 +78,79 @@
     <!-- Navbar End -->
 
     <!-- Admin Dashboard Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="row">
+    <div class="container">
+        <section class="mt-5" id="users">
+            <h2 class="mb-4 text-primary"><i class="fa fa-users me-2"></i>Country Directors</h2>
 
-                <!-- Main Content -->
-                <div class="col-md-12">
-
-                    <section class="mt-4" id="dashboard">
-                        <h2 class="mb-3 text-primary"><i class="fa fa-tachometer-alt mr-2"></i>Dashboard</h2>
-                        <div class="row mt-4">
-                            <div class="col-md-4 mb-3">
-                                <div class="bg-primary text-white text-center p-4 rounded shadow-sm">
-                                    <h4>Users</h4>
-                                    <p class="m-0">150</p>
-                                </div>
+            <!-- Add Country Director Form -->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary">
+                    <h5 class="text-white mb-0">Add New Country Director</h5>
+                </div>
+                <div class="card-body">
+                    <form id="countryDirectorForm">
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="country" class="form-label">Country</label>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="bg-secondary text-white text-center p-4 rounded shadow-sm">
-                                    <h4>Exams</h4>
-                                    <p class="m-0">30</p>
-                                </div>
+                            <div class="col-md-9">
+                                <input type="text" id="country" class="form-control" name="country" required>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="bg-warning text-white text-center p-4 rounded shadow-sm">
-                                    <h4>Messages</h4>
-                                    <p class="m-0">45</p>
-                                </div>
-                            </div>
-                            <!-- <div class="col-md-3 mb-3">
-                                <div class="bg-success text-white text-center p-4 rounded shadow-sm">
-                                    <h4>Visits</h4>
-                                    <p class="m-0">1200</p>
-                                </div>
-                            </div> -->
                         </div>
 
-                        <h3 class="mb-3 text-primary">User Growth Chart</h3>
-                        <div class="bg-light rounded shadow-sm p-3 mb-3">
-                            <canvas id="userGrowthChart" width="100%" height="40"></canvas>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="countrydirector_name" class="form-label">Director Name</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="countrydirector_name"
+                                    name="countrydirector_name" placeholder="Enter name" required>
+                            </div>
                         </div>
 
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        
-                    </section>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="phone" class="form-label">Phone No</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input id="phone" type="tel" class="form-control" name="phone"
+                                    placeholder="+94 77 123 4567" required>
+                            </div>
+                        </div>
 
-                    
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="countrydirector_email" class="form-label">Email Address</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="email" class="form-control" id="countrydirector_email"
+                                    name="countrydirector_email" placeholder="Enter email" required>
+                            </div>
+                        </div>
 
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <label for="countrydirector_password" class="form-label">Password</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="password" class="form-control" id="countrydirector_password"
+                                    name="countrydirector_password" placeholder="Enter password" required>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <a href="country-directors-list.html" class="btn btn-success">Country Directors List</a>
+                            <button type="submit" class="btn btn-primary">Add Country Director</button>
+                        </div>
+
+                        <div id="add-message" class="mt-2 text-center"></div>
+                    </form>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
+    <!-- Admin Dashboard End -->
+
     <!-- Admin Dashboard End -->
 
     <!-- Footer Start -->
@@ -210,6 +232,30 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
+
+
+    <script>
+        const phoneInput = document.querySelector("#phone");
+        window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: function (success, failure) {
+                fetch("https://ipapi.co/json")
+                    .then((res) => res.json())
+                    .then((data) => success(data.country_code))
+                    .catch(() => success("us"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#country").countrySelect({
+                defaultCountry: "us", // or "auto" for geo IP lookup
+                preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
+            });
+        });
+    </script>
 
     <!-- JavaScript Libraries -->
 
