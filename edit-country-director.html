@@ -262,6 +262,7 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
+        alert(id);
 
         fetch(`https://your-site/.netlify/functions/get-countrydirector-by-id?id=${id}`)
             .then(res => res.json())
