@@ -211,17 +211,19 @@
                     if (!Array.isArray(directors)) throw new Error('Invalid data format received');
 
                     tableBody.innerHTML = directors.map(director => `
-                                <tr>
-                                    <td>${director.country || 'N/A'}</td>
-                                    <td>${director.countrydirector_name || 'N/A'}</td>
-                                    <td>${director.countrydirector_email || 'N/A'}</td>
-                                    <td>${director.phone || 'N/A'}</td>
-                                    <td>
-                                        <a href="edit-country-director.html?id=${director._id}" class="btn btn-success btn-sm me-1">Edit</a>
-                                        <a href="" class="btn btn-danger btn-sm me-1">Delete</a>
-                                    </td>
-                                </tr>
-                            `).join('');
+                        <tr>
+                            <td>${director.country || 'N/A'}</td>
+                            <td>${director.countrydirector_name || 'N/A'}</td>
+                            <td>${director.countrydirector_email || 'N/A'}</td>
+                            <td>${director.phone || 'N/A'}</td>
+                            <td>
+                            <a href="edit-country-director.html?id=${director._id}" class="btn btn-success btn-sm me-1">Edit</a>
+                            <button class="btn btn-danger btn-sm me-1">Delete</button>
+                            </td>
+                        </tr>
+                        `)
+                    .join('');
+
                 } catch (error) {
                     console.error('Error:', error);
                     tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-danger">Error loading data</td></tr>`;
