@@ -276,6 +276,31 @@
 
     </script>
 
+    <script>
+        fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-countrydirector`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: document.getElementById('countrydirector_id').value,
+                country: document.getElementById('country').value,
+                countrydirector_name: document.getElementById('countrydirector_name').value,
+                countrydirector_email: document.getElementById('countrydirector_email').value,
+                phone: document.getElementById('phone').value,
+                countrydirector_password: document.getElementById('countrydirector_password').value
+            }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(err => {
+                console.error('❌ Update error:', err);
+            });
+
+    </script>
+
     <!-- JavaScript Libraries -->
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
