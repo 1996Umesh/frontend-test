@@ -236,7 +236,7 @@
 
     <script>
         const phoneInput = document.querySelector("#phone");
-        window.intlTelInput(phoneInput, {
+        const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
             geoIpLookup: function (success, failure) {
                 fetch("https://ipapi.co/json")
@@ -255,6 +255,41 @@
                 preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
             });
         });
+    </script>
+
+    <script>
+        document.getElementById('countryDirectorForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const fullPhoneNumber = iti.getNumber(); // E.g., +94771234567
+
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-countrydirector`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    country: document.getElementById('country').value,
+                    countrydirector_name: document.getElementById('countrydirector_name').value,
+                    countrydirector_email: document.getElementById('countrydirector_email').value,
+                    phone: fullPhoneNumber, // 👈 send full number here
+                    countrydirector_password: document.getElementById('countrydirector_password').value
+                }),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message || data._id) {
+                        window.location.href = 'country-directors-list.html';
+                    } else {
+                        alert('Update failed: ' + (data.error || 'Unknown error'));
+                    }
+                })
+                .catch(err => {
+                    console.error('❌ Insert error:', err);
+                    alert('Network error while updating.');
+                });
+        });
+
     </script>
 
     <!-- JavaScript Libraries -->
