@@ -89,7 +89,7 @@
                 </div>
                 <div class="card-body">
                     <form id="countryDirectorForm">
-                        <input type="text" id="countrydirector_id" name="countrydirector_id">
+                        <input type="hidden" id="countrydirector_id" name="countrydirector_id">
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <label for="country" class="form-label">Country</label>
@@ -278,32 +278,37 @@
     </script>
 
     <script>
-        fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-countrydirector`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: document.getElementById('countrydirector_id').value,
-                country: document.getElementById('country').value,
-                countrydirector_name: document.getElementById('countrydirector_name').value,
-                countrydirector_email: document.getElementById('countrydirector_email').value,
-                phone: document.getElementById('phone').value,
-                countrydirector_password: document.getElementById('countrydirector_password').value
-            }),
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.message) {
-                    window.location.href = 'country-directors-list.html';
-                } else {
-                    alert('Update failed: ' + (data.error || 'Unknown error'));
-                }
-            })
-            .catch(err => {
-                console.error('❌ Update error:', err);
-            });
+        // Handle form submit
+        document.getElementById('countryDirectorForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // prevent default form submit
 
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-countrydirector`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: document.getElementById('countrydirector_id').value,
+                    country: document.getElementById('country').value,
+                    countrydirector_name: document.getElementById('countrydirector_name').value,
+                    countrydirector_email: document.getElementById('countrydirector_email').value,
+                    phone: document.getElementById('phone').value,
+                    countrydirector_password: document.getElementById('countrydirector_password').value
+                }),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message || data._id) {
+                        window.location.href = 'country-directors-list.html';
+                    } else {
+                        alert('Update failed: ' + (data.error || 'Unknown error'));
+                    }
+                })
+                .catch(err => {
+                    console.error('❌ Update error:', err);
+                    alert('Network error while updating.');
+                });
+        });
     </script>
 
     <!-- JavaScript Libraries -->
