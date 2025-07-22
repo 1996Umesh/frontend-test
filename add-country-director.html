@@ -54,6 +54,16 @@
 </head>
 
 <body>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+
+        if (!token || role !== 'superadmin') {
+            window.location.href = '/login.html'; // redirect to login or 403 page
+        }
+    </script>
+
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5 fixed-top">
@@ -233,6 +243,14 @@
     <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
 
+    <script>
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('role');
+            window.location.href = '/login.html'; // change this path if needed
+        }
+    </script>
 
     <script>
         const phoneInput = document.querySelector("#phone");
