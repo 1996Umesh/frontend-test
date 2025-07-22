@@ -103,7 +103,8 @@
                         <!-- Rows will be injected here -->
                     </tbody>
                 </table>
-                <!-- ✅ Delete Confirmation Modal (only one, outside loop) -->
+
+                <!-- Delete Confirmation Modal -->
                 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -114,7 +115,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="deleteModalBody">
-                                <!-- Will be dynamically filled -->
+                                <!-- Dynamic content will be injected here -->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
@@ -123,6 +124,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
         <!-- <div class="row">
@@ -240,12 +242,12 @@
                             <a href="edit-country-director.html?id=${director._id}" class="btn btn-success btn-sm me-1">Edit</a>
                             <!-- Delete Button -->
                             <button 
-                            class="btn btn-danger btn-sm me-1"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteModal"
-                            data-id="${director._id}"
-                            data-name="${director.countrydirector_name}">
-                            Delete
+                                class="btn btn-danger btn-sm me-1"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                data-id="${director._id}"
+                                data-name="${director.countrydirector_name}">
+                                Delete
                             </button>
                             </td>
                         </tr>
@@ -264,25 +266,30 @@
 
     <script>
         let deleteId = null;
+        let deleteModalInstance = null;
 
-        const deleteModal = document.getElementById('deleteModal');
-        deleteModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteModal = document.getElementById('deleteModal');
 
-            // Get data-id and data-name from button
-            deleteId = button.getAttribute('data-id');
-            const name = button.getAttribute('data-name');
+            // Initialize and store Bootstrap modal instance
+            deleteModalInstance = new bootstrap.Modal(deleteModal);
 
-            // Update modal content
-            const modalBody = deleteModal.querySelector('#deleteModalBody');
-            modalBody.innerHTML = `Are you sure you want to delete <b>${name}</b>?`;
+            // Listen for modal show event to set ID and name
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
 
+                // Get data attributes
+                deleteId = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+
+                // Set modal body content
+                const modalBody = deleteModal.querySelector('#deleteModalBody');
+                modalBody.innerHTML = `Are you sure you want to delete <b>${name}</b>?`;
+            });
         });
 
         function confirmDelete() {
             if (!deleteId) return;
-
-            const deleteModal = document.getElementById('deleteModal');
 
             fetch(`https://b-end-test.netlify.app/.netlify/functions/delete-countrydirector?id=${deleteId}`, {
                 method: 'DELETE',
@@ -291,8 +298,8 @@
                 .then(data => {
                     try {
                         if (data.message) {
-                            const modalInstance = bootstrap.Modal.getInstance(deleteModal);
-                            if (modalInstance) modalInstance.hide();
+                            // Hide modal if instance is valid
+                            if (deleteModalInstance) deleteModalInstance.hide();
                             window.location.reload();
                         } else {
                             alert('Delete failed: ' + (data.error || 'Unknown error'));
@@ -308,9 +315,8 @@
                     alert('Network error while deleting.');
                 });
         }
-
-
     </script>
+
 
 
 
