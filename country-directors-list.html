@@ -103,6 +103,26 @@
                         <!-- Rows will be injected here -->
                     </tbody>
                 </table>
+                <!-- ✅ Delete Confirmation Modal (only one, outside loop) -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-warning text-white">
+                                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="deleteModalBody">
+                                <!-- Will be dynamically filled -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- <div class="row">
@@ -229,24 +249,6 @@
                             </button>
 
                             <!-- Bootstrap Delete Confirmation Modal -->
-                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                <div class="modal-header bg-warning text-white">
-                                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to delete <b>${director.countrydirector_name}</b>?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
                             </td>
                         </tr>
                         `)
