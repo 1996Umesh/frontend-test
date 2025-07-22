@@ -54,6 +54,15 @@
 </head>
 
 <body>
+    
+    <script>
+        // 🔒 Redirect if not logged in
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = '/login.html'; // or wherever your login page is
+        }
+    </script>
+
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5 fixed-top">
@@ -66,7 +75,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-                    
+
                     <a href="superadmin-dashboard.html" class="nav-item nav-link active">SuperAdmin Dashboard</a>
                     <a href="country-directors-list.html" class="nav-item nav-link">Country Directors</a>
                     <a href="superadmin-profile.html" class="nav-item nav-link">Profile</a>
@@ -120,10 +129,10 @@
                         </div>
 
                         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        
+
                     </section>
 
-                    
+
 
                 </div>
             </div>
@@ -211,6 +220,14 @@
     <a href="#" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
 
+    <script>
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('role');
+            window.location.href = '/login.html'; // change this path if needed
+        }
+    </script>
     <!-- JavaScript Libraries -->
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
