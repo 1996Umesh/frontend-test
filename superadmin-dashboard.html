@@ -56,12 +56,14 @@
 <body>
     
     <script>
-        // 🔒 Redirect if not logged in
         const token = localStorage.getItem('token');
-        if (!token) {
-          window.location.href = '/login.html'; // or wherever your login page is
+        const role = localStorage.getItem('role');
+
+        if (!token || role !== 'superadmin') {
+            window.location.href = '/login.html';
         }
     </script>
+
 
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
