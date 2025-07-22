@@ -219,7 +219,12 @@
                             <td>
                             <a href="edit-country-director.html?id=${director._id}" class="btn btn-success btn-sm me-1">Edit</a>
                             <!-- Delete Button -->
-                            <button class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="setDeleteId('${director._id}')">
+                            <button 
+                            class="btn btn-danger btn-sm me-1"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteModal"
+                            data-id="${director._id}"
+                            data-name="${director.countrydirector_name}">
                             Delete
                             </button>
 
@@ -260,9 +265,18 @@
     <script>
         let deleteId = null;
 
-        function setDeleteId(id) {
-            deleteId = id;
-        }
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+
+            // Get data-id and data-name from button
+            deleteId = button.getAttribute('data-id');
+            const name = button.getAttribute('data-name');
+
+            // Update modal content
+            const modalBody = deleteModal.querySelector('#deleteModalBody');
+            modalBody.textContent = `Are you sure you want to delete ${name}?`;
+        });
 
         function confirmDelete() {
             if (!deleteId) return;
@@ -273,10 +287,10 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.message) {
-                        const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
-                        modal.hide();
-                        alert(data.message);
-                        window.location.reload(); // Reload or redirect
+                        // Close modal and reload page
+                        const modalInstance = bootstrap.Modal.getInstance(deleteModal);
+                        modalInstance.hide();
+                        window.location.reload();
                     } else {
                         alert('Delete failed: ' + (data.error || 'Unknown error'));
                     }
@@ -287,6 +301,7 @@
                 });
         }
     </script>
+
 
 
     <!-- JavaScript Libraries -->
