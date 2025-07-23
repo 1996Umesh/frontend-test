@@ -226,13 +226,11 @@
         })
             .then(res => res.json())
             .then(data => {
-                alert(data.superadmin_email);
-                // console.log('Superadmin data:', data);
+                console.log('Returned data:', data);
+                alert(JSON.stringify(data)); // DEBUG: shows entire response
 
-                // Assuming backend returns this structure:
-                // { email: 'admin@example.com', ... }
-                if (data && data.superadmin_email) {
-                    document.getElementById('email').value = data.superadmin_email;
+                if (data && data.superadmin && data.superadmin.superadmin_email) {
+                    document.getElementById('email').value = data.superadmin.superadmin_email;
                 }
             })
             .catch(err => {
