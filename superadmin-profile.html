@@ -100,7 +100,7 @@
                         address, password, and other account information.</p>
                     <div class="bg-white p-4 rounded shadow-sm mb-4">
                         <form>
-                            <input type="email" class="form-control" id="id" placeholder="Enter email address">
+                            <input type="hidden" class="form-control" id="id">
                             <div class="mb-3">
                                 <label for="Email" class="form-label">Email Address</label>
                                 <input type="email" class="form-control" id="email" placeholder="Enter email address">
@@ -217,7 +217,6 @@
 
     <script>
         const userId = localStorage.getItem('userId');
-        alert(userId);
 
         fetch(`https://b-end-test.netlify.app/.netlify/functions/get-superadmin-by-id?id=${userId}`, {
             method: 'GET',
