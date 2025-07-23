@@ -235,14 +235,14 @@
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('Returned data:', data);
-                    alert(JSON.stringify(data)); // optional debug
+                    // console.log('Returned data:', data);
+                    // alert(JSON.stringify(data)); // optional debug
 
                     if (data.superadmin_email && data.superadmin_id) {
                         document.getElementById('id').value = data.superadmin_id;
                         document.getElementById('email').value = data.superadmin_email;
                     } else {
-                        alert("Incomplete response from server.");
+                        // alert("Incomplete response from server.");
                     }
                 })
                 .catch(err => {
