@@ -217,12 +217,13 @@
 
     <script>
         const userId = localStorage.getItem('userId');
-        // const token = localStorage.getItem('token');
+        const userToken = localStorage.getItem('token');
+
 
         fetch(`https://b-end-test.netlify.app/.netlify/functions/get-superadmin-by-id?id=${userId}`, {
             method: 'GET',
             headers: {
-                // 'Authorization': `Bearer ${token}`,  // ✅ Authorization header is REQUIRED
+                'Authorization': `Bearer ${userToken}`,  // ✅ Authorization header is REQUIRED
             }
         })
             .then(res => {
