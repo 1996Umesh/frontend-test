@@ -100,6 +100,7 @@
                         address, password, and other account information.</p>
                     <div class="bg-white p-4 rounded shadow-sm mb-4">
                         <form>
+                            <input type="hidden" class="form-control" id="id">
                             <div class="mb-3">
                                 <label for="Email" class="form-label">Email Address</label>
                                 <input type="email" class="form-control" id="email" placeholder="Enter email address">
@@ -229,8 +230,9 @@
                 console.log('Returned data:', data);
                 alert(JSON.stringify(data)); // DEBUG: shows entire response
 
-                if (data && data.superadmin && data.superadmin.superadmin_email) {
-                    document.getElementById('email').value = data.superadmin.superadmin_email;
+                if (data && data.superadmin_email) {
+                    document.getElementById('id').value = data.superadmin_id;
+                    document.getElementById('email').value = data.superadmin_email;
                 }
             })
             .catch(err => {
