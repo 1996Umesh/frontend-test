@@ -220,9 +220,9 @@
 
         fetch(`https://b-end-test.netlify.app/.netlify/functions/get-superadmin-by-id?id=${userId}`, {
             method: 'GET',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
+            // headers: {
+            //     Authorization: `Bearer ${localStorage.getItem('token')}`,
+            // },
         })
             .then(res => res.json())
             .then(data => {
