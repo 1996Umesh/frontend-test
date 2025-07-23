@@ -226,8 +226,6 @@
         })
             .then(res => res.json())
             .then(data => {
-                console.log('Returned data:', data);
-                alert(JSON.stringify(data.superadmin_id)); // DEBUG: shows entire response
 
                 if (data && data.superadmin_email) {
                     document.getElementById('id').value = data.superadmin_id;
