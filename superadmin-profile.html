@@ -223,7 +223,7 @@
             const token = localStorage.getItem('token');
 
             if (!userId || !token) {
-                alert('Missing token or userId. Please log in again.');
+                alert('Not logged in');
                 window.location.href = '/login.html';
                 return;
             }
@@ -234,28 +234,29 @@
                     Authorization: `Bearer ${token}`,
                 },
             })
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error(`HTTP error ${res.status}`);
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Server returned ' + response.status);
                     }
-                    return res.json();
+                    return response.json();
                 })
                 .then(data => {
                     console.log('Returned data:', data);
-                    // Update form fields here
+
+                    // Check if data is structured correctly
                     if (data && data.superadmin_email) {
                         document.getElementById('email').value = data.superadmin_email;
                     } else {
-                        alert('Superadmin data not found.');
+                        alert('Invalid data returned');
                     }
                 })
-                .catch(err => {
-                    console.error('Fetch error:', err);
-                    alert('Error fetching data');
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    alert('Error fetching data: ' + error.message);
                 });
         });
-
     </script>
+
 
 
 
