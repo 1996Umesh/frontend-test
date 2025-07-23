@@ -217,26 +217,32 @@
 
     <script>
         const userId = localStorage.getItem('userId');
+        // const token = localStorage.getItem('token');
 
         fetch(`https://b-end-test.netlify.app/.netlify/functions/get-superadmin-by-id?id=${userId}`, {
             method: 'GET',
-            // headers: {
-            //     Authorization: `Bearer ${localStorage.getItem('token')}`,
-            // },
+            headers: {
+                // 'Authorization': `Bearer ${token}`,  // ✅ Authorization header is REQUIRED
+            }
         })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then(data => {
-
                 if (data && data.superadmin_email) {
                     document.getElementById('id').value = data.superadmin_id;
                     document.getElementById('email').value = data.superadmin_email;
                 }
             })
             .catch(err => {
-                alert(err);
+                alert('Fetch error: ' + err.message);
                 console.error('Fetch error:', err);
             });
     </script>
+
 
 
     <!-- JavaScript Libraries -->
