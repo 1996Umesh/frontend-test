@@ -226,12 +226,18 @@
             .then(res => res.json())
             .then(data => {
                 console.log('Superadmin data:', data);
+
+                // Assuming backend returns this structure:
+                // { email: 'admin@example.com', ... }
+                if (data && data.email) {
+                    document.getElementById('email').value = data.email;
+                }
             })
             .catch(err => {
                 console.error('Fetch error:', err);
             });
-
     </script>
+
 
     <!-- JavaScript Libraries -->
 
