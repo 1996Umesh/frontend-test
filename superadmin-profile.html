@@ -215,31 +215,7 @@
         }
     </script>
 
-    <script>
-        const userId = localStorage.getItem('userId');
-        alert(userId);
-
-        fetch(`https://b-end-test.netlify.app/.netlify/functions/get-superadmin-by-id?id=${userId}`, {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log('Returned data:', data);
-                alert(JSON.stringify(data)); // DEBUG: shows entire response
-
-                if (data && data.superadmin_email) {
-                    document.getElementById('id').value = data.superadmin_id;
-                    document.getElementById('email').value = data.superadmin_email;
-                }
-            })
-            .catch(err => {
-                alert(err);
-                console.error('Fetch error:', err);
-            });
-    </script>
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
