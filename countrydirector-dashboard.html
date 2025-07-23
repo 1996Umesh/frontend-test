@@ -1,57 +1,5 @@
-<script>
-    // ✅ Step 1: Get the token from localStorage
-    const token = localStorage.getItem('token');
-    console.log(token);
-
-    if (!token) {
-        // ❌ No token means user not logged in
-        window.location.href = '/login.html';
-    } else {
-        // ✅ Step 2: Validate token and role via serverless function
-        fetch('https://b-end-test.netlify.app/.netlify/functions/protected', {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
-            .then(async (res) => {
-                const data = await res.json();
-
-                if (!res.ok || !data.role) {
-                    throw new Error('Unauthorized');
-                }
-
-                // ✅ Only allow if role is countrydirector
-                if (data.role !== 'countrydirector') {
-                    // ❌ Not allowed, redirect back or show unauthorized
-                    alert('Access denied. You are not authorized.');
-                    window.history.back(); // or redirect to unauthorized page
-                }
-
-                // ✅ Success: User can stay on this page
-            })
-            .catch((err) => {
-                // console.error('Error:', err.message);
-                // alert('Session expired or invalid. Please log in again.');
-                // localStorage.removeItem('token');
-                // window.location.href = '/login.html';
-            });
-    }
-</script>
-
-<script>
-    function logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('role'); // ❌ Remove JWT
-        alert('Logged out successfully');
-        window.location.href = '/login.html'; // 🔁 Redirect to login
-    }
-</script>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>Kiwi English Exams</title>
@@ -95,10 +43,10 @@
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
 
-                    <a href="countrydirector-dashboard.html" class="nav-item nav-link active">Country Director
-                        Dashboard</a>
+                    <a href="countrydirector-dashboard.html" class="nav-item nav-link active">Country Director Dashboard</a>
                     <a href="subjects-list.html" class="nav-item nav-link">Subjects</a>
                     <a href="examiners-list.html" class="nav-item nav-link">Examiners</a>
+                    <a href="country-director-profile.html" class="nav-item nav-link">Profile</a>
                 </div>
                 <a href="#" onclick="logout()" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
             </div>
