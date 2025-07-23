@@ -102,17 +102,16 @@
                         <form>
                             <div class="mb-3">
                                 <label for="siteEmail" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="siteEmail"
-                                    placeholder="Enter email address" value="superadmin@gmail.com">
+                                <input type="email" class="form-control" id="email" placeholder="Enter email address">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">New Password</label>
-                                <input type="password" class="form-control" name="student_password"
+                                <input type="password" class="form-control" id="password"
                                     placeholder="Enter new password">
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" name="student_password_confirmation"
+                                <input type="password" class="form-control" id="password_confirmation"
                                     placeholder="Re-enter new password">
                             </div>
                             <button type="submit" class="btn btn-primary">Update Profile</button>
@@ -214,7 +213,26 @@
             window.location.href = '/login.html'; // change this path if needed
         }
     </script>
-    
+
+    <script>
+        const userId = localStorage.getItem('userId');
+
+        fetch(`https://b-end-test.netlify.app/.netlify/functions/get-superadmin-by-id?id=${userId}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Superadmin data:', data);
+            })
+            .catch(err => {
+                console.error('Fetch error:', err);
+            });
+
+    </script>
+
     <!-- JavaScript Libraries -->
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
