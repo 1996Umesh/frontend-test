@@ -101,7 +101,7 @@
                     <div class="bg-white p-4 rounded shadow-sm mb-4">
                         <form>
                             <div class="mb-3">
-                                <label for="siteEmail" class="form-label">Email Address</label>
+                                <label for="Email" class="form-label">Email Address</label>
                                 <input type="email" class="form-control" id="email" placeholder="Enter email address">
                             </div>
                             <div class="mb-3">
@@ -225,12 +225,12 @@
         })
             .then(res => res.json())
             .then(data => {
-                console.log('Superadmin data:', data);
+                // console.log('Superadmin data:', data);
 
                 // Assuming backend returns this structure:
                 // { email: 'admin@example.com', ... }
-                if (data && data.email) {
-                    document.getElementById('email').value = data.email;
+                if (data && data.superadmin_email) {
+                    document.getElementById('email').value = data.superadmin_email;
                 }
             })
             .catch(err => {
