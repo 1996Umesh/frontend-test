@@ -231,6 +231,7 @@
             e.preventDefault();
 
             const token = localStorage.getItem('token');
+            const countrydirector_id = localStorage.getItem('userId');
 
             fetch(`https://b-end-test.netlify.app/.netlify/functions/add-subject`, {
                 method: 'POST',
@@ -241,6 +242,7 @@
 
                 body: JSON.stringify({
                     subject_name: document.getElementById('subject_name').value,
+                    countrydirector_id: countrydirector_id,
                 }),
             })
                 .then(res => res.json())
