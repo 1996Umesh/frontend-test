@@ -59,7 +59,7 @@
         const token = localStorage.getItem('token');
         const role = localStorage.getItem('role');
 
-        if (!token || role !== 'countrydirector') {
+        if (!token || role !== 'superadmin') {
             window.location.href = '/login.html'; // redirect to login or 403 page
         }
     </script>
