@@ -263,8 +263,6 @@
             const password_confirmation = document.getElementById('password_confirmation').value;
             const token = localStorage.getItem('token');
 
-            alert(id + email + password + password_confirmation);
-
             if (password !== password_confirmation) {
                 showMessage('Passwords do not match!', 'danger');
                 return;
