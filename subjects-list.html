@@ -255,14 +255,7 @@
                             <td>${sub.subject_name || 'N/A'}</td>
                             <td>
                                 <a href="edit-subject.html?id=${sub._id}" class="btn btn-success btn-sm me-1">Edit</a>
-                                <button 
-                                    class="btn btn-danger btn-sm me-1"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"
-                                    data-id="${sub._id}"
-                                    data-name="${sub.subject_name}">
-                                    Delete
-                                </button>
+                                
                             </td>
                         </tr>
                     `).join('');
