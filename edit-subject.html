@@ -100,7 +100,7 @@
                     <h5 class="text-white mb-0">Edit Subjects</h5>
                 </div>
                 <div class="card-body">
-                    <form id="countryDirectorForm">
+                    <form id="subjectForm">
                         <input type="hidden" id="subject_id" name="subject_id">
                         <div class="row mb-3">
                             <div class="col-md-3">
@@ -228,29 +228,25 @@
     </script>
 
     <script>
-        document.getElementById('countryDirectorForm').addEventListener('submit', function (e) {
+        document.getElementById('subjectForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const fullPhoneNumber = iti.getNumber(); // E.g., +94771234567
+            // const fullPhoneNumber = iti.getNumber(); // E.g., +94771234567
 
-            fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-countrydirector`, {
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-subject`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: document.getElementById('countrydirector_id').value,
-                    country: document.getElementById('country').value,
-                    countrydirector_name: document.getElementById('countrydirector_name').value,
-                    countrydirector_email: document.getElementById('countrydirector_email').value,
-                    phone: fullPhoneNumber, // 👈 send full number here
-                    countrydirector_password: document.getElementById('countrydirector_password').value
+                    id: document.getElementById('subject_id').value,
+                    subject: document.getElementById('subject_name').value,
                 }),
             })
                 .then(res => res.json())
                 .then(data => {
                     if (data.message || data._id) {
-                        window.location.href = 'country-directors-list.html';
+                        window.location.href = 'subjects-list.html';
                     } else {
                         alert('Update failed: ' + (data.error || 'Unknown error'));
                     }
