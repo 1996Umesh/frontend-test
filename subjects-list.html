@@ -252,22 +252,20 @@
                     tableBody.innerHTML = subjects.map(sub => `
                         <tr>
                             <td>${sub.subject_name || 'N/A'}</td>
-                            
                             <td>
-                            <a href="edit-subject.html?id=${subject._id}" class="btn btn-success btn-sm me-1">Edit</a>
-                            <!-- Delete Button -->
-                            <button 
-                                class="btn btn-danger btn-sm me-1"
-                                data-bs-toggle="modal"
-                                data-bs-target="#deleteModal"
-                                data-id="${subject._id}"
-                                data-name="${subject.subject_name}">
-                                Delete
-                            </button>
+                                <a href="edit-subject.html?id=${sub._id}" class="btn btn-success btn-sm me-1">Edit</a>
+                                <button 
+                                    class="btn btn-danger btn-sm me-1"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"
+                                    data-id="${sub._id}"
+                                    data-name="${sub.subject_name}">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
-                        `)
-                        .join('');
+                    `).join('');
+
 
                 } catch (error) {
                     // console.error('Error:', error);
