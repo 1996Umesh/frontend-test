@@ -105,9 +105,6 @@
                     <thead>
                         <tr>
                             <th>Subject Name</th>
-                            <!-- <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th> -->
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -252,9 +249,9 @@
                     const subjects = await response.json();
                     if (!Array.isArray(subjects)) throw new Error('Invalid data format received');
 
-                    tableBody.innerHTML = subjects.map(subject => `
+                    tableBody.innerHTML = subjects.map(sub => `
                         <tr>
-                            <td>${subject.subject_name || 'N/A'}</td>
+                            <td>${sub.subject_name || 'N/A'}</td>
                             
                             <td>
                             <a href="edit-subject.html?id=${subject._id}" class="btn btn-success btn-sm me-1">Edit</a>
