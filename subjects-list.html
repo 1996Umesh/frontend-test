@@ -240,10 +240,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const tableBody = document.querySelector('#subjectsTable tbody');
+            const countrydirector_id = localStorage.getItem('userId');
 
             const loadData = async () => {
                 try {
-                    const response = await fetch('https://b-end-test.netlify.app/.netlify/functions/get-subjects');
+                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-subjects?countrydirector_id=${countrydirector_id}`);
                     if (!response.ok) throw new Error(`Server returned ${response.status}`);
 
                     const subjects = await response.json();
