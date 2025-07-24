@@ -56,12 +56,12 @@
 <body>
 
     <script>
-        const token = localStorage.getItem('token');
-        const role = localStorage.getItem('role');
+        // const token = localStorage.getItem('token');
+        // const role = localStorage.getItem('role');
 
-        if (!token || role !== 'countrydirector') {
-            window.location.href = '/login.html'; // redirect to login or 403 page
-        }
+        // if (!token || role !== 'countrydirector') {
+        //     window.location.href = '/login.html'; // redirect to login or 403 page
+        // }
     </script>
 
     <!-- Navbar Start -->
@@ -90,22 +90,22 @@
     <!-- Admin Dashboard Start -->
     <div class="container">
         <section class="mt-5" id="users">
-            <h2 class="mb-3 text-primary"><i class="fa fa-users me-2"></i>Country Directors</h2>
-            <p>Manage and view the details of all Country Directors below.</p>
+            <h2 class="mb-3 text-primary"><i class="fa fa-tags mr-2"></i> Subjects</h2>
+            <p>Manage and view subjects for your exams. Keep everything organized for easy management.</p>
 
-            <!-- Add New Country Director Button -->
-            <a class="btn btn-primary mb-3" href="add-country-director.html">Add New Country Director</a>
+            <!-- Add New Subjects Button -->
+            <a class="btn btn-primary mb-3" href="add-subject.html">Add New Subject</a>
 
-            <!-- Country Director Table -->
+            <!-- Subjects Table -->
             <div class="table-responsive bg-white p-3 rounded shadow-sm">
-                <h3 class="text-primary mb-3">Country Director List</h3>
-                <table id="countryDirectorsTable" class="table table-striped table-bordered align-middle">
+                <h3 class="text-primary mb-3">Subjects List</h3>
+                <table id="subjectsTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
-                            <th>Country</th>
-                            <th>Name</th>
+                            <th>Subject Name</th>
+                            <!-- <th>Name</th>
                             <th>Email</th>
-                            <th>Phone</th>
+                            <th>Phone</th> -->
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -240,31 +240,29 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const tableBody = document.querySelector('#countryDirectorsTable tbody');
+            const tableBody = document.querySelector('#subjectsTable tbody');
 
             const loadData = async () => {
                 try {
-                    const response = await fetch('https://b-end-test.netlify.app/.netlify/functions/get-countrydirectors');
+                    const response = await fetch('https://b-end-test.netlify.app/.netlify/functions/get-subjects');
                     if (!response.ok) throw new Error(`Server returned ${response.status}`);
 
-                    const directors = await response.json();
-                    if (!Array.isArray(directors)) throw new Error('Invalid data format received');
+                    const subjects = await response.json();
+                    if (!Array.isArray(subjects)) throw new Error('Invalid data format received');
 
-                    tableBody.innerHTML = directors.map(director => `
+                    tableBody.innerHTML = subjects.map(subject => `
                         <tr>
-                            <td>${director.country || 'N/A'}</td>
-                            <td>${director.countrydirector_name || 'N/A'}</td>
-                            <td>${director.countrydirector_email || 'N/A'}</td>
-                            <td>${director.phone || 'N/A'}</td>
+                            <td>${subject.subject_name || 'N/A'}</td>
+                            
                             <td>
-                            <a href="edit-country-director.html?id=${director._id}" class="btn btn-success btn-sm me-1">Edit</a>
+                            <a href="edit-subject.html?id=${subject._id}" class="btn btn-success btn-sm me-1">Edit</a>
                             <!-- Delete Button -->
                             <button 
                                 class="btn btn-danger btn-sm me-1"
                                 data-bs-toggle="modal"
                                 data-bs-target="#deleteModal"
-                                data-id="${director._id}"
-                                data-name="${director.countrydirector_name}">
+                                data-id="${subject._id}"
+                                data-name="${subject.subject_name}">
                                 Delete
                             </button>
                             </td>
