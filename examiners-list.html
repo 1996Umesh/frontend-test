@@ -101,7 +101,7 @@
             <!-- Subjects Table -->
             <div class="table-responsive bg-white p-3 rounded shadow-sm">
                 <h3 class="text-primary mb-3">Examiners List</h3>
-                <table id="subjectsTable" class="table table-striped table-bordered align-middle">
+                <table id="examinersTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
                             <th>Examiner Name</th>
@@ -239,23 +239,31 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const tableBody = document.querySelector('#subjectsTable tbody');
+            const tableBody = document.querySelector('#examinersTable tbody');
             const countrydirector_id = localStorage.getItem('userId');
 
             const loadData = async () => {
                 try {
-                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-subjects?countrydirector_id=${countrydirector_id}`);
+                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-examiners?countrydirector_id=${countrydirector_id}`);
                     if (!response.ok) throw new Error(`Server returned ${response.status}`);
 
-                    const subjects = await response.json();
-                    if (!Array.isArray(subjects)) throw new Error('Invalid data format received');
+                    const examiners = await response.json();
+                    if (!Array.isArray(examiners)) throw new Error('Invalid data format received');
 
-                    tableBody.innerHTML = subjects.map(sub => `
+                    tableBody.innerHTML = examiners.map(examiner => `
                         <tr>
-                            <td>${sub.subject_name || 'N/A'}</td>
+                            <td>${examiner.examiner_name || 'N/A'}</td>
                             <td>
-                                <a href="edit-subject.html?id=${sub._id}" class="btn btn-success btn-sm me-1">Edit</a>
-                                
+                                <a href="edit-examiner.html?id=${examiner._id}" class="btn btn-success btn-sm me-1">Edit</a>
+                                <!-- Delete Button -->
+                                <button 
+                                    class="btn btn-danger btn-sm me-1"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"
+                                    data-id="${examiner._id}"
+                                    data-name="${examiner.examiner_name}">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     `).join('');
