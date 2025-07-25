@@ -256,7 +256,7 @@
                         <tr>
                             <td>${examiner.examiner_name || 'N/A'}</td>
                             <td>${examiner.examiner_email || 'N/A'}</td>
-                            <td>${examiner.subject_id || 'N/A'}</td>
+                            <td>${examiner.subject_id.subject_name || 'N/A'}</td>
                             <td>
                                 <a href="edit-examiner.html?id=${examiner._id}" class="btn btn-success btn-sm me-1">Edit</a>
                                 <!-- Delete Button -->
