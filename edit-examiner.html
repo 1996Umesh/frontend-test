@@ -101,6 +101,7 @@
                 </div>
                 <div class="card-body">
                     <form id="examinerForm">
+                        <input type="hidden" id="examiner_id" required>
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <label for="subject_name" class="form-label">Examiner Name</label>
@@ -316,6 +317,23 @@
 
     </script>
 
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        document.getElementById('examiner_id').value = id;
+
+        fetch(`https://b-end-test.netlify.app/.netlify/functions/get-examiner-by-id?id=${id}`)
+            .then(res => res.json())
+            .then(data => {
+                document.querySelector('#examiner_name').value = data.examiner_name;
+                document.querySelector('#examiner_email').value = data.examiner_email;
+                document.querySelector('#subjectSelect').value = data.subject_id;
+            })
+            .catch(error => console.error('Error loading director:', error));
+
+
+    </script>
     <!-- JavaScript Libraries -->
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
