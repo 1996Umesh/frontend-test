@@ -136,7 +136,7 @@
                             </div>
                             <div class="col-md-9">
                                 <input type="password" class="form-control" id="examiner_password"
-                                    placeholder="Enter Password" required>
+                                    placeholder="Enter Password">
                             </div>
                         </div>
                         <div class="text-end">
@@ -320,7 +320,6 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
-        // alert(id);
 
         document.getElementById('examiner_id').value = id;
 
@@ -332,6 +331,38 @@
                 document.querySelector('#subjectSelect').value = data.subject_id;
             })
             .catch(error => console.error('Error loading director:', error));
+    </script>
+
+    <script>
+        document.getElementById('examinerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-examiner`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: document.getElementById('examiner_id').value,
+                    examiner_name: document.getElementById('examiner_name').value,
+                    subject_id: document.getElementById('subjectSelect').value,
+                    examiner_password: document.getElementById('examiner_password').value,
+                }),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message || data._id) {
+                        window.location.href = 'examiners-list.html';
+                    } else {
+                        alert('Update failed: ' + (data.error || 'Unknown error'));
+                    }
+                })
+                .catch(err => {
+                    console.error('❌ Update error:', err);
+                    alert('Network error while updating.');
+                });
+        });
+
     </script>
 
     <!-- JavaScript Libraries -->
