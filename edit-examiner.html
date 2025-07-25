@@ -337,19 +337,34 @@
         document.getElementById('examinerForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
+            const id = document.getElementById('examiner_id').value;
+            const name = document.getElementById('examiner_name').value;
+            const subjectId = document.getElementById('subjectSelect').value;
+            const email = document.getElementById('examiner_email').value;
+            const password = document.getElementById('examiner_password').value;
+
+            console.log('Form Values:', { id, name, subjectId, email, password });
+
+            if (!id || !name || !subjectId || !email) {
+                alert('❌ Some required fields are empty.');
+                return;
+            }
+
+
             fetch(`https://b-end-test.netlify.app/.netlify/functions/edit-examiner`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: document.getElementById('examiner_id').value,
-                    examiner_name: document.getElementById('examiner_name').value,
-                    subject_id: document.getElementById('subjectSelect').value,
-                    examiner_email: document.getElementById('examiner_email').value,
-                    examiner_password: document.getElementById('examiner_password').value,
+                    id: id,
+                    examiner_name: name,
+                    subject_id: subjectId,
+                    examiner_email: email,
+                    examiner_password: password,
                 }),
             })
+
                 .then(res => res.json())
                 .then(data => {
                     if (data.message || data._id) {
