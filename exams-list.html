@@ -235,6 +235,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const tableBody = document.querySelector('#examsTable tbody');
             const examiner_id = localStorage.getItem('userId');
+            alert(examiner_id);
 
             const loadData = async () => {
                 try {
