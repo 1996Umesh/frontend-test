@@ -248,11 +248,11 @@
                     tableBody.innerHTML = exams.map(exam => `
                         <tr>
                             <td>${exam.exam_name || 'N/A'}</td>
-                            <td>${exam.exam_fee || 'N/A'}</td>
+                            <td>$ ${exam.exam_fee || 'N/A'}</td>
                             <td>${exam.exam_date || 'N/A'}</td>
                             <td>${exam.exam_start_time || 'N/A'}</td>
                             <td>${exam.exam_end_time || 'N/A'}</td>
-                            <td>${exam.exam_time_duration || 'N/A'}</td>
+                            <td>${exam.exam_time_duration || 'N/A'} minutes</td>
                             <td>
                                 <a href="edit-exam.html?id=${exam._id}" class="btn btn-success btn-sm me-1">Edit</a>
                                 <!-- Delete Button -->
