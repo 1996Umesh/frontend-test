@@ -233,31 +233,34 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const tableBody = document.querySelector('#examinersTable tbody');
-            const countrydirector_id = localStorage.getItem('userId');
+            const tableBody = document.querySelector('#examsTable tbody');
+            const examiner_id = localStorage.getItem('userId');
 
             const loadData = async () => {
                 try {
-                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-examiners?countrydirector_id=${countrydirector_id}`);
+                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-exams?examiner_id=${examiner_id}`);
                     if (!response.ok) throw new Error(`Server returned ${response.status}`);
 
-                    const examiners = await response.json();
-                    if (!Array.isArray(examiners)) throw new Error('Invalid data format received');
+                    const exams = await response.json();
+                    if (!Array.isArray(exams)) throw new Error('Invalid data format received');
 
-                    tableBody.innerHTML = examiners.map(examiner => `
+                    tableBody.innerHTML = exams.map(exam => `
                         <tr>
-                            <td>${examiner.examiner_name || 'N/A'}</td>
-                            <td>${examiner.examiner_email || 'N/A'}</td>
-                            <td>${examiner.subject_id.subject_name || 'N/A'}</td>
+                            <td>${exam.exam_name || 'N/A'}</td>
+                            <td>${exam.exam_fee || 'N/A'}</td>
+                            <td>${exam.exam_date || 'N/A'}</td>
+                            <td>${exam.exam_start_time || 'N/A'}</td>
+                            <td>${exam.exam_end_time || 'N/A'}</td>
+                            <td>${exam.exam_time_duration || 'N/A'}</td>
                             <td>
-                                <a href="edit-examiner.html?id=${examiner._id}" class="btn btn-success btn-sm me-1">Edit</a>
+                                <a href="edit-examiner.html?id=${exam._id}" class="btn btn-success btn-sm me-1">Edit</a>
                                 <!-- Delete Button -->
                                 <button 
                                     class="btn btn-danger btn-sm me-1"
                                     data-bs-toggle="modal"
                                     data-bs-target="#deleteModal"
-                                    data-id="${examiner._id}"
-                                    data-name="${examiner.examiner_name}">
+                                    data-id="${exam._id}"
+                                    data-name="${exam.exam_name}">
                                     Delete
                                 </button>
                             </td>
