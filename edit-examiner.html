@@ -320,6 +320,7 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
+        alert(id);
 
         document.getElementById('examiner_id').value = id;
 
@@ -331,9 +332,8 @@
                 document.querySelector('#subjectSelect').value = data.subject_id;
             })
             .catch(error => console.error('Error loading director:', error));
-
-
     </script>
+
     <!-- JavaScript Libraries -->
 
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
