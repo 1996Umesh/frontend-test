@@ -249,7 +249,7 @@
                         <tr>
                             <td>${exam.exam_name || 'N/A'}</td>
                             <td>$ ${exam.exam_fee || 'N/A'}</td>
-                            <td>${exam.exam_date || 'N/A'}</td>
+                            <td>${new Date(exam.exam_date).toISOString().split('T')[0] || 'N/A'}</td>
                             <td>${exam.exam_start_time || 'N/A'}</td>
                             <td>${exam.exam_end_time || 'N/A'}</td>
                             <td>${exam.exam_time_duration || 'N/A'} minutes</td>
