@@ -310,7 +310,7 @@
         function confirmDelete() {
             if (!deleteId) return;
 
-            fetch(`https://b-end-test.netlify.app/.netlify/functions/delete-countrydirector?id=${deleteId}`, {
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/delete-examiner?id=${deleteId}`, {
                 method: 'DELETE',
             })
                 .then(res => res.json())
