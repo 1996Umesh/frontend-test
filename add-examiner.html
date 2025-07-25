@@ -100,7 +100,7 @@
                     <h5 class="text-white mb-0">Add New Examiners</h5>
                 </div>
                 <div class="card-body">
-                    <form id="subjectForm">
+                    <form id="examinerForm">
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <label for="subject_name" class="form-label">Examiner Name</label>
@@ -278,16 +278,14 @@
         });
     </script>
 
-
-
     <script>
-        document.getElementById('subjectForm').addEventListener('submit', function (e) {
+        document.getElementById('examinerForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const token = localStorage.getItem('token');
             const countrydirector_id = localStorage.getItem('userId');
 
-            fetch(`https://b-end-test.netlify.app/.netlify/functions/add-subject`, {
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/add-examiner`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -295,14 +293,17 @@
                 },
 
                 body: JSON.stringify({
-                    subject_name: document.getElementById('subject_name').value,
+                    examiner_name: document.getElementById('examiner_name').value,
+                    subject_id: document.getElementById('subjectSelect').value,
+                    examiner_email: document.getElementById('examiner_email').value,
+                    examiner_password: document.getElementById('examiner_password').value,
                     countrydirector_id: countrydirector_id,
                 }),
             })
                 .then(res => res.json())
                 .then(data => {
                     if (data.message || data._id) {
-                        window.location.href = 'subjects-list.html';
+                        window.location.href = 'examiners-list.html';
                     } else {
                         alert('Insert failed: ' + (data.error || 'Unknown error'));
                     }
