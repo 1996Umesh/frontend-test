@@ -101,7 +101,7 @@
                 </div>
                 <div class="card-body">
                     <form id="examinerForm">
-                        <input type="text" id="examiner_id" required>
+                        <input type="hidden" id="examiner_id" required>
                         <div class="row mb-3">
                             <div class="col-md-3">
                                 <label for="subject_name" class="form-label">Examiner Name</label>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="text-end">
                             <a href="examiners-list.html" class="btn btn-success">Examiners List</a>
-                            <button type="submit" class="btn btn-primary">Add Examiner</button>
+                            <button type="submit" class="btn btn-primary">Edit Examiner</button>
                         </div>
 
                         <div id="add-message" class="mt-2 text-center"></div>
@@ -346,6 +346,7 @@
                     id: document.getElementById('examiner_id').value,
                     examiner_name: document.getElementById('examiner_name').value,
                     subject_id: document.getElementById('subjectSelect').value,
+                    examiner_email: document.getElementById('examiner_email').value,
                     examiner_password: document.getElementById('examiner_password').value,
                 }),
             })
