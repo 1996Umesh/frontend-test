@@ -106,8 +106,8 @@
                                 <label for="subject_name" class="form-label">Examiner Name</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="examiner_name" placeholder="Enter Examiner Name"
-                                    required>
+                                <input type="text" class="form-control" id="examiner_name"
+                                    placeholder="Enter Examiner Name" required>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -115,11 +115,8 @@
                                 <label for="subject_name" class="form-label">Subject Name</label>
                             </div>
                             <div class="col-md-9">
-                                <select class="form-select" aria-label="subject_name">
-                                    <option selected>Select Subject</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select id="subjectSelect" class="form-select" aria-label="Select Subject">
+                                    <option selected disabled>Select Subject</option>
                                 </select>
                             </div>
                         </div>
@@ -128,7 +125,8 @@
                                 <label for="subject_name" class="form-label">Examiner Email</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="email" class="form-control" id="examiner_email" placeholder="Enter Email" required>
+                                <input type="email" class="form-control" id="examiner_email" placeholder="Enter Email"
+                                    required>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -136,8 +134,8 @@
                                 <label for="subject_name" class="form-label">Password</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="password" class="form-control" id="examiner_password" placeholder="Enter Password"
-                                    required>
+                                <input type="password" class="form-control" id="examiner_password"
+                                    placeholder="Enter Password" required>
                             </div>
                         </div>
                         <div class="text-end">
@@ -243,18 +241,44 @@
     </script>
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
+        document.addEventListener('DOMContentLoaded', async () => {
+            const subjectSelect = document.getElementById('subjectSelect');
+            const token = localStorage.getItem('token'); // optional
+            const countrydirector_id = localStorage.getItem('userId'); // required for query
 
-        document.getElementById('subject_id').value = id;
+            try {
+                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-subjects?countrydirector_id=${countrydirector_id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // optional, only if your backend checks it
+                    }
+                });
 
-        fetch(`https://b-end-test.netlify.app/.netlify/functions/get-subject-by-id?id=${id}`)
-            .then(res => res.json())
-            .then(data => {
-                document.querySelector('#subject_name').value = data.subject_name;
-            })
-            .catch(error => console.error('Error loading director:', error));
+                const subjects = await response.json();
+
+                // Clear existing options except the first
+                subjectSelect.length = 1;
+
+                // Populate subjects
+                subjects.forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub._id;
+                    option.textContent = sub.subject_name;
+                    subjectSelect.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error('❌ Failed to load subjects:', error);
+                const option = document.createElement('option');
+                option.textContent = 'Failed to load subjects';
+                option.disabled = true;
+                subjectSelect.appendChild(option);
+            }
+        });
     </script>
+
+
 
     <script>
         document.getElementById('subjectForm').addEventListener('submit', function (e) {
