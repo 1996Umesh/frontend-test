@@ -92,27 +92,54 @@
     <!-- Admin Dashboard Start -->
     <div class="container">
         <section class="mt-5" id="users">
-            <h2 class="mb-4 text-primary"><i class="fa fa-tags me-2"></i>Subjects</h2>
+            <h2 class="mb-4 text-primary"><i class="fa fa-user-tie mr-2"></i>Examiners</h2>
 
-            <!-- Edit Subject Form -->
+            <!-- Add Examiner Form -->
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-primary">
-                    <h5 class="text-white mb-0">Add New Subjects</h5>
+                    <h5 class="text-white mb-0">Add New Examiners</h5>
                 </div>
                 <div class="card-body">
                     <form id="subjectForm">
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="subject_name" class="form-label">Subject Name</label>
+                                <label for="subject_name" class="form-label">Examiner Name</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="subject_name" name="subject_name"
+                                <input type="text" class="form-control" id="examiner_name"
+                                    placeholder="Enter Subject" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="subject_name" class="form-label">Subject</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="subject_name"
+                                    placeholder="Enter Subject" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="subject_name" class="form-label">Examiner Email</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="subject_name"
+                                    placeholder="Enter Subject" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="subject_name" class="form-label">Password</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="subject_name"
                                     placeholder="Enter Subject" required>
                             </div>
                         </div>
                         <div class="text-end">
-                            <a href="subjects-list.html" class="btn btn-success">Subjects List</a>
-                            <button type="submit" class="btn btn-primary">Add Subject</button>
+                            <a href="examiners-list.html" class="btn btn-success">Examiners List</a>
+                            <button type="submit" class="btn btn-primary">Add Examiner</button>
                         </div>
 
                         <div id="add-message" class="mt-2 text-center"></div>
