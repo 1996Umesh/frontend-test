@@ -26,14 +26,27 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- ✅ Country Select CSS -->
+    <!-- Country Select CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/css/countrySelect.min.css">
 
-    <!-- ✅ jQuery (required for country-select) -->
+    <!-- jQuery (REQUIRED) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- ✅ Country Select JS -->
+    <!-- Country Select JS -->
     <script src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
+
+    <style>
+        body {
+            padding: 2rem;
+            font-family: Arial;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+    </style>
 
 </head>
 
@@ -567,7 +580,7 @@
         $(document).ready(function () {
             $("#country").countrySelect({
                 defaultCountry: "us",
-                preferredCountries: ['us', 'gb', 'lk', 'in']
+                preferredCountries: ["us", "gb", "lk", "in"]
             });
         });
     </script>
