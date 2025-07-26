@@ -25,6 +25,17 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- countrySelect CSS -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/css/countrySelect.min.css" />
+
+    <!-- countrySelect JS -->
+    <script src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
+
 </head>
 
 <body>
@@ -61,11 +72,11 @@
     </div>
     <!-- Navbar End -->
 
-
     <!-- Header Start -->
 
     <div class="jumbotron jumbotron-fluid position-relative overlay-bottom mb-5 bg-dark text-white">
-        <div class="container d-flex flex-column justify-content-start align-items-center text-center my-5 py-5" style="min-height: 400px;">
+        <div class="container d-flex flex-column justify-content-start align-items-center text-center my-5 py-5"
+            style="min-height: 400px;">
             <div class="mt-5">
                 <h1 class="mb-3" style="color: rgb(34, 192, 28);">Achieve Global Success</h1>
                 <h1 class="display-4 display-md-1 mb-4" style="color: rgb(212, 23, 23);">Kiwi English Exams</h1>
@@ -75,9 +86,6 @@
             </div>
         </div>
     </div>
-
-
-
     <!-- Header End -->
 
 
@@ -266,11 +274,7 @@
                             <div class="form-row">
                                 <div class="col-md-6 col-lg-3 mb-3">
                                     <label class="form-label fw-bold">Country</label>
-                                    <select class="custom-select bg-light border-0" style="height: 45px;" id="country">
-                                        <option selected disabled>Selected Country</option>
-                                        <option value="<%= country.id %>">
-                                        </option>
-                                    </select>
+                                    <input type="text" id="country" class="form-control" style="height: 45px;">
                                 </div>
 
                                 <div class="col-md-6 col-lg-3 mb-3">
@@ -492,70 +496,6 @@
 
     <!-- Contact End -->
 
-
-    <!-- Footer Start -->
-    <!-- <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
-        <div class="container mt-5 pt-5">
-            <div class="row">
-                <div class="col-md-6 mb-5">
-                    <a href="index.html" class="navbar-brand">
-                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Kiwi English
-                            Exams</h1>
-                    </a>
-                    <p class="m-0 text-justify">Your trusted partner for mastering English exams in New Zealand and
-                        beyond. We provide the guidance and support you need to achieve your goals.</p>
-                </div>
-                <div class="col-md-6 mb-5">
-                    <h3 class="text-white mb-4">Newsletter</h3>
-                    <div class="w-100">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-light" style="padding: 30px;"
-                                placeholder="Your Email Address">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary px-4">Sign Up</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 mb-5">
-                    <h3 class="text-white mb-4">Get In Touch</h3>
-                    <p><i class="fa fa-map-marker-alt mr-2"></i>123 Galle Road, Colombo 03, Sri Lanka</p>
-                    <p><i class="fa fa-phone-alt mr-2"></i>+94 77 123 4567</p>
-                    <p><i class="fa fa-envelope mr-2"></i>info@kiwienglishexams.lk</p>
-                    <div class="d-flex justify-content-start mt-4">
-                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-twitter"></i></a>
-                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-facebook-f"></i></a>
-                        <a class="text-white mr-4" href="#"><i class="fab fa-2x fa-linkedin-in"></i></a>
-                        <a class="text-white" href="#"><i class="fab fa-2x fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-5">
-                    <h3 class="text-white mb-4">Our Exams</h3>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>IELTS</a>
-                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i> TOEFL</a>
-                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>KEPT</a>
-                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>KBEE</a>
-                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>IELTS</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-5">
-                    <h3 class="text-white mb-4">Quick Links</h3>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Privacy Policy</a>
-                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Terms &
-                            Condition</a>
-                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Regular FAQs</a>
-                        <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Help & Support</a>
-                        <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <!-- Footer Start -->
     <div class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style="margin-top: 90px;">
         <div class="container">
@@ -620,11 +560,18 @@
     </div>
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
     <a href="index.html" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
 
+    <script>
+        $(document).ready(function () {
+            $("#country").countrySelect({
+                defaultCountry: "us", // or "auto" for geo IP lookup
+                preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
+            });
+        });
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
