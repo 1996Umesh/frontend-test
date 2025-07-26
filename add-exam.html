@@ -146,7 +146,7 @@
                         </div>
                         <div class="text-end">
                             <a href="exams-list.html" class="btn btn-success">Exams List</a>
-                            <button type="submit" class="btn btn-primary">Add xxxxExam</button>
+                            <button type="submit" class="btn btn-primary">Add Exam</button>
                         </div>
 
                         <div id="add-message" class="mt-2 text-center"></div>
@@ -261,13 +261,13 @@
     </script>
 
     <script>
-        document.getElementById('subjectForm').addEventListener('submit', function (e) {
+        document.getElementById('examForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const token = localStorage.getItem('token');
-            const countrydirector_id = localStorage.getItem('userId');
+            const examiner_id = localStorage.getItem('userId');
 
-            fetch(`https://b-end-test.netlify.app/.netlify/functions/add-subject`, {
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/add-exam`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -275,14 +275,18 @@
                 },
 
                 body: JSON.stringify({
-                    subject_name: document.getElementById('subject_name').value,
-                    countrydirector_id: countrydirector_id,
+                    exam_name: document.getElementById('exam_name').value,
+                    exam_fee: document.getElementById('exam_fee').value,
+                    exam_date: document.getElementById('exam_date').value,
+                    exam_start_time: document.getElementById('exam_start_time').value,
+                    exam_end_time: document.getElementById('exam_end_time').value,
+                    examiner_id: examiner_id,
                 }),
             })
                 .then(res => res.json())
                 .then(data => {
                     if (data.message || data._id) {
-                        window.location.href = 'subjects-list.html';
+                        window.location.href = 'exams-list.html';
                     } else {
                         alert('Insert failed: ' + (data.error || 'Unknown error'));
                     }
