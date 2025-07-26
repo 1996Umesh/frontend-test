@@ -230,7 +230,7 @@
                 return res.json();
             })
             .then(data => {
-                if (data && data.countrydirector_email) {
+                if (data && data.examiner_email) {
                     document.getElementById('id').value = data.examiner_id;
                     document.getElementById('email').value = data.examiner_email;
                 }
