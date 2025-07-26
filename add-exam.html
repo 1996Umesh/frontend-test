@@ -266,7 +266,7 @@
 
             const token = localStorage.getItem('token');
             const examiner_id = localStorage.getItem('userId');
-            alert(document.getElementById('exam_name').value);
+            alert(document.getElementById('exam_start_time').value);
 
             fetch(`https://b-end-test.netlify.app/.netlify/functions/add-exam`, {
                 method: 'POST',
