@@ -261,12 +261,12 @@
     </script>
 
     <script>
+        alert(document.getElementById('exam_name').value);
         document.getElementById('examForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const token = localStorage.getItem('token');
             const examiner_id = localStorage.getItem('userId');
-            alert(document.getElementById('exam_name').value);
 
             fetch(`https://b-end-test.netlify.app/.netlify/functions/add-exam`, {
                 method: 'POST',
