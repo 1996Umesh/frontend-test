@@ -26,13 +26,13 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- Country Select CSS -->
+    <!-- ✅ Country Select CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/css/countrySelect.min.css">
 
-    <!-- jQuery (required for country-select) -->
+    <!-- ✅ jQuery (required for country-select) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Country Select JS -->
+    <!-- ✅ Country Select JS -->
     <script src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
 
 </head>
@@ -273,7 +273,7 @@
                             <div class="form-row">
                                 <div class="col-md-6 col-lg-3 mb-3">
                                     <label class="form-label fw-bold">Country</label>
-                                    <input type="text" id="country" class="form-control" style="height: 45px;">
+                                    <input type="text" id="country" style="height: 45px;" />
                                 </div>
 
                                 <div class="col-md-6 col-lg-3 mb-3">
@@ -566,8 +566,8 @@
     <script>
         $(document).ready(function () {
             $("#country").countrySelect({
-                defaultCountry: "us", // or "auto" for geo IP lookup
-                preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
+                defaultCountry: "us",
+                preferredCountries: ['us', 'gb', 'lk', 'in']
             });
         });
     </script>
