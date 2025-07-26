@@ -58,7 +58,7 @@
     <script>
         const token = localStorage.getItem('token');
         const role = localStorage.getItem('role');
-alert(token);
+
         if (!token || role !== 'examiner') {
             window.location.href = '/login.html';
         }
@@ -76,12 +76,9 @@ alert(token);
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-
-                    <a href="countrydirector-dashboard.html" class="nav-item nav-link">Country Director
-                        Dashboard</a>
-                    <a href="subjects-list.html" class="nav-item nav-link">Subjects</a>
-                    <a href="examiners-list.html" class="nav-item nav-link">Examiners</a>
-                    <a href="countrydirector-profile.html" class="nav-item nav-link active">Profile</a>
+                    <a href="examiner-dashboard.html" class="nav-item nav-link">Examiner Dashboard</a>
+                    <a href="exams-list.html" class="nav-item nav-link">Exam Details</a>
+                    <a href="examiner-profile.html" class="nav-item nav-link active">Profile</a>
                 </div>
                 <a href="#" onclick="logout()" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
             </div>
@@ -220,7 +217,7 @@ alert(token);
         const userToken = localStorage.getItem('token');
 
 
-        fetch(`https://b-end-test.netlify.app/.netlify/functions/get-countrydirector-profile?id=${userId}`, {
+        fetch(`https://b-end-test.netlify.app/.netlify/functions/get-examiner-profile?id=${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${userToken}`,  // ✅ Authorization header is REQUIRED
@@ -234,8 +231,8 @@ alert(token);
             })
             .then(data => {
                 if (data && data.countrydirector_email) {
-                    document.getElementById('id').value = data.countrydirector_id;
-                    document.getElementById('email').value = data.countrydirector_email;
+                    document.getElementById('id').value = data.examiner_id;
+                    document.getElementById('email').value = data.examiner_email;
                 }
             })
             .catch(err => {
