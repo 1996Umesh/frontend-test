@@ -6,6 +6,28 @@
     <title>Student Registration - Kiwi English Exams</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+    <!-- Bootstrap (optional if already added) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- intl-tel-input CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+
+    <!-- intl-tel-input JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+
+
+    <!-- Bootstrap CSS (if not already included) -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Country Select CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/css/countrySelect.min.css">
+
+    <!-- jQuery (required for country-select) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Country Select JS -->
+    <script src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -76,51 +98,46 @@
                         <h4 class="mb-3 text-center">Student User Account Details</h4>
                         <div class="mb-3">
                             <label class="form-label">Student Email</label>
-                            <input type="text" class="form-control border-0 border-bottom" name="student_email" placeholder="Enter email address"
-                                required>
+                            <input type="text" class="form-control border-0 border-bottom" name="student_email"
+                                placeholder="Enter email address" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control border-0 border-bottom" name="student_password" placeholder="Enter password"
-                                required>
+                            <input type="password" class="form-control border-0 border-bottom" name="student_password"
+                                placeholder="Enter password" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control border-0 border-bottom" name="student_password_confirmation" placeholder="Re-enter password"
-                                required>
+                            <input type="password" class="form-control border-0 border-bottom"
+                                name="student_password_confirmation" placeholder="Re-enter password" required>
                         </div>
                         <hr class="my-4">
                         <h4 class="mb-3 text-center">Student Personal Details</h4>
                         <div class="mb-3">
                             <label class="form-label">Student Name</label>
-                            <input type="text" class="form-control border-0 border-bottom" name="student_name" placeholder="Full Name"
-                                required>
+                            <input type="text" class="form-control border-0 border-bottom" name="student_name"
+                                placeholder="Full Name" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Student Address</label>
-                            <input type="text" class="form-control border-0 border-bottom" name="student_address" placeholder="Address" required>
+                            <input type="text" class="form-control border-0 border-bottom" name="student_address"
+                                placeholder="Address" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Phone Number</label>
                             <div class="input-group">
-                                <select class="form-select border-0 border-bottom" style="max-width: 150px;" name="student_country_code" required>
-                                    <option value="" selected disabled>Country Code</option>
-                                    <% countries.forEach(country=> { %>
-                                        <option value="<%= country.phoneCode %>">
-                                            <%= country.phoneCode %> | <%= country.name %>
-                                        </option>
-                                    <% }); %>
-                                </select>
-                                <input type="tel" class="form-control border-0 border-bottom" name="student_phone_no" placeholder="Phone Number"
-                                    required>
+                                
+                                <input type="tel" class="form-control border-0 border-bottom" id="phone"
+                                    placeholder="Phone Number" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control border-0 border-bottom" name="date_of_birth" required>
+                            <input type="date" class="form-control border-0 border-bottom" name="date_of_birth"
+                                required>
                         </div>
 
                         <div class="mb-3">
@@ -149,8 +166,8 @@
 
                         <div class="mb-3">
                             <label class="form-label">Father / Mother / Guardian Name</label>
-                            <input type="text" class="form-control border-0 border-bottom" name="guardian_name" placeholder="Guardian Name"
-                                required>
+                            <input type="text" class="form-control border-0 border-bottom" name="guardian_name"
+                                placeholder="Guardian Name" required>
                         </div>
 
                         <div class="mb-3">
@@ -162,12 +179,13 @@
                         <div class="mb-3">
                             <label class="form-label">Father / Mother / Guardian Phone Number</label>
                             <div class="input-group">
-                                <select class="form-select border-0 border-bottom" style="max-width: 150px;" name="guardian_country_code" required>
+                                <select class="form-select border-0 border-bottom" style="max-width: 150px;"
+                                    name="guardian_country_code" required>
                                     <option value="" selected disabled>Country Code</option>
-                                    
-                                        <option value="<%= country.phoneCode %>">
-                                            <%= country.phoneCode %> | <%= country.name %>
-                                        </option>
+
+                                    <option value="<%= country.phoneCode %>">
+                                        <%= country.phoneCode %> | <%= country.name %>
+                                    </option>
                                 </select>
                                 <input type="tel" class="form-control border-0 border-bottom" name="guardian_phone_no"
                                     placeholder="Guardian Phone Number" required>
@@ -251,6 +269,30 @@
     <!-- Back to Top -->
     <a href="student-registration.html" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
+
+
+    <script>
+        const phoneInput = document.querySelector("#phone");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: function (success, failure) {
+                fetch("https://ipapi.co/json")
+                    .then((res) => res.json())
+                    .then((data) => success(data.country_code))
+                    .catch(() => success("us"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#country").countrySelect({
+                defaultCountry: "us", // or "auto" for geo IP lookup
+                preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
+            });
+        });
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
