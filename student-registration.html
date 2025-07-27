@@ -6,7 +6,8 @@
     <title>Student Registration - Kiwi English Exams</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.min.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
 
@@ -134,16 +135,16 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label class="form-label">Phone Number</label>
-                            <div class="input-group">
-                                <input type="tel" class="form-control border-0 border-bottom" id="phone"
-                                    placeholder="Phone Number" required>
-                            </div>
+                                    <div class="input-group">
+                                        <input type="tel" class="form-control border-0 border-bottom" id="phone"
+                                            placeholder="Phone Number" required>
+                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-check">
                                         <label class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control border-0 border-bottom" id="date_of_birth"
-                                            required>
+                                        <input type="date" class="form-control border-0 border-bottom"
+                                            id="date_of_birth" required>
                                     </div>
                                 </div>
                             </div>
@@ -154,15 +155,14 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="genderMale"
-                                            value="male" required>
+                                        <input class="form-check-input" type="radio" id="gender" value="male" required>
                                         <label class="form-check-label" for="genderMale">Male</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="genderFemale"
-                                            value="female" required>
+                                        <input class="form-check-input" type="radio" id="gender" value="female"
+                                            required>
                                         <label class="form-check-label" for="genderFemale">Female</label>
                                     </div>
                                 </div>
@@ -273,13 +273,14 @@
 
 
     <script>
+        const itiInstances = {}; // to store each input's instance
         const phoneInputs = ["#phone", "#guardian_phone"];
 
         phoneInputs.forEach((selector) => {
             const input = document.querySelector(selector);
             if (!input) return;
 
-            window.intlTelInput(input, {
+            const iti = window.intlTelInput(input, {
                 initialCountry: "auto",
                 geoIpLookup: function (success, failure) {
                     fetch("https://ipapi.co/json")
@@ -289,9 +290,22 @@
                 },
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
             });
-        });
-    </script>
 
+            // Save instance for later use
+            itiInstances[selector] = iti;
+        });
+
+        // Example usage when submitting a form:
+        function getPhoneNumbers() {
+            const phone = itiInstances["#phone"]?.getNumber() || "";
+            const guardianPhone = itiInstances["#guardian_phone"]?.getNumber() || "";
+
+            // console.log("Student Phone:", phone);
+            // console.log("Guardian Phone:", guardianPhone);
+
+            return { phone, guardianPhone };
+        }
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -300,6 +314,63 @@
                 preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
             });
         });
+    </script>
+
+    <script>
+        document.getElementById('studentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const { phone, guardianPhone } = getPhoneNumbers();
+            student_email = document.getElementById('student_email').value;
+            student_password = document.getElementById('student_password').value;
+            student_password_confirmation = document.getElementById('student_password_confirmation').value;
+            student_name = document.getElementById('student_name').value;
+            student_address = document.getElementById('student_address').value;
+            student_phone = phone
+            date_of_birth = document.getElementById('date_of_birth').value;
+            gender = document.getElementById('gender').value;
+            guardian_name = document.getElementById('guardian_name').value;
+            guardian_address = document.getElementById('guardian_address').value;
+            guardian_phone = guardianPhone;
+
+
+            if (student_password !== student_password_confirmation) {
+                showMessage('Passwords do not match!', 'danger');
+                return;
+            }
+
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/add-student`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    student_email,
+                    student_password,
+                    student_name,
+                    student_address,
+                    student_phone,
+                    date_of_birth,
+                    gender,
+                    guardian_name,
+                    guardian_address,
+                    guardian_phone,
+                }),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message || data._id) {
+                        window.location.href = 'login.html';
+                    } else {
+                        alert('Insert failed: ' + (data.error || 'Unknown error'));
+                    }
+                })
+                .catch(err => {
+                    console.error('❌ Insert error:', err);
+                    alert('Network error while updating.');
+                });
+        });
+
     </script>
 
     <!-- JavaScript Libraries -->
