@@ -233,32 +233,18 @@
 
     <script>
         const phoneInput = document.querySelector("#student_phone_no");
-
-        // Initialize plugin
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
-            separateDialCode: true,      // Show country code outside input
-            nationalMode: true,          // Allow national number formatting
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-            geoIpLookup: function (callback) {
+            separateDialCode: true,
+            nationalMode: true,
+            geoIpLookup: function (success, failure) {
                 fetch("https://ipapi.co/json")
-                    .then(res => res.json())
-                    .then(data => callback(data.country_code))
-                    .catch(() => callback("us"));
-            }
+                    .then((res) => res.json())
+                    .then((data) => success(data.country_code))
+                    .catch(() => success("us"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
         });
-
-        // ✅ Simulated number from database
-        const fullNumber = document.getElementById('student_phone_no').value; // Example: Sri Lanka
-
-        // Set number & select correct flag
-        iti.setNumber(fullNumber);
-
-        // Set the input field with national number only (no +94)
-        phoneInput.value = iti.getNumber(intlTelInputUtils.numberFormat.NATIONAL); // Ex: "741803319"
-
-        // ✅ Optional: if you want full number later for form submission
-        // const fullE164 = iti.getNumber(); // +94741803319
     </script>
 
 
