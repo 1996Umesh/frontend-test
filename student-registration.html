@@ -137,7 +137,7 @@
                                 <div class="col-6">
                                     <label class="form-label">Country</label>
                                     <div class="input-group">
-                                        <input type="text" id="country" class="form-control" name="country" required>
+                                        <input type="text" id="country" name="country" />
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -313,14 +313,24 @@
         }
     </script>
 
-    <script>
-        $(document).ready(function () {
-            $("#country").countrySelect({
-                defaultCountry: "us", // or "auto" for geo IP lookup
-                preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
+<script>
+    $(document).ready(function () {
+      $('#country').countrySelect({
+        defaultCountry: "auto",
+        preferredCountries: ['us', 'gb', 'lk', 'in'],
+        geoIpLookup: function (callback) {
+          fetch("https://ipapi.co/json")
+            .then(res => res.json())
+            .then(data => {
+              callback(data.country_code); // e.g., "US"
+            })
+            .catch(() => {
+              callback("us"); // fallback if lookup fails
             });
-        });
-    </script>
+        }
+      });
+    });
+  </script>
 
     <script>
         document.getElementById('studentForm').addEventListener('submit', function (e) {
