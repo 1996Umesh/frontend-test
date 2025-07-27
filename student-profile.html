@@ -56,8 +56,8 @@
                 <div class="navbar-nav mx-auto py-0">
 
                     <a href="student-dashboard.html" class="nav-item nav-link">Student Dashboard</a>
-                    <a href="register-for-exam.html" class="nav-item nav-link active">Register for Exam</a>
-                    <a href="student-profile.html" class="nav-item nav-link">Profile</a>
+                    <a href="register-for-exam.html" class="nav-item nav-link">Register for Exam</a>
+                    <a href="student-profile.html" class="nav-item nav-link active">Profile</a>
                 </div>
                 <a href="#" onclick="logout()" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
             </div>
@@ -70,168 +70,8 @@
         <div class="row">
             <!-- Main Content -->
             <div class="col-md-12">
-                <!-- Sections -->
-                <section id="registeredExams" class="mt-4">
-                    <h2 class="text-primary mb-4"><i class="fa fa-book-open mr-2"></i> Registered Exams</h2>
-                    <p>Manage and view the details of all registered exams below.</p>
-                    <div class="bg-white p-4 rounded shadow-sm mb-4">
-                        <h3 class="text-primary mb-3">Register New Exam</h3>
-                        <form action="/add-student-exam" method="post">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="form-label">Subject</label>
-                                    <select class="form-control border-0 border-bottom" id="subjectDropdown"
-                                        name="subject_id" required>
-                                        <option value="" disabled selected>Select Subject</option>
-                                        <% subjects.forEach(subject=> { %>
-                                            <option value="<%= subject._id %>">
-                                                <%= subject.subject_name %>
-                                            </option>
-                                            <% }) %>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Exam</label>
-                                        <select class="form-control border-0 border-bottom" id="examDropdown"
-                                            name="exam_id" required>
-                                            <option value="" selected disabled>Select Exam</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label fw-bold">Exam Name : <span id="examName">--</span></label>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label fw-bold">Exam Date : <span id="examDate">--</span></label>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label fw-bold">Start Time : <span
-                                            id="examStart">--</span></label>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label fw-bold">End Time : <span id="examEnd">--</span></label>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label fw-bold">Exam Fee : <span id="examFee">--</span></label>
-                                </div>
-                            </div>
 
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#paymentModal">
-                                Pay Exam Fee & Register for the Exam
-                            </button>
-
-                            <!-- Bootstrap Modal -->
-                            <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="paymentModalLabel">Confirm Payment</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <p>Are you sure you want to pay the <strong id="examFee">--</strong> and
-                                                register for the selected
-                                                exam?</p>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancel</button>
-
-                                            <!-- Submit the original form using JS -->
-                                            <button type="submit" class="btn btn-primary">Yes, Pay &
-                                                Register</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </form>
-                    </div>
-
-                    <div class="table-responsive bg-white p-3 rounded shadow-sm">
-                        <h3 class="text-primary mb-3">Registered Exam List</h3>
-                        <table class="table table-striped table-bordered align-middle">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Exam Name</th>
-                                    <th>Exam Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Exam Fee</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section id="results" class="mt-4" style="display: none;">
-                    <h2 class="text-primary mb-4"><i class="fa fa-poll mr-2"></i> Results</h2>
-                    <table class="table table-bordered">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>Exam</th>
-                                <th>Date</th>
-                                <th>Score</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Kiwi Kids English Fun</td>
-                                <td>10th July 2025</td>
-                                <td>85%</td>
-                                <td>Passed</td>
-                            </tr>
-                            <tr>
-                                <td>Kiwi Grammar Test</td>
-                                <td>5th June 2025</td>
-                                <td>78%</td>
-                                <td>Passed</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <section id="studentMessages" class="mt-4" style="display: none;">
-                    <h2 class="text-primary mb-4"><i class="fa fa-comments mr-2"></i> Messages</h2>
-                    <ul class="list-group">
-                        <li class="list-group-item">Your exam schedule has been updated.</li>
-                        <li class="list-group-item">Don't forget to bring your ID on exam day.</li>
-                    </ul>
-                </section>
-
-                <section id="profile" class="mt-4" style="display: none;">
+                <section id="profile" class="mt-4">
                     <h2 class="text-primary mb-4"><i class="fa fa-user mr-2"></i> Profile</h2>
                     <p>Manage and update your personal profile details below. You can change your name, email
                         address, password, and other account information.</p>
@@ -287,23 +127,6 @@
                     </div>
                 </section>
 
-                <section id="studentSettings" class="mt-4" style="display: none;">
-                    <h2 class="text-primary mb-4"><i class="fa fa-cog mr-2"></i> Settings</h2>
-                    <form>
-                        <div class="form-group">
-                            <label>Email Notifications</label>
-                            <select class="form-control">
-                                <option selected>Enabled</option>
-                                <option>Disabled</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Change Password</label>
-                            <input type="password" class="form-control" placeholder="New Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update Settings</button>
-                    </form>
-                </section>
             </div>
         </div>
     </div>
