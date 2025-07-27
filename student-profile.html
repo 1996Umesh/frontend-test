@@ -33,13 +33,12 @@
 <body>
 
     <script>
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
 
-        // const token = localStorage.getItem('token');
-        // const role = localStorage.getItem('role');
-
-        // if (!token || role !== 'student') {
-        //     window.location.href = 'login.html';
-        // }
+        if (!token || role !== 'student') {
+            window.location.href = 'login.html';
+        }
     </script>
 
     <!-- Navbar Start -->
