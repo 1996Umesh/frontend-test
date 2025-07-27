@@ -322,7 +322,6 @@
             e.preventDefault();
 
             const { phone, guardianPhone } = getPhoneNumbers();
-            alert( guardianPhone);
             const student_email = document.getElementById('student_email').value;
             const student_password = document.getElementById('student_password').value;
             const student_password_confirmation = document.getElementById('student_password_confirmation').value;
@@ -334,6 +333,8 @@
             const guardian_name = document.getElementById('guardian_name').value;
             const guardian_address = document.getElementById('guardian_address').value;
             const guardian_phone = guardianPhone;
+
+            alert(gender);
 
 
             if (student_password !== student_password_confirmation) {
