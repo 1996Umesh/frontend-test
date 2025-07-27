@@ -318,7 +318,7 @@
         $(document).ready(function () {
             $('#country').countrySelect({
                 defaultCountry: "auto",
-                preferredCountries: ['us', 'gb', 'lk', 'in'],
+                preferredCountries: ['lk', 'us', 'gb', 'in'],
                 geoIpLookup: function (callback) {
                     fetch("https://ipapi.co/json")
                         .then(res => res.json())
