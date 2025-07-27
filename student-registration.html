@@ -151,31 +151,23 @@
                         </div>
 
                         <div class="mb-3">
-                            
+                            <label class="form-label">Gender</label>
                             <div class="row">
-                                <!-- Phone Number -->
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control border-0 border-bottom" id="phone"
-                                        placeholder="Phone Number" required>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderMale"
+                                            value="male" required>
+                                        <label class="form-check-label" for="genderMale">Male</label>
+                                    </div>
                                 </div>
-                            
-                                <!-- Gender -->
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Gender</label>
-                                    <div class="d-flex gap-3 align-items-center mt-2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" required>
-                                            <label class="form-check-label" for="genderMale">Male</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female" required>
-                                            <label class="form-check-label" for="genderFemale">Female</label>
-                                        </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderFemale"
+                                            value="female" required>
+                                        <label class="form-check-label" for="genderFemale">Female</label>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
 
                         <hr class="my-4">
