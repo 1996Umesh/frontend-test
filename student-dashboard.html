@@ -34,12 +34,12 @@
 
     <script>
 
-        // const token = localStorage.getItem('token');
-        // const role = localStorage.getItem('role');
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
 
-        // if (!token || role !== 'student') {
-        //     window.location.href = 'login.html';
-        // }
+        if (!token || role !== 'student') {
+            window.location.href = 'login.html';
+        }
     </script>
 
     <!-- Navbar Start -->
@@ -419,7 +419,7 @@
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             localStorage.removeItem('role');
-            window.location.href = '/login.html'; // change this path if needed
+            window.location.href = 'login.html'; // change this path if needed
         }
     </script>
 
