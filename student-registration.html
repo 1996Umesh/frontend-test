@@ -323,15 +323,23 @@
                     fetch("https://ipapi.co/json")
                         .then(res => res.json())
                         .then(data => {
-                            callback(data.country_code); // e.g., "US"
+                            console.log("📡 IP lookup data:", data);
+                            if (data && data.country_code) {
+                                callback(data.country_code.toLowerCase());
+                            } else {
+                                console.warn("❌ Country code missing, using fallback.");
+                                callback("us");
+                            }
                         })
-                        .catch(() => {
-                            callback("us"); // fallback if lookup fails
+                        .catch((err) => {
+                            console.error("❌ GeoIP fetch failed:", err);
+                            callback("us");
                         });
                 }
             });
         });
     </script>
+
 
     <script>
         document.getElementById('studentForm').addEventListener('submit', function (e) {
