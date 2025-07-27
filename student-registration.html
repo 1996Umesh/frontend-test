@@ -134,33 +134,38 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
+                                    <label class="form-label">Country</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control border-0 border-bottom" id="country"
+                                            placeholder="Phone Number" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
                                     <label class="form-label">Phone Number</label>
                                     <div class="input-group">
                                         <input type="tel" class="form-control border-0 border-bottom" id="phone"
                                             placeholder="Phone Number" required>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-check">
-                                        <label class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control border-0 border-bottom"
-                                            id="date_of_birth" required>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control border-0 border-bottom" id="date_of_birth" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Gender</label>
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-6">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="genderMale"
                                             value="male" required>
                                         <label class="form-check-label" for="genderMale">Male</label>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-6">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="genderFemale"
                                             value="female" required>
