@@ -82,17 +82,6 @@
 </head>
 
 <body>
-
-    <script>
-
-        const token = localStorage.getItem('token');
-        const role = localStorage.getItem('role');
-
-        if (!token || role !== 'student') {
-            window.location.href = 'login.html';
-        }
-    </script>
-
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5 fixed-top">
@@ -105,9 +94,8 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mx-auto py-0">
-                    
-                    <a href="student-dashboard.html" class="nav-item nav-link active">Student Dashboard</a>
-                    <a href="regster-for-exam.html" class="nav-item nav-link">register for Exam</a>
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/student-dashboard" class="nav-item nav-link active">Student Dashboard</a>
                 </div>
                 <a href="#" onclick="logout()" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
             </div>
