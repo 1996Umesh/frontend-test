@@ -206,7 +206,7 @@
     <script>
         const userId = localStorage.getItem('userId');
         const userToken = localStorage.getItem('token');
-        alert(userId);
+        alert(userToken);
         fetch(`https://b-end-test.netlify.app/.netlify/functions/get-student-profile?id=${userId}`, {
             method: 'GET',
             headers: {
