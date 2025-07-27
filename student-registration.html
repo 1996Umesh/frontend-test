@@ -314,24 +314,24 @@
         }
     </script>
 
-<script>
-    $(document).ready(function () {
-      $('#country').countrySelect({
-        defaultCountry: "auto",
-        preferredCountries: ['us', 'gb', 'lk', 'in'],
-        geoIpLookup: function (callback) {
-          fetch("https://ipapi.co/json")
-            .then(res => res.json())
-            .then(data => {
-              callback(data.country_code); // e.g., "US"
-            })
-            .catch(() => {
-              callback("us"); // fallback if lookup fails
+    <script>
+        $(document).ready(function () {
+            $('#country').countrySelect({
+                defaultCountry: "auto",
+                preferredCountries: ['us', 'gb', 'lk', 'in'],
+                geoIpLookup: function (callback) {
+                    fetch("https://ipapi.co/json")
+                        .then(res => res.json())
+                        .then(data => {
+                            callback(data.country_code); // e.g., "US"
+                        })
+                        .catch(() => {
+                            callback("us"); // fallback if lookup fails
+                        });
+                }
             });
-        }
-      });
-    });
-  </script>
+        });
+    </script>
 
     <script>
         document.getElementById('studentForm').addEventListener('submit', function (e) {
