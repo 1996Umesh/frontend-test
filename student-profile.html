@@ -232,32 +232,35 @@
     </script>
 
     <script>
-        const input = document.querySelector("#student_phone_no");
-        const iti = window.intlTelInput(input, {
+        const phoneInput = document.querySelector("#student_phone_no");
+
+        // Initialize plugin
+        const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
-            nationalMode: true, // ✅ allows showing number without dial code
-            separateDialCode: true, // ✅ shows dial code outside input
+            separateDialCode: true,      // Show country code outside input
+            nationalMode: true,          // Allow national number formatting
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
             geoIpLookup: function (callback) {
                 fetch("https://ipapi.co/json")
-                    .then((res) => res.json())
-                    .then((data) => callback(data.country_code))
+                    .then(res => res.json())
+                    .then(data => callback(data.country_code))
                     .catch(() => callback("us"));
-            },
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+            }
         });
 
-        // ✅ Simulate incoming full number from DB/API
-        const fullNumberFromServer = "+94741803319";
+        // ✅ Simulated number from database
+        const fullNumber = "+94741803319"; // Example: Sri Lanka
 
-        // ✅ Set full number
-        iti.setNumber(fullNumberFromServer);
+        // Set number & select correct flag
+        iti.setNumber(fullNumber);
 
-        // ✅ Optional: Extract national number only (without country code)
-        const nationalNumber = iti.getNumber(intlTelInputUtils.numberFormat.NATIONAL); // "741803319"
+        // Set the input field with national number only (no +94)
+        phoneInput.value = iti.getNumber(intlTelInputUtils.numberFormat.NATIONAL); // Ex: "741803319"
 
-        // ✅ Replace raw value with national number only
-        document.getElementById('student_phone_no').value = nationalNumber;
+        // ✅ Optional: if you want full number later for form submission
+        // const fullE164 = iti.getNumber(); // +94741803319
     </script>
+
 
 
     <script>
