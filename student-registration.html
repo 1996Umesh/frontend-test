@@ -155,14 +155,15 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="gender" value="male" required>
+                                        <input class="form-check-input" type="radio" name="gender" id="genderMale"
+                                            value="male" required>
                                         <label class="form-check-label" for="genderMale">Male</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="gender" value="female"
-                                            required>
+                                        <input class="form-check-input" type="radio" name="gender" id="genderFemale"
+                                            value="female" required>
                                         <label class="form-check-label" for="genderFemale">Female</label>
                                     </div>
                                 </div>
@@ -322,17 +323,17 @@
 
             const { phone, guardianPhone } = getPhoneNumbers();
             alert(phone, guardianPhone);
-            student_email = document.getElementById('student_email').value;
-            student_password = document.getElementById('student_password').value;
-            student_password_confirmation = document.getElementById('student_password_confirmation').value;
-            student_name = document.getElementById('student_name').value;
-            student_address = document.getElementById('student_address').value;
-            student_phone = phone
-            date_of_birth = document.getElementById('date_of_birth').value;
-            gender = document.getElementById('gender').value;
-            guardian_name = document.getElementById('guardian_name').value;
-            guardian_address = document.getElementById('guardian_address').value;
-            guardian_phone = guardianPhone;
+            const student_email = document.getElementById('student_email').value;
+            const student_password = document.getElementById('student_password').value;
+            const student_password_confirmation = document.getElementById('student_password_confirmation').value;
+            const student_name = document.getElementById('student_name').value;
+            const student_address = document.getElementById('student_address').value;
+            const student_phone = phone
+            const date_of_birth = document.getElementById('date_of_birth').value;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+            const guardian_name = document.getElementById('guardian_name').value;
+            const guardian_address = document.getElementById('guardian_address').value;
+            const guardian_phone = guardianPhone;
 
 
             if (student_password !== student_password_confirmation) {
