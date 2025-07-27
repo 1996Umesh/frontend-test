@@ -328,12 +328,12 @@
                                 callback(data.country_code.toLowerCase());
                             } else {
                                 console.warn("❌ Country code missing, using fallback.");
-                                callback("us");
+                                callback("lk");
                             }
                         })
                         .catch((err) => {
                             console.error("❌ GeoIP fetch failed:", err);
-                            callback("us");
+                            callback("lk");
                         });
                 }
             });
