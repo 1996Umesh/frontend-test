@@ -155,7 +155,7 @@
 
                     <div class="table-responsive bg-white p-3 rounded shadow-sm">
                         <h3 class="text-primary mb-3">Registered Exam List</h3>
-                        <table class="table table-striped table-bordered align-middle">
+                        <table class="table table-striped table-bordered align-middle" id="studentExamsTable">
                             <thead class="thead-light">
                                 <tr>
                                     <th>Exam Name</th>
@@ -166,25 +166,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -424,6 +405,37 @@
                 });
         });
 
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tableBody = document.querySelector('#studentExamsTable tbody');
+            const studentId = localStorage.getItem('userId');
+            // alert(examiner_id);
+
+            const loadData = async () => {
+                try {
+                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-studentexams?student_id=${studentId}`);
+                    if (!response.ok) throw new Error(`Server returned ${response.status}`);
+
+                    const exams = await response.json();
+                    if (!Array.isArray(exams)) throw new Error('Invalid data format received');
+
+                    tableBody.innerHTML = exams.map(exam => `
+                    <tr>
+                        <td>${exam.exam_id || 'N/A'}</td>
+                    </tr>
+                `).join('');
+
+
+                } catch (error) {
+                    // console.error('Error:', error);
+                    tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Error loading data</td></tr>`;
+                }
+            };
+
+            loadData();
+        });
     </script>
 
     <!-- JavaScript Libraries -->
