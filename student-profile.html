@@ -325,6 +325,7 @@
                 const data = await response.json();
 
                 if (response.ok) {
+                    alert('Profile updated successfully!');
                     showMessage('Profile updated successfully!', 'success');
                     window.location.reload();
                 } else {
