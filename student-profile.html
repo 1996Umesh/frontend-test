@@ -123,12 +123,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">New Password</label>
-                                <input type="password" class="form-control" name="student_password"
+                                <input type="password" class="form-control" id="student_password"
                                     placeholder="Enter new password">
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" name="student_password_confirmation"
+                                <input type="password" class="form-control" id="student_password_confirmation"
                                     placeholder="Re-enter new password">
                             </div>
                             <button type="submit" class="btn btn-primary">Update Profile</button>
@@ -247,8 +247,6 @@
         });
     </script>
 
-
-
     <script>
         const userId = localStorage.getItem('userId');
         const userToken = localStorage.getItem('token');
@@ -292,10 +290,12 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const id = document.getElementById('id').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const password_confirmation = document.getElementById('password_confirmation').value;
+            const id = document.getElementById('student_id').value;
+            const name = document.getElementById('student_name').value;
+            const email = document.getElementById('student_email').value;
+            const phone = document.getElementById('student_phone_no').value;
+            const password = document.getElementById('student_password').value;
+            const password_confirmation = document.getElementById('student_password_confirmation').value;
             const token = localStorage.getItem('token');
 
             if (password !== password_confirmation) {
@@ -304,7 +304,7 @@
             }
 
             try {
-                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/update-examiner-profile`, {
+                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/update-student-profile`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -312,8 +312,10 @@
                     },
                     body: JSON.stringify({
                         id,
-                        examiner_email: email,
-                        examiner_password: password
+                        student_name: name,
+                        student_email: email,
+                        student_password: password,
+                        student_phone_no: phone
                     })
                 });
 
