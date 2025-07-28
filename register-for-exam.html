@@ -345,40 +345,40 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const examSelect = document.getElementById('examSelect');
-            const exam_id = examSelect.value;
+            const token = localStorage.getItem('token');
 
-            try {
-                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/filter-exams-details.js?exam_id=${exam_id}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // optional, only if your backend checks it
-                    }
-                });
+            examSelect.addEventListener('change', async () => {
+                const exam_id = examSelect.value;
 
-                const subjects = await response.json();
+                if (!exam_id) return;
 
-                // Clear existing options except the first
-                subjectSelect.length = 1;
+                try {
+                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/filter-exams-details?exam_id=${exam_id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
 
-                // Populate subjects
-                subjects.forEach(sub => {
-                    const option = document.createElement('option');
-                    option.value = sub._id;
-                    option.textContent = sub.subject_name;
-                    subjectSelect.appendChild(option);
-                });
+                    if (!response.ok) throw new Error('Fetch failed');
 
-            } catch (error) {
-                console.error('❌ Failed to load subjects:', error);
-                const option = document.createElement('option');
-                option.textContent = 'Failed to load subjects';
-                option.disabled = true;
-                subjectSelect.appendChild(option);
-            }
+                    const exam_details = await response.json();
+
+                    document.getElementById('examName').textContent = exam_details.exam_name;
+                    document.getElementById('examDate').textContent = exam_details.exam_date;
+                    document.getElementById('examStart').textContent = exam_details.exam_start_time;
+                    document.getElementById('examEnd').textContent = exam_details.exam_end_time;
+                    document.getElementById('examFee').textContent = exam_details.exam_fee;
+
+                } catch (error) {
+                    console.error('❌ Failed to load Exam details:', error);
+                }
+            });
         });
+
     </script>
 
     <!-- JavaScript Libraries -->
