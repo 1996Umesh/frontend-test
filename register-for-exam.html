@@ -281,6 +281,44 @@
         document.addEventListener('DOMContentLoaded', async () => {
             const subjectSelect = document.getElementById('subjectSelect');
             const token = localStorage.getItem('token'); // optional
+            // const countrydirector_id = localStorage.getItem('userId'); // required for query
+
+            try {
+                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-all-subjects`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // optional, only if your backend checks it
+                    }
+                });
+
+                const subjects = await response.json();
+
+                // Clear existing options except the first
+                subjectSelect.length = 1;
+
+                // Populate subjects
+                subjects.forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub._id;
+                    option.textContent = sub.subject_name;
+                    subjectSelect.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error('❌ Failed to load subjects:', error);
+                const option = document.createElement('option');
+                option.textContent = 'Failed to load subjects';
+                option.disabled = true;
+                subjectSelect.appendChild(option);
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const subjectSelect = document.getElementById('subjectSelect');
+            const token = localStorage.getItem('token'); // optional
             const countrydirector_id = localStorage.getItem('userId'); // required for query
 
             try {
