@@ -281,8 +281,6 @@
         document.addEventListener('DOMContentLoaded', async () => {
             const subjectSelect = document.getElementById('subjectSelect');
             const token = localStorage.getItem('token'); // optional
-            // const countrydirector_id = localStorage.getItem('userId'); // required for query
-            alert(subjectSelect);
             try {
                 const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-all-subjects`, {
                     method: 'GET',
@@ -311,6 +309,43 @@
                 option.textContent = 'Failed to load subjects';
                 option.disabled = true;
                 subjectSelect.appendChild(option);
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const subjectSelect = document.getElementById('subjectSelect');
+            const subjectId = subjectSelect.value;
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-exams-by-subject?subject_id=${subjectId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // optional, only if your backend checks it
+                    }
+                });
+
+                const exams = await response.json();
+
+                // Clear existing options except the first
+                examSelect.length = 1;
+
+                // Populate subjects
+                exams.forEach(exm => {
+                    const option = document.createElement('option');
+                    option.value = exm._id;
+                    option.textContent = exm.exam_name;
+                    examSelect.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error('❌ Failed to load exams:', error);
+                const option = document.createElement('option');
+                option.textContent = 'Failed to load exams';
+                option.disabled = true;
+                examSelect.appendChild(option);
             }
         });
     </script>
