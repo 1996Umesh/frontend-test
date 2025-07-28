@@ -372,7 +372,7 @@
 
                     document.getElementById('duration').textContent = exam_details.exam_time_duration;
                     document.getElementById('examCountry').textContent = exam_details.country;
-                    document.getElementById('examDate').textContent = exam_details.exam_date;
+                    document.getElementById('examDate').textContent = exam_details.exam_date.split('T')[0];
                     document.getElementById('examStart').textContent = exam_details.exam_start_time;
                     document.getElementById('examEnd').textContent = exam_details.exam_end_time;
                     document.getElementById('examFee').textContent = exam_details.exam_fee;
