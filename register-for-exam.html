@@ -411,32 +411,48 @@
         document.addEventListener('DOMContentLoaded', function () {
             const tableBody = document.querySelector('#studentExamsTable tbody');
             const studentId = localStorage.getItem('userId');
-            // alert(examiner_id);
+            const token = localStorage.getItem('token');
 
             const loadData = async () => {
                 try {
-                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-studentexams?student_id=${studentId}`);
-                    if (!response.ok) throw new Error(`Server returned ${response.status}`);
+                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-studentexams?student_id=${studentId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || `Server returned ${response.status}`);
+                    }
 
                     const exams = await response.json();
+
                     if (!Array.isArray(exams)) throw new Error('Invalid data format received');
+
+                    if (exams.length === 0) {
+                        tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-warning">No exams found</td></tr>`;
+                        return;
+                    }
 
                     tableBody.innerHTML = exams.map(exam => `
                     <tr>
                         <td>${exam.exam_id || 'N/A'}</td>
+                        <!-- Add more columns as needed -->
                     </tr>
                 `).join('');
-
-
                 } catch (error) {
-                    // console.error('Error:', error);
-                    tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Error loading data</td></tr>`;
+                    console.error('❌ Error fetching student exams:', error);
+                    tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Error loading data: ${error.message}</td></tr>`;
                 }
             };
 
             loadData();
         });
     </script>
+
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
