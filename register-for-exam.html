@@ -412,7 +412,8 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.message || data.id) {
-                        window.location.href = 'register-for-exam.html';
+                        alert(data.message || 'Registered successfully!');
+                        window.location.href = 'register-for-exam.html'; // or any page you want
                     } else {
                         alert('Insert failed: ' + (data.error || 'Unknown error'));
                     }
