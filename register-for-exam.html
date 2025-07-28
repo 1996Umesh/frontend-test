@@ -95,11 +95,13 @@
                                     <label class="form-label fw-bold">Exam Name : <span id="examName">--</span></label>
                                 </div>
                                 <div class="form-group col-md-6">
+                                    <label class="form-label fw-bold">Exam Country : <span id="examCountry">--</span></label>
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label class="form-label fw-bold">Exam Date : <span id="examDate">--</span></label>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="form-label fw-bold">Start Time : <span
-                                            id="examStart">--</span></label>
+                                    <label class="form-label fw-bold">Start Time : <span id="examStart">--</span></label>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="form-label fw-bold">End Time : <span id="examEnd">--</span></label>
@@ -368,6 +370,7 @@
                     const exam_details = await response.json();
 
                     document.getElementById('examName').textContent = exam_details.exam_name;
+                    document.getElementById('examCountry').textContent = exam_details.country;
                     document.getElementById('examDate').textContent = exam_details.exam_date;
                     document.getElementById('examStart').textContent = exam_details.exam_start_time;
                     document.getElementById('examEnd').textContent = exam_details.exam_end_time;
