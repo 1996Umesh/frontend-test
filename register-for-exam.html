@@ -159,10 +159,6 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Exam Name</th>
-                                    <th>Exam Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Exam Fee</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -445,7 +441,7 @@
                 `).join('');
                 } catch (error) {
                     console.error('❌ Error fetching student exams:', error);
-                    tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Error loading data: ${error.message}</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="1" class="text-center text-danger">Error loading data: ${error.message}</td></tr>`;
                 }
             };
 
