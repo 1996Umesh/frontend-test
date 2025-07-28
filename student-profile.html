@@ -327,7 +327,7 @@
                 if (response.ok) {
                     // alert('Profile updated successfully!');
                     showMessage('Profile updated successfully!', 'success');
-                    location.reload();
+                    window.location.reload();
                 } else {
                     showMessage(`Error: ${data.error}`, 'danger');
                 }
