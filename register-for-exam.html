@@ -91,9 +91,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label fw-bold">Exam Name : <span id="examName">--</span></label>
-                                </div>
+                                
                                 <div class="form-group col-md-6">
                                     <label class="form-label fw-bold">Exam Country : <span id="examCountry">--</span></label>
                                 </div>
@@ -105,6 +103,9 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="form-label fw-bold">End Time : <span id="examEnd">--</span></label>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label fw-bold">Time Duration : <span id="duration">--</span> minites</label>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="form-label fw-bold">Exam Fee : $<span id="examFee">--</span></label>
@@ -369,7 +370,7 @@
 
                     const exam_details = await response.json();
 
-                    document.getElementById('examName').textContent = exam_details.exam_name;
+                    document.getElementById('duration').textContent = exam_details.exam_time_duration;
                     document.getElementById('examCountry').textContent = exam_details.country;
                     document.getElementById('examDate').textContent = exam_details.exam_date;
                     document.getElementById('examStart').textContent = exam_details.exam_start_time;
