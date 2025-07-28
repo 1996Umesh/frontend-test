@@ -280,29 +280,29 @@
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const subjectSelect = document.getElementById('subjectSelect');
-            const token = localStorage.getItem('token'); // optional
+            const examSelect = document.getElementById('examSelect');
+            const token = localStorage.getItem('token');
+
+            // ✅ Load subjects on page load
             try {
                 const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-all-subjects`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // optional, only if your backend checks it
+                        'Authorization': `Bearer ${token}`
                     }
                 });
 
                 const subjects = await response.json();
 
-                // Clear existing options except the first
-                subjectSelect.length = 1;
+                subjectSelect.length = 1; // Keep only the first option
 
-                // Populate subjects
                 subjects.forEach(sub => {
                     const option = document.createElement('option');
                     option.value = sub._id;
                     option.textContent = sub.subject_name;
                     subjectSelect.appendChild(option);
                 });
-
             } catch (error) {
                 console.error('❌ Failed to load subjects:', error);
                 const option = document.createElement('option');
@@ -310,43 +310,37 @@
                 option.disabled = true;
                 subjectSelect.appendChild(option);
             }
-        });
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const subjectSelect = document.getElementById('subjectSelect');
-            const subjectId = subjectSelect.value;
-            const token = localStorage.getItem('token');
-            try {
-                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-exams-by-subject?subject_id=${subjectId}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // optional, only if your backend checks it
-                    }
-                });
+            // ✅ When a subject is selected, load exams
+            subjectSelect.addEventListener('change', async () => {
+                const subjectId = subjectSelect.value;
+                examSelect.length = 1; // Clear existing options except first
 
-                const exams = await response.json();
+                try {
+                    const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-exams-by-subject?subject_id=${subjectId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
 
-                // Clear existing options except the first
-                examSelect.length = 1;
+                    const exams = await response.json();
 
-                // Populate subjects
-                exams.forEach(exm => {
+                    exams.forEach(exm => {
+                        const option = document.createElement('option');
+                        option.value = exm._id;
+                        option.textContent = exm.exam_name;
+                        examSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('❌ Failed to load exams:', error);
                     const option = document.createElement('option');
-                    option.value = exm._id;
-                    option.textContent = exm.exam_name;
+                    option.textContent = 'Failed to load exams';
+                    option.disabled = true;
                     examSelect.appendChild(option);
-                });
-
-            } catch (error) {
-                console.error('❌ Failed to load exams:', error);
-                const option = document.createElement('option');
-                option.textContent = 'Failed to load exams';
-                option.disabled = true;
-                examSelect.appendChild(option);
-            }
+                }
+            });
         });
     </script>
 
