@@ -315,6 +315,7 @@
             subjectSelect.addEventListener('change', async () => {
                 const subjectId = subjectSelect.value;
                 examSelect.length = 1; // Clear existing options except first
+
                 try {
                     const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-exams-by-subject?subject_id=${subjectId}`, {
                         method: 'GET',
