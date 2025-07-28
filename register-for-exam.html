@@ -346,12 +346,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const subjectSelect = document.getElementById('subjectSelect');
-            const token = localStorage.getItem('token'); // optional
-            const countrydirector_id = localStorage.getItem('userId'); // required for query
+            const examSelect = document.getElementById('examSelect');
+            const exam_id = examSelect.value;
 
             try {
-                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/get-subjects?countrydirector_id=${countrydirector_id}`, {
+                const response = await fetch(`https://b-end-test.netlify.app/.netlify/functions/filter-exams-details.js?exam_id=${exam_id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
