@@ -655,6 +655,11 @@
             const startTime = document.getElementById('startTime').value;
             const tableBody = document.querySelector('#studentExamsTable tbody');
 
+            alert(country);
+            alert(subject);
+            alert(examDate);
+            alert(startTime);
+
             fetch(`https://b-end-test.netlify.app/.netlify/functions/exams-filter`, {
                 method: 'POST',
                 headers: {
