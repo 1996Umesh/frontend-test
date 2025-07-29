@@ -616,14 +616,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('filterExamsForm');
-        if (form) {
-            alert('Form not found'); // Debugging
-            return;
-        }
+        
     
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-    
+    if (form) {
+            alert('Form not found'); // Debugging
+            return;
+        }
             const country = document.getElementById('country').value;
             const subject = document.getElementById('subjectSelect').value;
             const examDate = document.getElementById('examDate').value;
