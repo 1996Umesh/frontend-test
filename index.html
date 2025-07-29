@@ -613,23 +613,60 @@
         });
     </script>
 
-<script>
-    document.getElementById('filterBtn').onclick = function (e) {
-        e.preventDefault(); // Prevent default form submit behavior
+    <script>
+        document.getElementById('filterBtn').onclick = function (e) {
+            e.preventDefault(); // Prevent default form behavior
 
-        const country = document.getElementById('country').value;
-        const subject = document.getElementById('subjectSelect').value;
-        const examDate = document.getElementById('examDate').value;
-        const startTime = document.getElementById('startTime').value;
+            const country = document.getElementById('country').value;
+            const subject = document.getElementById('subjectSelect').value;
+            const examDate = document.getElementById('examDate').value;
+            const startTime = document.getElementById('startTime').value;
+            const tableBody = document.querySelector('#studentExamsTable tbody');
 
-        alert(`Country: ${country}`);
-        alert(`Subject: ${subject}`);
-        alert(`Exam Date: ${examDate}`);
-        alert(`Start Time: ${startTime}`);
-    };
-</script>
+            const queryParams = new URLSearchParams({
+                country,
+                subject,
+                examDate,
+                startTime,
+            });
 
-    
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/exams-filter?${queryParams.toString()}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data) && data.length > 0) {
+                        tableBody.innerHTML = data.map(exam => `
+                    <tr>
+                        <td>${exam.exam_name || 'N/A'}</td>
+                        <td>${exam.exam_fee || 'N/A'}</td>
+                        <td>${exam.exam_date ? exam.exam_date.split('T')[0] : 'N/A'}</td>
+                        <td>${exam.exam_start_time || 'N/A'}</td>
+                        <td>${exam.exam_end_time || 'N/A'}</td>
+                        <td>${exam.exam_time_duration || 'N/A'}</td>
+                        <td><a class="btn btn-success btn-sm" href="login.html">Register Now</a></td>
+                    </tr>
+                `).join('');
+                    } else {
+                        tableBody.innerHTML = `
+                    <tr><td colspan="7" class="text-center text-warning">No matching exams found.</td></tr>
+                `;
+                    }
+                })
+                .catch(err => {
+                    console.error('❌ Fetch error:', err);
+                    tableBody.innerHTML = `
+                <tr><td colspan="7" class="text-center text-danger">Network error while loading.</td></tr>
+            `;
+                });
+        };
+    </script>
+
+
+
 
 
     <!-- JavaScript Libraries -->
