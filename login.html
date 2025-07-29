@@ -190,16 +190,16 @@
           setTimeout(() => {
             switch (data.role) {
               case 'superadmin':
-                window.location.href = '/superadmin-dashboard.html';
+                window.location.href = '/country-directors-list.html';
                 break;
               case 'countrydirector':
-                window.location.href = '/countrydirector-dashboard.html';
+                window.location.href = '/subjects-list.html';
                 break;
               case 'examiner':
-                window.location.href = '/examiner-dashboard.html';
+                window.location.href = '/exams-list.html';
                 break;
               case 'student':
-                window.location.href = '/student-dashboard.html';
+                window.location.href = '/register-for-exam.html';
                 break;
               default:
                 messageDiv.innerHTML = `<div class="alert alert-danger">Unknown role</div>`;
