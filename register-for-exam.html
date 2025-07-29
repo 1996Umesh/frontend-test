@@ -433,9 +433,9 @@
                         return;
                     }
 
-                    tableBody.innerHTML = exams.map(exm => `
+                    tableBody.innerHTML = exams.map(exam => `
                     <tr>
-                        <td>${exm.exam_id?.exam_name || 'N/A'}</td>
+                        <td>${exam.exam_id?.exam_name || 'N/A'}</td>
                         <!-- Add more columns as needed -->
                     </tr>
                 `).join('');
