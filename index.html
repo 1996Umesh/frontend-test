@@ -277,7 +277,7 @@
                 <div class="col-12 col-lg-10 py-0">
                     <div class="bg-white p-4 p-md-5 my-4">
                         <h1 class="text-center mb-4">Filter Your Own Exam</h1>
-                        <form>
+                        <form id="filterExamsForm">
                             <div class="form-row">
                                 <div class="col-md-6 col-lg-3 mb-3">
                                     <label class="form-label fw-bold">Country</label>
@@ -286,7 +286,8 @@
 
                                 <div class="col-md-6 col-lg-3 mb-3">
                                     <label class="form-label fw-bold">Subject</label>
-                                    <select class="custom-select bg-light border-0" style="height: 45px;" id="subjectSelect">
+                                    <select class="custom-select bg-light border-0" style="height: 45px;"
+                                        id="subjectSelect">
                                         <option selected disabled>Selected Subject</option>
                                     </select>
                                 </div>
@@ -316,7 +317,25 @@
                         <div class="mt-5">
                             <h4 class="text-center mb-4">Filtered Exam Results</h4>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped text-center" id="examResultsTable">
+                                <table id="studentExamsTable" class="table table-bordered table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Fee</th>
+                                            <th>Date</th>
+                                            <th>Start</th>
+                                            <th>End</th>
+                                            <th>Duration</th>
+                                            <th>Register for the Exam</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="7" class="text-center">Loading...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <table class="table table-bordered table-striped text-center" id="examResultsTable">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Exam Name</th>
@@ -347,7 +366,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> -->
                             </div>
                         </div>
                     </div>
@@ -623,6 +642,54 @@
                 option.disabled = true;
                 subjectSelect.appendChild(option);
             }
+        });
+    </script>
+
+    <script>
+        document.getElementById('filterExamsForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const country = document.getElementById('country').value;
+            const subject = document.getElementById('subjectSelect').value;
+            const examDate = document.getElementById('examDate').value;
+            const startTime = document.getElementById('startTime').value;
+            const tableBody = document.querySelector('#studentExamsTable tbody');
+
+            fetch(`https://b-end-test.netlify.app/.netlify/functions/exams-filter`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    country, subject, examDate, startTime
+                }),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data) && data.length > 0) {
+                        tableBody.innerHTML = data.map(exam => `
+                    <tr>
+                        <td>${exam.exam_name || 'N/A'}</td>
+                        <td>${exam.exam_fee || 'N/A'}</td>
+                        <td>${exam.exam_date ? exam.exam_date.split('T')[0] : 'N/A'}</td>
+                        <td>${exam.exam_start_time || 'N/A'}</td>
+                        <td>${exam.exam_end_time || 'N/A'}</td>
+                        <td>${exam.exam_time_duration || 'N/A'}</td>
+                        <td><a class="btn btn-success btn-sm" href="login.html">Register Now</a>
+                    </tr>
+                `).join('');
+                    } else {
+                        tableBody.innerHTML = `
+                    <tr><td colspan="6" class="text-center text-warning">No matching exams found.</td></tr>
+                `;
+                    }
+                })
+                .catch(err => {
+                    console.error('❌ Insert error:', err);
+                    tableBody.innerHTML = `
+                <tr><td colspan="6" class="text-center text-danger">Network error while updating.</td></tr>
+            `;
+                });
         });
     </script>
 
