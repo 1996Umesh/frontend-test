@@ -613,58 +613,30 @@
         });
     </script>
 
-    <script>
-        document.getElementById('filterExamsForm').addEventListener('submit', function (e) {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('filterExamsForm');
+        if (!form) {
+            alert('Form not found'); // Debugging
+            return;
+        }
+    
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
-
+    
             const country = document.getElementById('country').value;
             const subject = document.getElementById('subjectSelect').value;
             const examDate = document.getElementById('examDate').value;
             const startTime = document.getElementById('startTime').value;
-            const tableBody = document.querySelector('#studentExamsTable tbody');
-
-            alert(country);
-            alert(subject);
-            alert(examDate);
-            alert(startTime);
-
-            fetch(`https://b-end-test.netlify.app/.netlify/functions/exams-filter`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    country, subject, examDate, startTime
-                }),
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (Array.isArray(data) && data.length > 0) {
-                        tableBody.innerHTML = data.map(exam => `
-                    <tr>
-                        <td>${exam.exam_name || 'N/A'}</td>
-                        <td>${exam.exam_fee || 'N/A'}</td>
-                        <td>${exam.exam_date ? exam.exam_date.split('T')[0] : 'N/A'}</td>
-                        <td>${exam.exam_start_time || 'N/A'}</td>
-                        <td>${exam.exam_end_time || 'N/A'}</td>
-                        <td>${exam.exam_time_duration || 'N/A'}</td>
-                        <td><a class="btn btn-success btn-sm" href="login.html">Register Now</a>
-                    </tr>
-                `).join('');
-                    } else {
-                        tableBody.innerHTML = `
-                    <tr><td colspan="6" class="text-center text-warning">No matching exams found.</td></tr>
-                `;
-                    }
-                })
-                .catch(err => {
-                    console.error('❌ Insert error:', err);
-                    tableBody.innerHTML = `
-                <tr><td colspan="6" class="text-center text-danger">Network error while updating.</td></tr>
-            `;
-                });
+    
+            alert(`Country: ${country}`);
+            alert(`Subject: ${subject}`);
+            alert(`Exam Date: ${examDate}`);
+            alert(`Start Time: ${startTime}`);
         });
+    });
     </script>
+    
 
 
     <!-- JavaScript Libraries -->
