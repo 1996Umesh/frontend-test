@@ -286,10 +286,8 @@
 
                                 <div class="col-md-6 col-lg-3 mb-3">
                                     <label class="form-label fw-bold">Subject</label>
-                                    <select class="custom-select bg-light border-0" style="height: 45px;" id="subject">
+                                    <select class="custom-select bg-light border-0" style="height: 45px;" id="subjectSelect">
                                         <option selected disabled>Selected Subject</option>
-                                        <option value="<%= subject._id %>">
-                                        </option>
                                     </select>
                                 </div>
 
@@ -571,27 +569,63 @@
     <a href="index.html" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
 
-            <script>
-                async function getUserCountryCode() {
-                    try {
-                        const res = await fetch('https://ipapi.co/json/');
-                        const data = await res.json();
-                        return data.country_code?.toLowerCase(); // e.g. "us", "lk"
-                    } catch (error) {
-                        console.warn('🌍 Could not detect country, falling back to default.');
-                        return 'us';
+    <script>
+        async function getUserCountryCode() {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                return data.country_code?.toLowerCase(); // e.g. "us", "lk"
+            } catch (error) {
+                console.warn('🌍 Could not detect country, falling back to default.');
+                return 'us';
+            }
+        }
+
+        $(document).ready(async function () {
+            const userCountry = await getUserCountryCode();
+
+            $("#country").countrySelect({
+                defaultCountry: userCountry,
+                preferredCountries: ['us', 'gb', 'lk', 'in']
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const subjectSelect = document.getElementById('subjectSelect');
+
+            // ✅ Load subjects on page load
+            try {
+                const response = await fetch('https://b-end-test.netlify.app/.netlify/functions/get-all-subjects', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                }
-            
-                $(document).ready(async function () {
-                    const userCountry = await getUserCountryCode();
-            
-                    $("#country").countrySelect({
-                        defaultCountry: userCountry,
-                        preferredCountries: ['us', 'gb', 'lk', 'in']
-                    });
                 });
-            </script>
+
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const subjects = await response.json();
+
+                subjectSelect.length = 1; // Keep only the first option (e.g., "Select Subject")
+
+                subjects.forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub._id;
+                    option.textContent = sub.subject_name;
+                    subjectSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('❌ Failed to load subjects:', error);
+                const option = document.createElement('option');
+                option.textContent = 'Failed to load subjects';
+                option.disabled = true;
+                subjectSelect.appendChild(option);
+            }
+        });
+    </script>
+
 
     <!-- JavaScript Libraries -->
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
