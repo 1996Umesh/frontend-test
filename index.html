@@ -8,6 +8,23 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
+    <!-- Country Select CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/css/countrySelect.min.css">
+
+    <!-- jQuery (required for country-select) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Country Select JS -->
+    <script src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
+
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5 JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -25,15 +42,6 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-
-    <!-- Country Select CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/css/countrySelect.min.css">
-
-    <!-- jQuery (REQUIRED) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Country Select JS -->
-    <script src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
 
 </head>
 
@@ -566,14 +574,14 @@
     <script>
         $(document).ready(function () {
             $("#country").countrySelect({
-                defaultCountry: "us",
-                preferredCountries: ["us", "gb", "lk", "in"]
+                defaultCountry: "us", // or "auto" for geo IP lookup
+                preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
             });
         });
     </script>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
@@ -597,7 +605,7 @@
             }
         });
     </script>
-
+    
     <script>
         document.querySelector('button[type="submit"]').addEventListener('click', function (e) {
             e.preventDefault();
