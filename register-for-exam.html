@@ -434,10 +434,10 @@
                     }
 
                     tableBody.innerHTML = exams.map(exam => `
-                    // <tr>
-                    //     <td>${exam.exam_id?.exam_name || 'N/A'}</td>
-                    //     <!-- Add more columns as needed -->
-                    // </tr>
+                    <tr>
+                        <td>${exam.exam_id || 'N/A'}</td>
+                        <!-- Add more columns as needed -->
+                    </tr>
                 `).join('');
                 } catch (error) {
                     console.error('❌ Error fetching student exams:', error);
