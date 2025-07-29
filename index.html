@@ -307,7 +307,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-12 text-center">
-                                    <button class="btn btn-primary px-5" type="submit"
+                                    <button class="btn btn-primary px-5" type="button" id="filterBtn"
                                         style="height: 45px;">Filter</button>
                                 </div>
                             </div>
@@ -614,28 +614,21 @@
     </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('filterExamsForm');
-        
-    
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-    if (form) {
-            alert('Form not found'); // Debugging
-            return;
-        }
-            const country = document.getElementById('country').value;
-            const subject = document.getElementById('subjectSelect').value;
-            const examDate = document.getElementById('examDate').value;
-            const startTime = document.getElementById('startTime').value;
-    
-            alert(`Country: ${country}`);
-            alert(`Subject: ${subject}`);
-            alert(`Exam Date: ${examDate}`);
-            alert(`Start Time: ${startTime}`);
-        });
-    });
-    </script>
+    document.getElementById('filterBtn').onclick = function (e) {
+        e.preventDefault(); // Prevent default form submit behavior
+
+        const country = document.getElementById('country').value;
+        const subject = document.getElementById('subjectSelect').value;
+        const examDate = document.getElementById('examDate').value;
+        const startTime = document.getElementById('startTime').value;
+
+        alert(`Country: ${country}`);
+        alert(`Subject: ${subject}`);
+        alert(`Exam Date: ${examDate}`);
+        alert(`Start Time: ${startTime}`);
+    };
+</script>
+
     
 
 
