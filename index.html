@@ -571,14 +571,27 @@
     <a href="index.html" class="btn btn-lg btn-primary rounded-0 btn-lg-square back-to-top"><i
             class="fa fa-angle-double-up"></i></a>
 
-    <script>
-        $(document).ready(function () {
-            $("#country").countrySelect({
-                defaultCountry: "us", // or "auto" for geo IP lookup
-                preferredCountries: ['us', 'gb', 'lk', 'in'] // you can customize this
-            });
-        });
-    </script>
+            <script>
+                async function getUserCountryCode() {
+                    try {
+                        const res = await fetch('https://ipapi.co/json/');
+                        const data = await res.json();
+                        return data.country_code?.toLowerCase(); // e.g. "us", "lk"
+                    } catch (error) {
+                        console.warn('🌍 Could not detect country, falling back to default.');
+                        return 'us';
+                    }
+                }
+            
+                $(document).ready(async function () {
+                    const userCountry = await getUserCountryCode();
+            
+                    $("#country").countrySelect({
+                        defaultCountry: userCountry,
+                        preferredCountries: ['us', 'gb', 'lk', 'in']
+                    });
+                });
+            </script>
 
     <!-- JavaScript Libraries -->
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
@@ -605,7 +618,7 @@
             }
         });
     </script>
-    
+
     <script>
         document.querySelector('button[type="submit"]').addEventListener('click', function (e) {
             e.preventDefault();
