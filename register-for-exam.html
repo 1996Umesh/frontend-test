@@ -353,43 +353,61 @@
 
     </script>
 
+    
+
     <script>
-        document.getElementById('registerExamForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registerExamForm');
+            const modal = document.getElementById('paymentModal');
+            const confirmBtn = modal.querySelector('button[type="submit"]');
 
-            const token = localStorage.getItem('token');
-            const studentId = localStorage.getItem('userId');
-            const examSelect = document.getElementById('examSelect');
-            const examId = examSelect.value;
+            confirmBtn.addEventListener('click', async function (e) {
+                e.preventDefault(); // Prevent default form submission
 
-            fetch(`https://b-end-test.netlify.app/.netlify/functions/register-for-exams`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
+                // Collect data from form or spans
+                const subject = document.getElementById('subjectSelect').value;
+                const exam = document.getElementById('examSelect').value;
+                const studentId = localStorage.getItem('userId');
+                const token = localStorage.getItem('token');
 
-                body: JSON.stringify({
-                    student_id: studentId,
-                    exam_id: examId,
-                }),
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.message || data.id) {
-                        alert(data.message || 'Registered successfully!');
-                        window.location.href = 'register-for-exam.html'; // or any page you want
-                    } else {
-                        alert('Insert failed: ' + (data.error || 'Unknown error'));
+                try {
+                    const res = await fetch('https://b-end-test.netlify.app/.netlify/functions/register-exam', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            student_id: studentId,
+                            subject_id: subject,
+                            exam_id: exam
+                        })
+                    });
+
+                    if (!res.ok) {
+                        const err = await res.json();
+                        throw new Error(err.error || `Failed to register: ${res.status}`);
                     }
-                })
-                .catch(err => {
-                    console.error('❌ Insert error:', err);
-                    alert('Network error while updating.');
-                });
-        });
 
+                    // ✅ Success
+                    const result = await res.json();
+                    console.log('Registration success:', result);
+
+                    // 🔒 Close the modal (using Bootstrap's API)
+                    const bsModal = bootstrap.Modal.getInstance(modal);
+                    bsModal.hide();
+
+                    // ✅ Optional: Redirect or show success message
+                    alert('Exam registered successfully!');
+                    window.location.href = '/student-dashboard.html'; // adjust as needed
+
+                } catch (err) {
+                    alert(`❌ Error: ${err.message}`);
+                }
+            });
+        });
     </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
