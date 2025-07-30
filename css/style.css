@@ -9814,6 +9814,16 @@ h6,
   background-size: cover;
 }
 
+.jumbotron.feature-page {
+  background: url(../img/features.jpg), no-repeat center center;
+  background-size: cover;
+}
+
+.jumbotron.detail-page {
+  background: url(../img/detail.jpg), no-repeat center center;
+  background-size: cover;
+}
+
 .overlay-top::before,
 .overlay-bottom::after {
   position: absolute;
