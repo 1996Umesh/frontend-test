@@ -399,7 +399,7 @@
 
                     // ✅ Optional: Redirect or show success message
                     alert('Exam registered successfully!');
-                    window.location.href = '/student-dashboard.html'; // adjust as needed
+                    window.location.reload(); // adjust as needed
 
                 } catch (err) {
                     alert(`❌ Error: ${err.message}`);
