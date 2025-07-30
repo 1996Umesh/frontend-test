@@ -9809,6 +9809,11 @@ h6,
   background-size: cover;
 }
 
+.jumbotron.about-page {
+  background: url(../img/student-registration.jpg), no-repeat center center;
+  background-size: cover;
+}
+
 .overlay-top::before,
 .overlay-bottom::after {
   position: absolute;
