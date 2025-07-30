@@ -247,7 +247,7 @@
             .then(data => {
                 document.querySelector('#exam_name').value = data.exam_name;
                 document.querySelector('#exam_fee').value = data.exam_fee;
-                document.querySelector('#exam_date').value = data.exam_date;
+                document.querySelector('#exam_date').value = data.exam_date.split('T')[0];
                 document.querySelector('#exam_start_time').value = data.exam_start_time;
                 document.querySelector('#exam_end_time').value = data.exam_end_time;
             })
