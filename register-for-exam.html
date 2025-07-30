@@ -353,8 +353,6 @@
 
     </script>
 
-    
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('registerExamForm');
@@ -362,13 +360,17 @@
             const confirmBtn = modal.querySelector('button[type="submit"]');
 
             confirmBtn.addEventListener('click', async function (e) {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault(); // Prevent default form behavior
 
-                // Collect data from form or spans
                 const subject = document.getElementById('subjectSelect').value;
                 const exam = document.getElementById('examSelect').value;
                 const studentId = localStorage.getItem('userId');
                 const token = localStorage.getItem('token');
+
+                if (!subject || !exam) {
+                    alert('Please select subject and exam.');
+                    return;
+                }
 
                 try {
                     const res = await fetch('https://b-end-test.netlify.app/.netlify/functions/register-for-exams', {
@@ -379,7 +381,6 @@
                         },
                         body: JSON.stringify({
                             student_id: studentId,
-                            // subject_id: subject,
                             exam_id: exam
                         })
                     });
@@ -389,24 +390,29 @@
                         throw new Error(err.error || `Failed to register: ${res.status}`);
                     }
 
-                    // ✅ Success
                     const result = await res.json();
-                    console.log('Registration success:', result);
+                    console.log('✅ Registration success:', result);
 
-                    // 🔒 Close the modal (using Bootstrap's API)
+                    // ✅ Close the modal properly using Bootstrap API
                     const bsModal = bootstrap.Modal.getInstance(modal);
-                    bsModal.hide();
+                    if (bsModal) {
+                        bsModal.hide();
+                    }
 
-                    // ✅ Optional: Redirect or show success message
-                    alert('Exam registered successfully!');
-                    window.location.reload(); // adjust as needed
+                    // ✅ Optional: Delay to allow modal to close before reload
+                    setTimeout(() => {
+                        alert('🎉 Exam registered successfully!');
+                        window.location.reload();
+                    }, 300); // slight delay for smooth UX
 
                 } catch (err) {
+                    console.error('❌ Registration error:', err);
                     alert(`❌ Error: ${err.message}`);
                 }
             });
         });
     </script>
+
 
 
     <script>
