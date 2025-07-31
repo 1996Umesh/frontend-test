@@ -9824,6 +9824,16 @@ h6,
   background-size: cover;
 }
 
+.jumbotron.testimonial-page {
+  background: url(../img/testimonials.jpg), no-repeat center center;
+  background-size: cover;
+}
+
+.jumbotron.contact-page {
+  background: url(../img/contact.jpg), no-repeat center center;
+  background-size: cover;
+}
+
 .overlay-top::before,
 .overlay-bottom::after {
   position: absolute;
